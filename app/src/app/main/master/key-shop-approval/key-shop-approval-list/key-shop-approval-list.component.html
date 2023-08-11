@@ -1,0 +1,184 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="key_shop_approval"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+        <dx-data-grid
+          #dataGrid
+          class="ext-grid mb-1"
+          [dataSource]="store"
+          [showBorders]="false"
+          [showColumnLines]="false"
+          [showRowLines]="true"
+          [columnHidingEnabled]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]="true"
+          (onSelectionChanged)="onSelectionChanged($event)"
+        >
+          <dxo-selection
+            selectAllMode="page"
+            showCheckBoxesMode="always"
+            mode="multiple"
+          ></dxo-selection>
+          <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+          <dxo-pager
+            [showPageSizeSelector]="true"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+          >
+          </dxo-pager>
+          <dxi-column
+            dataField="code"
+            [caption]="l('username_code')"
+          ></dxi-column>
+          <dxi-column dataField="name" [caption]="l('name')"></dxi-column>
+          <dxi-column
+            dataField="mobilePhone"
+            [caption]="l('mobilePhone')"
+          ></dxi-column>
+          <dxi-column dataField="email" [caption]="l('email')"></dxi-column>
+          <dxi-column
+            dataField="channelName"
+            [caption]="l('channelName')"
+          ></dxi-column>
+          <dxi-column
+            alignment="center"
+            [caption]="l('status')"
+            cellTemplate="designTemplate"
+          >
+            <div *dxTemplate="let cell of 'designTemplate'">
+              <div
+                class="badge badge-pill"
+                [ngClass]="{
+                  'badge-light-primary': cell.data.keyShopStatus == keyShopStatus.Created,
+                  'badge-light-success': (cell.data.keyShopStatus != keyShopStatus.Created && cell.data.keyShopStatus != keyShopStatus.Refuse),
+                  'badge-light-danger': cell.data.keyShopStatus == keyShopStatus.Refuse
+                }"
+              >
+                {{
+                  l(
+                    cell.data.keyShopStatus == 10
+                      ? "status_type_unregistered"
+                      : cell.data.keyShopStatus == 20
+                      ? "status_type_created"
+                      : cell.data.keyShopStatus == 30
+                      ? "status_type_approved"
+                      : cell.data.keyShopStatus == 40
+                      ? "status_type_registered"
+                      : "status_type_refuse"
+                  )
+                }}
+              </div>
+            </div>
+          </dxi-column>
+          <dxi-column
+            dataField="keyShopAuthCode"
+            [caption]="l('keyShopAuthCode')"
+          ></dxi-column>
+        </dx-data-grid>
+
+        <block-ui> </block-ui>
+      </div>
+    </section>
+  </div>
+
+  <core-sidebar
+    class="modal modal-slide-in fade"
+    [name]="sidebarName"
+    overlayClass="modal-backdrop"
+  >
+  </core-sidebar>
+</div>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+
+    <button
+      class="btn btn-primary ml-1"
+      rippleEffect
+      [disabled]="!approveEnable"
+      *ngIf="approveVisible"
+      (click)="approve()"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("approve") }} </span>
+    </button>
+    <button
+      class="btn btn-primary ml-1"
+      rippleEffect
+      [disabled]="!refuseEnable"
+      *ngIf="refuseVisible"
+      (click)="refuse()"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("refuse") }} </span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-icon btn-outline-primary ml-1"
+      rippleEffect
+      (click)="refresh()"
+    >
+      <span [data-feather]="'refresh-ccw'"></span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #filterForm>
+  <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-zone-combo
+            #zoneCombo
+            [placeholder]="l('all')"
+            [readOnly]="formReadOnly"
+            formControlName="zone"
+            (change)="zoneChange($event)"
+          >
+          </app-zone-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-area-combo
+            #areaCombo
+            [placeholder]="l('all')"
+            [readOnly]="formReadOnly"
+            formControlName="area"
+            [zoneId]="cValue('zone')"
+          >
+          </app-area-combo>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("search") }}</label>
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="l('search_placeholder')"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,163 @@
+<div
+  class="content-wrapper d-flex flex-column"
+  style="min-height: 60vh"
+  *blockUI="'consumer_reward_detail_dialog_block'"
+>
+  <form class="form-validate mb-auto " [formGroup]="formGroup">
+    <div class="content-body">
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label">{{ l("reward_item_name") }}</label>
+            <dx-text-box
+              formControlName="rewardItemName"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label">{{ l("reward_quantity") }}</label>
+            <dx-number-box
+              formControlName="rewardQuantity"
+              format="#,##0"
+              [min]="0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="form-group">
+            <label class="form-label">&nbsp;</label>
+            <div>
+              <button
+                type="button"
+                class="btn btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+                rippleEffect
+                (click)="addTicket()"
+                *ngIf="!readOnly"
+              >
+                {{ ladd }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center mt-1 mb-1">
+                <h4>
+                  <i
+                    data-feather="image"
+                    [size]="16"
+                    class="mr-75 font-medium-4"
+                  ></i>
+                  <span class="align-middle">{{
+                    l("acceptance_reward_photo")
+                  }}</span>
+                </h4>
+              </div>
+            </div>
+            <app-image-viewer
+              #imageViewer
+              [dataImages]="photos"
+              [header]="l('acceptance_reward_photo')"
+              [readOnly]="readOnly"
+            ></app-image-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="detailGrid"></ng-container>
+  </form>
+
+  <div class="d-flex justify-content-end">
+    <button
+      *ngIf="!readOnly"
+      class="btn btn-primary mr-1 mt-1"
+      rippleEffect
+      (click)="save()"
+    >
+      {{ lsave }}
+    </button>
+    <button
+      class="btn btn-outline-secondary mt-1"
+      (click)="close()"
+      rippleEffect
+    >
+      {{ lclose }}
+    </button>
+  </div>
+</div>
+<core-sidebar
+  class="modal modal-slide-in fade"
+  [name]="rewardDetailConfig.sidebarName"
+  overlayClass="modal-backdrop"
+>
+  <app-ticket-consumer-reward-detail-sidebar
+    [ticketInvestmentId]="ticketInvestmentId"
+    [allocateTickets]="allocateTickets"
+    [dataSource]="rewardDetailDataSource"
+  >
+  </app-ticket-consumer-reward-detail-sidebar>
+</core-sidebar>
+<ng-template #detailGrid>
+  <dx-data-grid
+    class="ext-grid mt-1"
+    [dataSource]="rewardDetailDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="false"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column
+      dataField="ticketCode"
+      [caption]="l('ticket_code')"
+    ></dxi-column>
+    <dxi-column
+      dataField="consumerName"
+      [caption]="l('consumer_reward_consumer_name')"
+    ></dxi-column>
+    <dxi-column dataField="consumerPhone" [caption]="l('phone')"></dxi-column>
+    <dxi-column dataField="note" [caption]="l('note')"></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="80"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="deleteTicketVisible(cell.data)"
+            (click)="deleteTicket(cell.data)"
+            ><i class="mr-1" size="16" data-feather="trash"></i
+          ></a>
+
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="editTicketVisible(cell.data)"
+            (click)="editTicket(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>

@@ -1,0 +1,50 @@
+<div class="content-wrapper">
+  <div class="content-body"  *blockUI="'reward_item_dialog_block'">
+    <ng-container *ngTemplateOutlet="rewardItems"></ng-container>
+  </div>
+</div>
+
+<ng-template #rewardItems>
+  <dx-data-grid
+    class="ext-grid mt-1"
+    [dataSource]="rewardItemDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+    [wordWrapEnable]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column dataField="code" [caption]="lcode"></dxi-column>
+    <dxi-column dataField="name" [caption]="lname"></dxi-column>
+    <dxi-column
+      dataField="documentLink"
+      cellTemplate="cellTemplate"
+      [caption]="l('description')"
+    >
+      <div *dxTemplate="let data of 'cellTemplate'">
+        <a href="{{ data.value }}" target="_blank">{{ data.value }}</a>
+      </div>
+    </dxi-column>
+
+    <dxi-column
+      dataField="quantity"
+      [caption]="l('quantity')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column
+      dataField="price"
+      [caption]="l('reward_price')"
+      format="#,##0.##"
+    ></dxi-column>
+  </dx-data-grid>
+</ng-template>

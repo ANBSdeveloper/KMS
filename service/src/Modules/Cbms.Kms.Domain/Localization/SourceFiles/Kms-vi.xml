@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+  <texts>
+    <text name="EntityNotFoundWithType">{0} với id {1} không tìm thấy</text>
+    <text name="EntityNotFound">Không tìm thấy {0} với id {1} </text>
+    <text name="EntityFieldRequired">Trường {0} bắt buộc</text>
+    <text name="InternalServerError">Có lỗi trong quá trình xử lý trên máy chủ! Vui lòng liên hệ bộ phận hỗ trợ.</text>
+    <text name="DatabaseUpdateError">Có lỗi trong quá trình xử lý trong cơ sở dữ liệu</text>
+    <text name="TenantConflictError">This request is conflicted with current user's tenant</text>
+    <text name="EmptyFile">Please choose file before upload</text>
+    <text name="EntityFieldValueMustGreaterThanOrEqual">{0} must greater than or equal {1}</text>
+    <text name="EntityFieldValueNotValid">Value of field {0} is not valid</text>
+    <text name="BranchIsNotAssigned">Branch {0} is not assiged for this user</text>
+    <text name="RequestConflictEntityId">Request with id not match with entity id</text>
+    <text name="EntityDuplicateKey">{0} bị trùng {1}</text>
+    <text name="EntityDeleteConflicted">Dữ liệu này đang được dùng bởi {0} nên không thể xóa!</text>
+    <text name="StoreIsNotAssigned">Store {0} is not assigned for user {1}</text>
+    <text name="RequestWithSortParamsNotValid">Truy vấn với tham số Sort không hợp lệ</text>
+    <text name="FilterDateInvalid">Tham số ngày tháng không hợp lệ</text>
+    <text name="Username">Tài khoản</text>
+	<text name="Fullname">Họ tên</text>
+	<text name="Password">Mật khẩu</text>
+    <text name="Import.Error">{0}</text>
+    
+    <text name="User.PasswordInvalidLength">Mật khẩu có độ dài tối thiểu là {0}!</text>
+    
+    <text name="ResetPassword.UsernameEmailInvalid">Tài khoản hoặc địa chỉ email không hợp lệ!</text>
+    <text name="ResetPassword.Subject">Khôi phục mật khẩu</text>
+    <text name="ResetPassword.NewPasswordMustDifferent">Mật khẩu mới phải khác với mật khẩu đã sử dụng</text>
+    <text name="ResetPassword.TicketInvalid">Yêu cầu khởi tạo mật khẩu này đã hết hạn sử dụng. Vui lòng tạo yêu cầu mới</text>
+
+    <text name="User.UserNameExists">Tên tài khoản {0} đã được sử dụng</text>
+    <text name="User.InvalidLogin">Tài khoản hoặc mật khẩu không đúng</text>
+    <text name="User.NotActive">Tài khoản này chưa được kích hoạt</text>
+	<text name="User.ExistsPhoneNumber">Số điện thoại {0} đã được sử dụng</text>
+    <text name="User.Expired">Tài khoản này đã hết hạn</text>
+    
+    <text name="Budget.OverBudgetDetail">Nhân viên {0} đã vượt quá ngân sách, ngân sách chỉ còn lại {1}</text>
+    <text name="Budget.UsingCantDelete">Ngân sách này đang sử dụng không thể xóa</text>
+    <text name="Budget.Exists">Đã tồn tại ngân sách trong kỳ {0}</text>
+    <text name="Budget.NotValidForInvestment">Không có phân bổ ngân sách cho chương trình đầu tư trong kỳ {0}</text>
+    <text name="Budget.NotValidForZone">Không có phân bổ ngân sách cho chương trình đầu tư trong kỳ {0} - vùng {1}</text>
+    <text name="Budget.NotValidForArea">Không có phân bổ ngân sách cho chương trình đầu tư trong kỳ {0} - khu vực {1}</text>
+    <text name="Budget.NotValidForBranch">Không có phân bổ ngân sách cho chương trình đầu tư trong kỳ {0} - nhà phân phối {1}</text>
+    <text name="Budget.NotValidForStaff">Không có phân bổ ngân sách cho chương trình đầu tư này và nhân viên {0}</text>
+    <text name="Budget.OverTemp">Ngân sách cần dùng là {0} nhưng chỉ còn lại {1}</text>
+    <text name="Budget.AsmNotFound">Không tìm thấy ASM của nhân viên {0}</text>
+    <text name="Budget.RsmNotFound">Không tìm thấy RSM của nhân viên {0}</text>
+
+	<text name="PosmInvestment.RegisterUserInvalid">Người dùng ngày không thể đăng ký đầu tư</text>
+	<text name="PosmInvestment.PendingExists">Cửa hàng {0} đang có chương trình đầu tư {1} chưa hoàn tất nên không thể đăng ký thêm</text>
+    <text name="PosmInvestment.CustomerNotManagedByUser">Khách hàng này không được quản lý bởi nhân viên này</text>
+	<text name="PosmInvestment.ActionInvalid">Không thể xử lý vì chương trình POSM đã ở trạng thái khác</text>
+	<text name="PosmInvestment.ItemActionInvalid">Không thể xử lý vì POSM đã ở trạng thái khác</text>
+    <text name="PosmInvestment.CycleInvalid">Dòng {0] không có định nghĩa chu kỳ cho ngày đăng ký {1}</text>
+	  
+	<text name="TicketInvestment.RegisterUserInvalid">Người dùng ngày không thể đăng ký đầu tư</text>
+    <text name="TicketInvestment.OverMaxMaterial">Vượt quá số tiền đầu tư cho vật tư, tối đa là {0}</text>
+    <text name="TicketInvestment.BuyDateInvalid">Ngày bắt đầu và ngày kết thúc mua hàng không hợp lệ</text>
+    <text name="TicketInvestment.SalesCommitmentNotExists">Doanh số cam kết cho năm {0} tháng {1} chưa được đăng ký</text>
+    <text name="TicketInvestment.SalesCommitmentNotEqual">Số tháng cam kết doanh số không đúng với thời gian bắt đầu và kết thúc</text>
+    <text name="TicketInvestment.PendingExists">Cửa hàng {0} đang có chương trình đầu tư {1} chưa hoàn tất nên không thể đăng ký thêm</text>
+    <text name="TicketInvestment.NoPermission">Không có quyền thực hiện thao tác này</text>
+    <text name="TicketInvestment.CantUpdateProgress">Không thể cập nhật tiến độ vì chương trình đầu tư BTTT đã ở trạng thái khác</text>
+    <text name="TicketInvestment.CustomerNotManagedByUser">Khách hàng này không được quản lý bởi nhân viên này</text>
+    <text name="TicketInvestment.RewardItemNotRegister">Quà tặng {0} không được đăng ký nên không thể sử dụng</text>
+    <text name="TicketInvestment.MaterialNotRegister">Vật tư {0} không được đăng ký nên không thể sử dụng</text>
+    <text name="TicketInvestment.OperationDateInvalid">Ngày tổ chức phải lớn hơn ngày phát phiếu {0}</text>
+    <text name="TicketInvestment.OperationInvalid">Không thể cập nhật thông tin tổ chức vì chương trình BTTT đã ở trạng thái khác</text>
+    <text name="TicketInvestment.AcceptanceDateInvalid">Ngày nghiệm thu phải lớn hơn ngày tổ chức {0}</text>
+    <text name="TicketInvestment.AcceptanceInvalid">Không thể nghiệm thu vì chương trình BTTT đã ở trạng thái khác</text>
+    <text name="TicketInvestment.RemarkInvalid">Không thể chấm điểm chương trình BTTT chưa được tổ chức</text>
+    <text name="TicketInvestment.CantUpdateConsumerReward">Không thể cập nhật thông tin quà tặng vì chương trình BTTT đã ở trạng thái khác</text>
+    <text name="TicketInvestment.TicketNotExists">Phiếu bốc thăm {0} không hợp lệ</text>
+    <text name="TicketInvestment.ConsumerRewardQuantityInvalid">Số lượng phiếu trúng của quà tặng {0} phải nhỏ hơn hoặc bằng số lượng đăng ký {1}</text>
+    <text name="TicketInvestment.FinalSettleDateInvalid">Ngày quyết toán phải lớn hơn ngày nghiệm thu {0}</text>
+    <text name="TicketInvestment.FinalSettleInvalid">Không thể quyết toán vì chương trình BTTT đã ở trạng thái khác</text>
+	  <text name="TicketInvestment.OperationDateBuyInvalid">Ngày tổ chức phải nằm trong tháng cuối của nhập hàng trở về sau và lớn hơn ngày phát mã tham dự</text>
+    <text name="TicketInvestment.IssueBeginDateInvalid">Ngày phát mã tham dự phải lớn hơn hoặc băng ngày {0}</text>
+    <text name="TicketInvestment.CreateOrderIssueDateInvalid">Không thể tạo đơn hàng để tích điểm do ngày phát phiếu từ {0} đến {1}</text>
+    <text name="TicketInvestment.Status.RequestInvestment">Đề Xuất</text>
+    <text name="TicketInvestment.Status.DeniedRequestInvestment">Không Xác Nhận Yêu Cầu</text>
+    <text name="TicketInvestment.Status.ConfirmedRequestInvestment">Xác Nhận Yêu Cầu</text>
+    <text name="TicketInvestment.Status.ValidRequestInvestment1">Xác Nhận PYC Hợp Lệ 1</text>
+    <text name="TicketInvestment.Status.InValidRequestInvestment1">PYC Không Hợp Lệ 1</text>
+    <text name="TicketInvestment.Status.ValidRequestInvestment2">Xác Nhận PYC Hợp Lệ 2</text>
+    <text name="TicketInvestment.Status.InValidRequestInvestment2">PYC Không Hợp Lệ 2</text>
+    <text name="TicketInvestment.Status.ConfirmedInvestment">Xác Nhận Đầu Tư</text>
+    <text name="TicketInvestment.Status.DeniedInvestmentConfirmation">Không Xác Nhận Đầu Tư</text>
+    <text name="TicketInvestment.Status.ApproveInvestment">Trade Duyệt Đầu Tư</text>
+    <text name="TicketInvestment.Status.DeniedInvestmentApproval">Trade Không Duyệt Đầu Tư</text>
+    <text name="TicketInvestment.EndIssueStage">Chương trình BTTT {0} đã hết hạn phát phiếu</text>
+    <text name="TicketInvestment.OutOfTicket">Đã hết mã tham gia chương trình bốc thăm trúng thưởng</text>
+    
+    <text name="Cycle.Error_FromDate_ToDate">Thời gian từ ngày đến ngày trùng với thời gian của kỳ làm việc {0} </text>
+    
+    <text name="Product.NotFoundByQrCode">Mã QR không đúng. Vui lòng thử lại hoặc gọi Hotline Shop: {0}</text>
+    <text name="Product.NotFoundByCode">Không tìm thấy sản phẩm có mã {0}</text>
+    <text name="Product.QrCodeInvalid">Mã QR không hợp lệ</text>
+    <text name="Product.QrCodeSmallUnitNotSupport">Chức năng năng chỉ hỗ trợ quét mã QR trên lon</text>
+	  <text name="Product.SpoonCodeInvalid">Mã muỗng không hợp lệ</text>
+    <text name="Product.QrCodeInvalidBranch">Mã QR không thuộc NPP ABC. Vui lòng kiểm tra lại hoặc gọi Hotline Shop: {0} để được hướng dẫn</text>
+    <text name="Product.ConflictPointTime">Sản phẩm {0} cài đặt điểm với thời gian {1} đến {2} trùng với thời gian {3} - {4} </text>
+    <text name="Product.QrCodeIsUsed">Mã QR {0} đã được sử dụng (đã tích điểm BTTT). Vui lòng kiểm tra lại hoặc gọi Hotline Shop: {1} để được hướng dẫn</text>
+    <text name="Product.Active">Hoạt Động</text>
+    <text name="Product.NotActive">Ngưng Hoạt Động</text>
+    
+    <text name="Consumer.NotFoundByPhone">Không tìm thấy khách hàng với số điện thoại {0}</text>
+    <text name="Consumer.PhoneInvalid">Số điện thoại không hợp lệ</text>
+    <text name="Consumer.CantSendOtp">Không thể gửi mã OTP tới số điện thoại {0}</text>
+    <text name="Consumer.OtpInvalid">Mã OTP này không hợp lệ</text>
+    <text name="Consumer.OtpOverTime">Mã OTP này đã hết hạn. Chỉ được sử dụng trong {0} phút</text>
+    <text name="Consumer.OrderTicket1">Bạn đã tham gia chương trình BTTT tại Shop {0} và nhận được {1} mã BTTT. Mã tham dự BTTT của bạn là: {2}</text>
+    <text name="Consumer.OrderTicket2">Bạn đã tham gia chương trình BTTT tại Shop {0} và nhận được {1} mã BTTT. Mã tham dự BTTT của bạn là: {2}. Số điểm tích lũy là: {3}đ, vui lòng mua thêm sản phẩm để nhận về mã tham dự BTTT</text>
+    <text name="Consumer.OrderTicket3">Bạn đã tham gia chương trình BTTT tại Shop {0}. Số điểm tích lũy là: {3}đ, vui lòng mua thêm sản phẩm để nhận về mã tham dự BTTT</text>
+    <text name="Consumer.OrderTicket4">Bạn đã tham gia chương trình BTTT tại Shop {0}. Vui lòng nhập Mã Muỗng trên Reward App để nhận về mã BTTT. Tải ứng dụng tại {4}</text>
+
+    <text name="Order.SpoonExists">Sản phẩm với QR Code {0} đã có mã muỗng rồi, nên không thể sử dụng mã muỗng {1}</text>
+    <text name="Order.PointsOverLimit">Số điểm thưởng sử dụng vượt quá giới hạn</text>
+    <text name="Order.DetailSpoonRequired">Vui lòng nhập mã muỗng cho sản phẩm {0}</text>
+    <text name="Order.DetailQrCodeRequired">Vui lòng nhập mã QR cho sản phẩm {0}</text>
+    <text name="Order.QrCodeInvalid">Mã QR không hợp lệ</text>
+    <text name="Order.SpoonCodeInvalid">Mã QR không hợp lệ</text>
+    <text name="Order.DetailProductNotMatchQrCode">Mã QR {0} không đúng cho sản phẩm {1}</text>
+    <text name="Order.NotAllowCreateTicketFromShop">Không cho phép tạo mã bốc thăm trúng thưởng từ cửa hàng</text>
+    
+    <text name="Order.DetailSpoonInValid">Mã muỗng {0} cho sản phẩm {1} không hợp lệ</text>
+	  <text name="Order.SpoonInValid">Mã muỗng {0} không hợp lệ</text>
+
+	  <text name="InvestmentSetting.NotExists">Cấu hình đầu tư chưa được cài đặt trên hệ thống!</text>
+
+    <text name="Customer.NotValidCreateOrder">Khách hàng (cửa hàng) không tồn tại</text>
+    <text name="Customer.AuthCodeInvalid">Mã xác nhận này không hợp lệ</text>
+    <text name="Customer.BirthdayInvalid">Ngày sinh không hợp lệ</text>
+    <text name="Customer.MobilePhoneInvalid">Số điện thoại không hợp lệ</text>
+    <text name="Customer.CantSendOtp">Không thể gửi OTP. Vui lòng thử lại</text>
+    <text name="Customer.CantActive">Không thể kích hoạt đăng ký cho khách hàng này</text>
+    <text name="Customer.OtpInvalid">Mã OTP này không hợp lệ</text>
+    <text name="Customer.OtpOverTime">Mã OTP này đã hết hạn. Chỉ được sử dụng trong {0} phút</text>
+    <text name="Customer.NotExists">Không tìm thấy khách hàng có mã {0}</text>
+    <text name="Customer.NotExistsWithPhone">Không tìm thấy khách hàng có số điện thoại {0}</text>
+    <text name="Customer.RegisterInvalid">Khách hàng {0} không hợp lệ để đăng ký thành Key Shop, vui lòng kiểm tra lại trạng thái</text>
+    <text name="Customer.ApproveInvalid">Khách hàng {0} không thể xác nhận thành Key Shop, vui lòng kiểm tra lại trạng thái</text>
+    <text name="Customer.RefuseInvalid">Khách hàng {0} không thể từ chối Key Shop, vui lòng kiểm tra lại trạng thái</text>
+    <text name="Customer.PaswordInvalid">Độ dài mật khẩu phải lớn ít nhất 6 ký tự</text>
+    <text name="Customer.KeyShopExistsWithPhone">Số điện thoại {0} được dùng bởi Key Shop khác vui lòng dùng số điện thoại khác</text>
+    <text name="Customer.NotKeyShop">Khách hàng này không phải là Key Shop, không thể sử dụng chức năng này</text>
+    <text name="Customer.NoActiveTicketInvestment">Khách hàng hiện không tham gia đầu tư BTTT nào trong thời gian này</text>
+    <text name="Customer.UserIsNotCustomer">Người dùng này không phải là khách hàng</text>
+    <text name="Customer.QrCodeIsUsed">Mã QRCode {0} đã được dùng</text>
+	<text name="Customer.UserNameLengthInvalid">Độ dài Tài khoản phải lớn hơn 6</text>
+	<text name="Customer.UserNameSpaceInvalid">Tài khoản không chứa khoảng trắng</text>
+	<text name="Customer.PasswordLengthInvalid">Độ dài Mật khẩu phải lớn hơn 6</text>
+
+	<text name="Staff.UserNameLengthInvalid">Độ dài Tài khoản phải lớn hơn 6</text>
+	<text name="Staff.UserNameSpaceInvalid">Tài khoản không chứa khoảng trắng</text>
+	<text name="Staff.PasswordLengthInvalid">Độ dài Mật khẩu phải lớn hơn 6</text>
+    <text name="Staff.NotExistsWithUser">Không tồn tại nhân viên với tài khoản {0}</text>
+	<text name="Staff.MobilePhoneInvalid">Số điện thoại không hợp lệ</text>
+	<text name="Staff.PaswordInvalid">Độ dài mật khẩu phải lớn ít nhất 6 ký tự</text>
+    <text name="Role.NotExists">Vai trò {0} không tồn tại</text>
+
+    <text name="Notification.DeleteInvalid">Thông báo {0} đang được sử dụng không thể xóa</text>
+
+    <text name="Material.ImportSpecialCharacter">Dòng {0} {1} không được dùng ký tự đặc biệt</text>
+    <text name="Material.ImportLengthInvalid">Dòng {0} {1} độ dài vượt quá {2}</text>
+    <text name="Material.ImportFormatBool">Dòng {0} {1} không đúng định dạng TRUE hoặc FALSE</text>
+    <text name="Material.ImportFormatNumber">Dòng {0} {1} không đúng định dạng số</text>
+    <text name="Material.ImportNumber">Dòng {0} {1} không được nhỏ hơn 0</text>
+    <text name="Material.ImportEmpty">Dòng {0} {1} không được để trống</text>
+    <text name="Material.ImportExists">Dòng {0} {1} không tồn tại trong hệ thống</text>
+    <text name="Material.MaterialCode">Mã vật tư</text>
+    <text name="Material.MaterialName">Tên vật tư</text>
+    <text name="Material.MaterialTypeCode">Mã loại vật tư</text>
+    <text name="Material.MaterialTypeName">Tên loại vật tư</text>
+    <text name="Material.IsDesign">Có thiết kế</text>
+    <text name="Material.Value">Đơn giá</text>
+    <text name="Material.Status">Trạng thái</text>
+
+    <text name="ProductPoint.ImportError">{0}</text>
+    <text name="ProductPoint.ImportNoData">File import không có dữ liệu.</text>
+    <text name="ProductPoint.ImportFormatBool">Dòng {0} {1} không đúng định dạng TRUE hoặc FALSE</text>
+    <text name="ProductPoint.ImportFormatNumber">Dòng {0} {1} không đúng định dạng số</text>
+    <text name="ProductPoint.ImportNumber">Dòng {0} {1} không được nhỏ hơn 0</text>
+    <text name="ProductPoint.ImportEmpty">Dòng {0} {1} không được để trống</text>
+    <text name="ProductPoint.ImportRangeDateConflict">Dòng {0} {1} có thời gian hiệu lực {2} - {3} trùng với dòng {4}</text>
+    <text name="ProductPoint.ImportExists">Dòng {0} {1} không tồn tại trong hệ thống</text>
+    <text name="ProductPoint.ImportErrorFromDateToDate">Dòng {0} có {1} phải lớn hơn {2}</text>
+    <text name="ProductPoint.ImportFormatDate">Dòng {0} {1} không đúng định dạng dd/MM/yyyy</text>
+    <text name="ProductPoint.ProductCode">Mã Sản Phẩm</text>
+    <text name="ProductPoint.ProductName">Tên Sản Phẩm</text>
+    <text name="ProductPoint.Points">Điểm</text>
+    <text name="ProductPoint.FromDate">Từ ngày</text>
+    <text name="ProductPoint.ToDate">Đến ngày</text>
+    <text name="ProductPoint.IsActive">Trạng thái</text>
+    <text name="ProductPoint.IsNew">Thêm mới</text>
+
+    <text name="EmailInvalid">Địa chỉ email {0} không hợp lệ!</text>
+    <text name="Entity_Customer">Khách hàng</text>
+    <text name="Entity_District">Quận</text>
+    <text name="Entity_Province">Tỉnh</text>
+    <text name="Entity_Product">Sản phẩm</text>
+    <text name="Entity_Brand">Nhãn hàng</text>
+    <text name="Entity_ProductClass">Ngành hàng</text>
+    <text name="Entity_SubProductClass">Ngành hàng con</text>
+    <text name="Entity_Branch">Nhà phân phối</text>
+    <text name="Entity_JobPosition">Job position</text>
+    <text name="Entity_ShipAddress">Ship address</text>
+    <text name="Entity_Store">Store</text>
+    <text name="Entity_Staff">Nhân viên</text>
+    <text name="Entity_Budget">Ngân sách</text>
+    <text name="Entity_TicketMaterial">Đầu tư vật tư</text>
+    <text name="Entity_TicketInvestment">Đầu tư bốc thăm trúng thường</text>
+    <text name="Entity_UserRole">Vai trò người dùng</text>
+    <text name="Entity_Notification">Thông báo</text>
+    <text name="Entity_Order">Đơn hàng</text>
+    <text name="Entity_Cycle">Kỳ làm việc</text>
+    <text name="Entity_ProductPoint">Điểm sản phẩm</text>
+    <text name="Entity_MaterialType">Loại vật tư</text>
+    <text name="Entity_Material">Vật tư</text>
+    <text name="Entity_RewardPackage">Gói quà tặng</text>
+    <text name="Entity_User">Người dùng</text>
+	<text name="Entity_PosmItem">POSM</text>
+	<text name="Entity_PosmClass">Nhóm POSM</text>
+	<text name="Entity_PosmType">Loại POSM</text>
+	<text name="Entity_PosmInvestmentItem">Đầu tư POSM</text>
+	<text name="Entity_PosmCatalog">POSM Catalog</text>
+	<text name="Entity_Vendor">Nhà cung cấp</text>
+	  
+    <text name="Field_QuantityPerPallet">Quantity / Pallet</text>
+    <text name="Field_Addr">Address</text>
+	<text name="Field_Username">Tài khoản</text>
+	<text name="Field_Fullname">Họ tên</text>
+	<text name="Field_Password">Mật khẩu</text>
+    <text name="Field_JobPosition">Job Position</text>
+    <text name="Field_TemperatureLevel">Temperature Level</text>
+	  
+    <text name="Ticket.IdNotFind">Không tìm thấy phiếu đầu tư {0}</text>
+    <text name="TicketInvestment.BuyBeginDateInvalid">Ngày bắt đầu mua hàng không hợp lệ</text>
+    <text name="TicketInvestment.BuyEndDateInvalid">Ngày kết thúc mua hàng không hợp lệ</text>
+    <text name="TicketInvestment.OperationDateInputInvalid">Ngày tổ chức không hợp lệ</text>
+    <text name="TicketInvestment.IdNotFind">Không tìm thấy mã BTTT {0}</text>
+    <text name="TicketInvestment.NotPrinted">Mã BTTT đã chuyển trạng thái khác bạn không thể thực hiện được chức năng in!</text>
+    <text name="TicketInvestment.CustomerNoHaveActive">Cửa hàng không có chương trình đầu tư trong thời gian này</text>
+
+    <text name="Budget.UserInvalid">Không có phân bổ ngân sách cho người dùng này!</text>
+    <text name="Field_ConsumerName">Tên khách hàng</text>
+    <text name="Field_Phone">Số điện thoại</text>
+
+    <text name="Order.DuplicateQrCode">Trùng mã QRCode {0}</text>
+    <text name="Order.DuplicateSpoonCode">Trùng mã muỗng {0}</text>
+    <text name="Order.MustAtLeastOneItem">Đơn hàng phải có ít nhất 1 sản phảm!</text>
+
+	<text name="PosmItem.PosmItemCode"> Mã POSM</text>
+	<text name="PosmItem.PosmItemName">Tên POSM</text>
+	<text name="PosmItem.PosmClassCode">Mã nhóm POSM</text>
+	<text name="PosmItem.PosmClassName">Tên nhóm POSM</text>
+	<text name="PosmItem.PosmTypeCode">Mã loại POSM</text>
+	<text name="PosmItem.PosmTypeName">Tên loại POSM</text>
+	<text name="PosmItem.Link">Link</text>
+	<text name="PosmItem.UnitType">Đơn vị</text>
+	<text name="PosmItem.CalcType">Cách tính kích thước</text>
+	<text name="PosmItem.IsActive">Đang sử dụng</text>
+	<text name="PosmItem.PosmCatalogCode">Mã catalog</text>
+	<text name="PosmItem.PosmCatalogName">Tên catalog</text>
+	<text name="PosmItem.ImportSpecialCharacter">Dòng {0} {1} không được dùng ký tự đặc biệt</text>
+	<text name="PosmItem.ImportLengthInvalid">Dòng {0} {1} độ dài vượt quá {2}</text>
+	<text name="PosmItem.ImportFormatBool">Dòng {0} {1} không đúng định dạng TRUE hoặc FALSE</text>
+	<text name="PosmItem.ImportFormatNumber">Dòng {0} {1} không đúng định dạng số</text>
+	<text name="PosmItem.ImportNumber">Dòng {0} {1} không được nhỏ hơn 0</text>
+	<text name="PosmItem.ImportEmpty">Dòng {0} {1} không được để trống</text>
+	<text name="PosmItem.ImportExists">Dòng {0} {1} không tồn tại trong hệ thống</text>
+	<text name="PosmInvestment.ImportEmpty">Dòng {0} {1} không được để trống</text>
+	<text name="PosmInvestment.SetupPlanDate">Ngày dự kiến lắp đặt</text>
+	<text name="PosmInvestment.ImportInvalid">Dòng {0} {1} dữ liệu không hợp lệ</text>
+	<text name="PosmInvestment.RequestType">Lý do yêu cầu</text>
+	 
+	<text name="PosmPrice.PosmItemCode">Mã POSM</text>
+	<text name="PosmPrice.PosmItemName">Tên POSM</text>
+	<text name="PosmPrice.Code">Mã bảng giá</text>
+	<text name="PosmPrice.Name">Diễn giải</text>	
+	<text name="PosmPrice.UnitType">Đơn vị</text>
+	<text name="PosmPrice.CalcType">Cách tính kích thước</text>
+	<text name="PosmPrice.FromDate">Từ ngày (mm/dd/yyyy)</text>
+	<text name="PosmPrice.ToDate">Đến ngày (mm/dd/yyyy)</text>
+	<text name="PosmPrice.Price">Giá</text>
+	<text name="PosmPrice.ImportSpecialCharacter">Dòng {0} {1} không được dùng ký tự đặc biệt</text>
+	<text name="PosmPrice.ImportLengthInvalid">Dòng {0} {1} độ dài vượt quá {2}</text>
+	<text name="PosmPrice.ImportDateInvalid">Dòng {0} {1} thời gian không đúng (mm/dd/yyyy)</text>
+	<text name="PosmPrice.ImportFormatBool">Dòng {0} {1} không đúng định dạng TRUE hoặc FALSE</text>
+	<text name="PosmPrice.ImportFormatNumber">Dòng {0} {1} không đúng định dạng số</text>
+	<text name="PosmPrice.ImportNumber">Dòng {0} {1} không được nhỏ hơn 0</text>
+	<text name="PosmPrice.ImportEmpty">Dòng {0} {1} không được để trống</text>
+	<text name="PosmPrice.ImportExists">Dòng {0} {1} không tồn tại trong hệ thống</text>
+	<text name="ImportEntityNotFoundCode">Dòng {0} không tìm thấy {1} có mã {2} </text>
+	<text name="PosmInvestment.CycleNotFound">Chưa định nghĩa chu kỳ cho ngày đăng ký {0}</text>
+
+  </texts>
+</localizationDictionary>

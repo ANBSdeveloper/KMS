@@ -1,0 +1,2092 @@
+{
+  "ReportVersion": "2020.2.1.0",
+  "ReportGuid": "9e319286441749af950a2434c340ac3d",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(1630941203000+0700)/",
+  "ReportChanged": "/Date(1631167153380+0700)/",
+  "EngineVersion": "EngineV2",
+  "ReportUnit": "Inches",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiDataTableSource",
+        "Name": "root",
+        "Alias": "root",
+        "Key": "fd734bfce03e462a8cd14af143358815",
+        "Columns": {
+          "0": {
+            "Name": "FromDate",
+            "Index": -1,
+            "NameInSource": "FromDate",
+            "Alias": "FromDate",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "ToDate",
+            "Index": -1,
+            "NameInSource": "ToDate",
+            "Alias": "ToDate",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "ZoneName",
+            "Index": -1,
+            "NameInSource": "ZoneName",
+            "Alias": "ZoneName",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "AreaName",
+            "Index": -1,
+            "NameInSource": "AreaName",
+            "Alias": "AreaName",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "ProvinceName",
+            "Index": -1,
+            "NameInSource": "ProvinceName",
+            "Alias": "ProvinceName",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "RSMCode",
+            "Index": -1,
+            "NameInSource": "RSMCode",
+            "Alias": "RSMCode",
+            "Type": "System.Decimal"
+          },
+          "6": {
+            "Name": "RSMName",
+            "Index": -1,
+            "NameInSource": "RSMName",
+            "Alias": "RSMName",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "ASMCode",
+            "Index": -1,
+            "NameInSource": "ASMCode",
+            "Alias": "ASMCode",
+            "Type": "System.Decimal"
+          },
+          "8": {
+            "Name": "ASMName",
+            "Index": -1,
+            "NameInSource": "ASMName",
+            "Alias": "ASMName",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "SSCode",
+            "Index": -1,
+            "NameInSource": "SSCode",
+            "Alias": "SSCode",
+            "Type": "System.Decimal"
+          },
+          "10": {
+            "Name": "SSName",
+            "Index": -1,
+            "NameInSource": "SSName",
+            "Alias": "SSName",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "LeadCode",
+            "Index": -1,
+            "NameInSource": "LeadCode",
+            "Alias": "LeadCode",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "LeadName",
+            "Index": -1,
+            "NameInSource": "LeadName",
+            "Alias": "LeadName",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "BranchCode",
+            "Index": -1,
+            "NameInSource": "BranchCode",
+            "Alias": "BranchCode",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "BranchName",
+            "Index": -1,
+            "NameInSource": "BranchName",
+            "Alias": "BranchName",
+            "Type": "System.String"
+          },
+          "15": {
+            "Name": "ShopCode",
+            "Index": -1,
+            "NameInSource": "ShopCode",
+            "Alias": "ShopCode",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "ShopName",
+            "Index": -1,
+            "NameInSource": "ShopName",
+            "Alias": "ShopName",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "ContactName",
+            "Index": -1,
+            "NameInSource": "ContactName",
+            "Alias": "ContactName",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "Phone",
+            "Index": -1,
+            "NameInSource": "Phone",
+            "Alias": "Phone",
+            "Type": "System.Decimal"
+          },
+          "19": {
+            "Name": "Address",
+            "Index": -1,
+            "NameInSource": "Address",
+            "Alias": "Address",
+            "Type": "System.String"
+          },
+          "20": {
+            "Name": "TicketInvestmentCode",
+            "Index": -1,
+            "NameInSource": "TicketInvestmentCode",
+            "Alias": "TicketInvestmentCode",
+            "Type": "System.Decimal"
+          },
+          "21": {
+            "Name": "OrderDate",
+            "Index": -1,
+            "NameInSource": "OrderDate",
+            "Alias": "OrderDate",
+            "Type": "System.String"
+          },
+          "22": {
+            "Name": "CustName",
+            "Index": -1,
+            "NameInSource": "CustName",
+            "Alias": "CustName",
+            "Type": "System.String"
+          },
+          "23": {
+            "Name": "QrCode",
+            "Index": -1,
+            "NameInSource": "QrCode",
+            "Alias": "QrCode",
+            "Type": "System.String"
+          },
+          "24": {
+            "Name": "SpoonCode",
+            "Index": -1,
+            "NameInSource": "SpoonCode",
+            "Alias": "SpoonCode",
+            "Type": "System.String"
+          },
+          "25": {
+            "Name": "ProductCode",
+            "Index": -1,
+            "NameInSource": "ProductCode",
+            "Alias": "ProductCode",
+            "Type": "System.String"
+          },
+          "26": {
+            "Name": "ProductName",
+            "Index": -1,
+            "NameInSource": "ProductName",
+            "Alias": "ProductName",
+            "Type": "System.String"
+          },
+          "27": {
+            "Name": "API",
+            "Index": -1,
+            "NameInSource": "API",
+            "Alias": "API",
+            "Type": "System.String"
+          },
+          "28": {
+            "Name": "Quantity",
+            "Index": -1,
+            "NameInSource": "Quantity",
+            "Alias": "Quantity",
+            "Type": "System.Decimal"
+          },
+          "29": {
+            "Name": "UnitPrice",
+            "Index": -1,
+            "NameInSource": "UnitPrice",
+            "Alias": "UnitPrice",
+            "Type": "System.Decimal"
+          },
+          "30": {
+            "Name": "Points",
+            "Index": -1,
+            "NameInSource": "Points",
+            "Alias": "Points",
+            "Type": "System.Decimal"
+          },
+          "31": {
+            "Name": "CreationTime",
+            "Index": -1,
+            "NameInSource": "CreationTime",
+            "Alias": "CreationTime",
+            "Type": "System.DateTime"
+          }
+        },
+        "NameInSource": "Data.root"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiJsonDatabase",
+        "Name": "Data",
+        "Alias": "Data",
+        "PathData": "C:\\Users\\tranb\\Desktop\\RP_TicketInvestment_Order_Detail.json"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "395ff21942334af49e991c909b02da0d",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiText",
+          "Name": "Text4",
+          "MinSize": "0,0",
+          "MaxSize": "0,0",
+          "ClientRectangle": "-0.2,-0.1,0.6,0.2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "TextBrush": "solid:Black",
+          "Type": "Expression"
+        },
+        "1": {
+          "Ident": "StiGroupHeaderBand",
+          "Name": "GroupHeaderBand1",
+          "ClientRectangle": "0,0.2,23.22,0.9",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiImage",
+              "Name": "Image1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,1.4,0.6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "Stretch": true,
+              "ImageBytes": "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"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0.1,6,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Báo Cáo Theo Dõi Chi Tiết Đơn Hàng Tham Gia BTTT"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;16;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0.4,2.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Từ Ngày: {root.FromDate} - Đến Ngày: {root.ToDate}"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text3",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0.7,0.3,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "STT"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text6",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Vùng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text7",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.1,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Khu Vực"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.9,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tỉnh / Thành Phố"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text9",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.6,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã RSM"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text10",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.4,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên RSM"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text11",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.3,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã ASM"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text12",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.1,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên ASM"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text13",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã SS"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text14",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.7,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên SS"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text15",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.6,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã TLD"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text16",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.3,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên TLD"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.2,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã NPP"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên NPP"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text19",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.9,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã CH"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text20",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.6,0.7,1,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên CH"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text21",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "12.6,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Người Đại Diện"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "20": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "13.5,0.7,0.6,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "SĐT"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "21": {
+              "Ident": "StiText",
+              "Name": "Text23",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.1,0.7,1.4,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Địa Chỉ"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "22": {
+              "Ident": "StiText",
+              "Name": "Text24",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "15.5,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Id Đầu Tư"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "23": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "16.4,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Ngày Tạo Đơn"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "24": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "17.1,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên KH"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "25": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "18,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã QR"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "26": {
+              "Ident": "StiText",
+              "Name": "Text28",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "18.8,0.7,0.8,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã Muỗng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "27": {
+              "Ident": "StiText",
+              "Name": "Text29",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "19.6,0.7,0.6,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã SKU"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "28": {
+              "Ident": "StiText",
+              "Name": "Text30",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "20.2,0.7,0.9,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên SKU"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "29": {
+              "Ident": "StiText",
+              "Name": "Text31",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "21.1,0.7,0.7,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "App Nhập MM"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "30": {
+              "Ident": "StiText",
+              "Name": "Text32",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "21.8,0.7,0.4,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "SL"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "31": {
+              "Ident": "StiText",
+              "Name": "Text33",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "22.2,0.7,0.5,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Đơn Giá"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "32": {
+              "Ident": "StiText",
+              "Name": "Text34",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "22.7,0.7,0.5,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Điểm"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "2": {
+          "Ident": "StiDataBand",
+          "Name": "DataBand1",
+          "ClientRectangle": "0,1.5,23.22,0.7",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text5",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,0.3,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Line}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text35",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ZoneName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text36",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.1,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.AreaName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text37",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.9,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ProvinceName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text38",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.6,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.RSMCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text39",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.4,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.RSMName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text40",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.3,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ASMCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text42",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.1,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ASMName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text41",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.SSCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text43",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.7,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.SSName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text44",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.6,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.LeadCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text45",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.3,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.LeadName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text46",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.2,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.BranchCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text47",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.BranchName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text48",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.9,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ShopCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text49",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.6,0,1,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ShopName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text50",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "12.6,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ContactName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text51",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "13.5,0,0.6,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Phone}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text52",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.1,0,1.4,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Address}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text53",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "15.5,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.TicketInvestmentCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "20": {
+              "Ident": "StiText",
+              "Name": "Text54",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "16.4,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.OrderDate}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "21": {
+              "Ident": "StiText",
+              "Name": "Text55",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "17.1,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.CustName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "22": {
+              "Ident": "StiText",
+              "Name": "Text56",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "18,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.QrCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "23": {
+              "Ident": "StiText",
+              "Name": "Text57",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "18.8,0,0.8,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.SpoonCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "24": {
+              "Ident": "StiText",
+              "Name": "Text58",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "19.6,0,0.6,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ProductCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "25": {
+              "Ident": "StiText",
+              "Name": "Text59",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "20.2,0,0.9,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ProductName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "26": {
+              "Ident": "StiText",
+              "Name": "Text60",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "21.1,0,0.7,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.API}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "27": {
+              "Ident": "StiText",
+              "Name": "Text61",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "21.8,0,0.4,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Quantity}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "28": {
+              "Ident": "StiText",
+              "Name": "Text62",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "22.2,0,0.5,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.UnitPrice}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "29": {
+              "Ident": "StiText",
+              "Name": "Text63",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "22.7,0,0.5,0.7",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Points}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            }
+          },
+          "DataSourceName": "root"
+        }
+      },
+      "PaperSize": "A3",
+      "Orientation": "Landscape",
+      "PageWidth": 24.0,
+      "PageHeight": 11.69,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.39,
+        "Right": 0.39,
+        "Top": 0.39,
+        "Bottom": 0.39
+      }
+    }
+  }
+}

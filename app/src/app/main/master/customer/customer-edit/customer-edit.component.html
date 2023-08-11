@@ -1,0 +1,433 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header contentHeaderName="customer"></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+        </div>
+      </div>
+    </section>
+    <section>
+      <ng-container *ngTemplateOutlet="formInfoGrossRevenue"></ng-container>
+    </section>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <ng-container
+            *ngTemplateOutlet="formInvestmentHistory"
+          ></ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("customer_information") }}</span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ lcode }}</label>
+          <dx-text-box
+            formControlName="code"
+            [isValid]="!cError('code')"
+            [readOnly]="formReadOnly"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+            <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("code", 50) }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ lname }}</label>
+          <dx-text-box
+            formControlName="name"
+            [isValid]="!cError('name')"
+            [readOnly]="formReadOnly"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("name", 50) }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("phone") }}</label>
+          <dx-text-box formControlName="mobilePhone" [readOnly]="formReadOnly">
+          </dx-text-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("address") }}</label>
+          <dx-text-box formControlName="address" [readOnly]="formReadOnly">
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("customer_type") }}</label>
+          <dx-text-box formControlName="channelName" [readOnly]="formReadOnly">
+          </dx-text-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-branch-combo
+            formControlName="branchId"
+            [isValid]="!cError('branchId')"
+            [readOnly]="formReadOnly"
+          ></app-branch-combo>
+          <span class="invalid-form" *ngIf="cErrorV('branchId', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("efficient") }}</label>
+          <div class="rating">
+            <ngb-rating
+              [rate]="cValue('efficient')"
+              [max]="5"
+              [readonly]="true"
+              class="outline-none"
+            ></ngb-rating>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-ss-staff-combo
+            [readOnly]="formReadOnly"
+            formControlName="salesSupervisorStaffId"
+            [getDataWithoutSupervisor]="true"
+          ></app-ss-staff-combo>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-asm-staff-combo
+            [readOnly]="formReadOnly"
+            formControlName="asmStaffId"
+            [getDataWithoutSupervisor]="true"
+          ></app-asm-staff-combo>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-rsm-staff-combo
+            [readOnly]="formReadOnly"
+            formControlName="rsmStaffId"
+            [getDataWithoutSupervisor]="true"
+          ></app-rsm-staff-combo>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #formInfoGrossRevenue>
+  <div class="row match-height">
+    <div class="col-lg-6 lg-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="mb-1">
+                <i
+                  data-feather="dollar-sign"
+                  [size]="16"
+                  class="mr-75 font-medium-4"
+                ></i>
+                <span class="align-middle">{{
+                  l("info_gross_revenue_monthly")
+                }}</span>
+              </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table>
+                <tbody>
+                  <tr
+                    *ngFor="let item of customerRecentSalesDataSource.monthData"
+                  >
+                    <td class="pr-1 pb-1">
+                      {{ l("gross_revenue_month") }} {{ item.month }}:
+                    </td>
+                    <td class="pr-1 pb-1">
+                      <span class="font-weight-bold"
+                        >{{ item.amount | numberFormat }} VNĐ</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pr-1 pb-1">{{ l("total") }}:</td>
+                    <td class="pr-1 pb-1">
+                      <span class="font-weight-bold"
+                        >{{ totalMonth | numberFormat }} VNĐ</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 lg-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="mb-1">
+                <i
+                  data-feather="dollar-sign"
+                  [size]="16"
+                  class="mr-75 font-medium-4"
+                ></i>
+                <span class="align-middle">{{
+                  l("info_gross_revenue_yearly")
+                }}</span>
+              </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table>
+                <tbody>
+                  <tr
+                    *ngFor="let item of customerRecentSalesDataSource.yearData"
+                  >
+                    <td class="pr-1 pb-1">{{ item.measure }}:</td>
+                    <td class="pr-1 pb-1">
+                      <span class="font-weight-bold"
+                        >{{ item.amount | numberFormat }} VNĐ</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #formInvestmentHistory>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("ticket_investment") }}</span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("status_propose") }}</label>
+          <dx-number-box
+            formControlName="totalRequest"
+            [readOnly]="formReadOnly"
+            format="#,##0.##"
+          >
+          </dx-number-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("ticket_investment_status_approved")
+          }}</label>
+          <dx-number-box
+            formControlName="totalApproved"
+            [readOnly]="formReadOnly"
+            format="#,##0.##"
+          >
+          </dx-number-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("total_amount_Bttt") }}</label>
+          <dx-number-box
+            formControlName="totalAmountBttt"
+            [value]="totalAmountBttt"
+            [readOnly]="formReadOnly"
+            format="#,##0.##"
+          >
+          </dx-number-box>
+        </div>
+      </div>
+    </div>
+
+    <dx-data-grid
+      class="ext-grid"
+      [dataSource]="ticketInvestmentListItemDataSource.items"
+      [showBorders]="false"
+      [showColumnLines]="false"
+      [showRowLines]="true"
+      [columnHidingEnabled]="true"
+      [columnAutoWidth]="true"
+    >
+      <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+      <dxo-paging [pageSize]="10"> </dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [showInfo]="false"
+        [showNavigationButtons]="true"
+      >
+      </dxo-pager>
+      <dxi-column dataField="code" [caption]="l('investment_id')"></dxi-column>
+
+      <dxi-column
+        dataField="operationDate"
+        [caption]="l('operation_date_time')"
+        type="date"
+      ></dxi-column>
+
+      <dxi-column
+        dataField="investmentAmount"
+        [caption]="l('total_amount_Bttt')"
+        format="#,##0.##"
+      ></dxi-column>
+      <dxi-column
+        [caption]="l('credit_point')"
+        cellTemplate="creditPointTemplate"
+      >
+        <div *dxTemplate="let cell of 'creditPointTemplate'">
+          <div class="d-flex align-items-center">
+            <div class="rating">
+              <ngb-rating
+                [rate]="cell.data.pointsForTicket"
+                [max]="5"
+                [readonly]="true"
+                class="outline-none"
+              ></ngb-rating>
+            </div>
+          </div>
+        </div>
+      </dxi-column>
+      <dxi-column
+        dataField="status"
+        [caption]="l('status')"
+        cellTemplate="designTemplate"
+      >
+        <div *dxTemplate="let cell of 'designTemplate'">
+          <div>
+            {{
+              l(
+                cell.data.status == 10
+                  ? "ticket_investment_status_request_investment"
+                  : cell.data.status == 20
+                  ? "ticket_investment_status_denied_request_investment"
+                  : cell.data.status == 30
+                  ? "ticket_investment_status_confirmed_request_investment"
+                  : cell.data.status == 40
+                  ? "ticket_investment_status_valid_request_investment1"
+                  : cell.data.status == 50
+                  ? "ticket_investment_status_in_valid_request_investment1"
+                  : cell.data.status == 60
+                  ? "ticket_investment_status_valid_request_investment2"
+                  : cell.data.status == 70
+                  ? "ticket_investment_status_in_valid_request_investment2"
+                  : cell.data.status == 80
+                  ? "ticket_investment_status_confirmed_investment"
+                  : cell.data.status == 90
+                  ? "ticket_investment_status_denied_investment_confirmation"
+                  : cell.data.status == 100
+                  ? "ticket_investment_status_approve_investment1"
+                  : cell.data.status == 110
+                  ? "ticket_investment_status_denied_investment_approval"
+                  : cell.data.status == 120
+                  ? "ticket_investment_status_approved"
+                  : cell.data.status == 130
+                  ? "ticket_investment_status_denied"
+                  : cell.data.status == 140
+                  ? "ticket_investment_status_updating"
+                  : cell.data.status == 150
+                  ? "ticket_investment_status_operated"
+                  : cell.data.status == 160
+                  ? "ticket_investment_status_acceptance"
+                  : cell.data.status == 170
+                  ? "ticket_investment_status_final_settlement"
+                  : ""
+              )
+            }}
+          </div>
+        </div>
+      </dxi-column>
+      <dxi-column [caption]="" cellTemplate="actionTemplate">
+        <div *dxTemplate="let cell of 'actionTemplate'">
+          <a
+            href="javascript:;"
+            *ngIf="cell.data.id > 0"
+            (click)="showDetail(cell.data)"
+            class="font-weight-bold"
+            >{{ l("see_details") }}</a
+          >
+        </div>
+      </dxi-column>
+    </dx-data-grid>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+</ng-template>

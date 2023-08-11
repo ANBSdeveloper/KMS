@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+  <texts>
+    <text name="EntityNotFoundWithType">{0} entity with id {1} is not found</text>
+    <text name="EntityNotFound">{0} entity with id {1} is not found</text>
+    <text name="EntityFieldRequired">Field {0} is required</text>
+    <text name="InternalServerError">Has an error in internal server in processing</text>
+    <text name="DatabaseUpdateError">Has an error in database processing</text>
+    <text name="TenantConflictError">This request is conflicted with current user's tenant</text>
+    <text name="EmptyFile">Please choose file before upload</text>
+    <text name="EntityFieldValueMustGreaterThanOrEqual">{0} must greater than or equal {1}</text>
+    <text name="EntityFieldValueNotValid">Value of field {0} is not valid</text>
+    <text name="BranchIsNotAssigned">Branch {0} is not assiged for this user</text>
+    <text name="RequestConflictEntityId">Request with id not match with entity id</text>
+    <text name="EntityDuplicateKey">Entity {0} is duplicate with key {1}</text>
+    <text name="StoreIsNotAssigned">Store {0} is not assigned for user {1}</text>
+    <text name="RequestWithSortParamsNotValid">Sort params in request is not valid</text>
+    <text name="ResetPassword.EmailInvalid">This email is not valid</text>
+    <text name="ResetPassword.Subject">Reset password</text>
+    
+    <text name="EmailInvalid">This email {0} is invalid</text>
+    <text name="Entity_Customer">Customer</text>
+    <text name="Entity_District">District</text>
+    <text name="Entity_Province">Province</text>
+    <text name="Entity_Product">Product</text>
+    <text name="Entity_Brand">Brand</text>
+    <text name="Entity_ProductClass">Product Class</text>
+    <text name="Entity_Branch">Branch</text>
+    <text name="Entity_JobPosition">Job Position</text>
+    <text name="Entity_ShipAddress">Ship Address</text>
+    <text name="Entity_Store">Store</text>
+    <text name="Entity_Employee">Employee</text>
+    <text name="Entity_Reward_package">Gói Quà Tặng</text>
+   
+    <text name="Field_QuantityPerPallet">Quantity / Pallet</text>
+    <text name="Field_Addr">Address</text>
+    <text name="Field_JobPosition">Job Position</text>
+    <text name="Field_TemperatureLevel">Temperature Level</text>
+  </texts>
+</localizationDictionary>

@@ -1,0 +1,19 @@
+<p-accordion [multiple]="true">
+  <div *ngIf="newProgress">
+    <p-accordionTab [selected]="true" [header]="l('update_new_progress')">
+      <app-ticket-progress-item
+        #newProgressItem
+        [ticketInvestmentId]="ticketInvestmentId"
+        [data]="newProgress"
+      ></app-ticket-progress-item>
+    </p-accordionTab>
+  </div>
+
+  <p-accordionTab *ngFor="let progress of progresses" [header]="progressTitle(progress)">
+    <app-ticket-progress-item [data]="progress"></app-ticket-progress-item>
+  </p-accordionTab>
+</p-accordion>
+
+<div *ngIf="isEmpty">
+  {{ l("empty_progress") }}
+</div>

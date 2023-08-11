@@ -1,0 +1,114 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+
+          <div class="row">
+            <div class="col-12 d-flex flex-sm-row mt-2">
+              <ng-container *ngTemplateOutlet="buttons"></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("from_date")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #fromDate
+            formControlName="fromDate"
+            [isValid]="!cError('fromDate')"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("to_date") }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #toDate
+            formControlName="toDate"
+            [isValid]="!cError('toDate')"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'invalidRange')">
+            <small class="form-text text-danger">{{ l("error_todate") }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6" *ngIf="!(isRsm || isAsm || isSS)">
+          <div class="form-group">
+            <app-ticket-investment-rsm-staff-combo
+              #rsmStaffCombo
+              [placeholder]="l('all')"
+              formControlName="rsmStaffId"
+              (change)="rsmStaffChange($event)"
+              [isValid]="!cError('rsmStaffId')"
+            ></app-ticket-investment-rsm-staff-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" *ngIf="!(isAsm || isSS)">
+          <div class="form-group">
+            <app-ticket-investment-asm-staff-combo
+              #asmStaffCombo
+              [placeholder]="l('all')"
+              [supervisorId]="cValue('rsmStaffId')"
+              formControlName="asmStaffId"
+              (change)="asmStaffChange($event)"
+            ></app-ticket-investment-asm-staff-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" *ngIf="!isSS">
+          <div class="form-group">
+            <app-ticket-investment-ss-staff-combo
+              #ssStaffCombo
+              [supervisorId]="cValue('asmStaffId')"
+              [placeholder]="l('all')"
+              formControlName="ssStaffId"
+            ></app-ticket-investment-ss-staff-combo>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="printPreview()"
+  >
+    {{ l("print_preview") }}
+  </button>
+</ng-template>

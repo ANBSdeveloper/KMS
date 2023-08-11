@@ -1,0 +1,185 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>4545d964-231b-446a-a3f2-8be7f210c0cf</UserSecretsId>
+    <DockerfileContext>..\..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Kms\Hrm\**" />
+    <Content Remove="Controllers\Kms\Hrm\**" />
+    <EmbeddedResource Remove="Controllers\Kms\Hrm\**" />
+    <None Remove="Controllers\Kms\Hrm\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Identity\Account\ExternalController.cs" />
+    <Compile Remove="Controllers\Kms\LocationController.cs" />
+    <Compile Remove="Controllers\Kms\StoreController.cs" />
+    <Compile Remove="Controllers\Kms\TemperatureLevelController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Setup\Scripts\03.RP_Cycle.sql" />
+    <None Remove="Setup\Scripts\04.RP_Budget.sql" />
+    <None Remove="Setup\Scripts\05.RP_Analytic.sql" />
+    <None Remove="Setup\Scripts\06.RP_Analytic6Months.sql" />
+    <None Remove="Setup\Scripts\07.RP_InvestmentYearly.sql" />
+    <None Remove="Setup\Scripts\08.RP_TicketInvestment_Ticket.sql" />
+    <None Remove="Setup\Scripts\09.RP_TicketInvestment_Remark.sql" />
+    <None Remove="Setup\Scripts\14.RP_PosmInvestment_Request.sql" />
+    <None Remove="Setup\Scripts\15.RP_PosmInvestment_Order.sql" />
+    <None Remove="Setup\Scripts\16.RP_PosmInvestment_Progress.sql" />
+    <None Remove="Setup\Scripts\17.RP_PosmInvestment_Produce.sql" />
+    <None Remove="Setup\Scripts\18.RP_PosmInvestment_Budget.sql" />
+    <None Remove="Setup\Scripts\19.RP_PosmInvestment_Export.sql" />
+    <None Remove="Setup\Scripts\20.RP_PivotPosm.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Setup\Scripts\06.RP_Analytic6Months.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\20.RP_PivotPosm.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\19.RP_PosmInvestment_Export.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\18.RP_PosmInvestment_Budget.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\17.RP_PosmInvestment_Produce.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\16.RP_PosmInvestment_Progress.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\15.RP_PosmInvestment_Order.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\14.RP_PosmInvestment_Request.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\09.RP_TicketInvestment_Remark.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\08.RP_TicketInvestment_Ticket.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\07.RP_InvestmentYearly.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\05.RP_Analytic.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\04.RP_Budget.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\03.RP_Cycle.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setup\Scripts\02.RP_TicketInvestment_Result.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="AutofacSerilogIntegration" Version="5.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.0" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.24" />
+    <PackageReference Include="HangFire.Autofac" Version="2.3.1" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.24" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.0.0" />
+    <PackageReference Include="Inflector.NetCore" Version="1.2.3" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.5" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.16" />
+
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+
+    <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.2.22" />
+
+    <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.2.22" />
+
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Cbms.Kms.Application\Cbms.Kms.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Cbms.Kms.Domain\Cbms.Kms.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\Cbms.Kms.Infrastructure\Cbms.Kms.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="certificate.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\01.System.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\02.RP_TicketInvestment_Result.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\10.RP_TicketInvestment_Order_Detail.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\11.RP_TicketInvestment_PrintTicket.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\13.RP_TicketInvestment_ScanQrCode.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Setup\Scripts\12.RP_TicketInvestment_Reward.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="tempkey.jwk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Cbms">
+      <HintPath>..\..\BuildingBlocks\Cbms.dll</HintPath>
+    </Reference>
+    <Reference Include="Cbms.Application">
+      <HintPath>..\..\BuildingBlocks\Cbms.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Cbms.AspNetCore">
+      <HintPath>..\..\BuildingBlocks\Cbms.AspNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cbms.EntityFrameworkCore">
+      <HintPath>..\..\BuildingBlocks\Cbms.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/config.json" /></VisualStudio></ProjectExtensions>
+</Project>

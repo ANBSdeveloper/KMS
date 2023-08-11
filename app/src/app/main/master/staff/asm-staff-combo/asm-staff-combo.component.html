@@ -1,0 +1,18 @@
+<label class="form-label mr-1">{{ l(label) }}</label>
+<ng-select
+  [bindLabel]="displayName"
+  [bindValue]="valueName"
+  [(ngModel)]="value"
+  [typeahead]="input$"
+  [items]="items"
+  [minTermLength]="2"
+  [virtualScroll]="true"
+  [loading]="loading"
+  (scroll)="onScroll($event)"
+  (scrollToEnd)="onScrollToEnd()"
+  (ngModelChange)="onChange($event)"
+  [readonly]="readOnly"
+  [placeholder]="placeholder"
+  
+>
+</ng-select>

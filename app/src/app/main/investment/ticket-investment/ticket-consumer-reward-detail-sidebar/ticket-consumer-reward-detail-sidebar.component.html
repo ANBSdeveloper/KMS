@@ -1,0 +1,84 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div
+      class="modal-dialog"
+      *blockUI="'ticket_consumer_reward_detail_content_block'"
+    >
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <!-- <label class="form-label">{{ l("ticket_code") }}</label> -->
+          <div class="form-group">
+            <app-ticket-combo
+              #ticketCombo
+              required="true"
+              formControlName="ticketId"
+              [ticketInvestmentId]="ticketInvestmentId"
+              [readOnly]="readOnly || modelId"
+              [error]="cError('ticketId')"
+              (change)="ticketChange($event)"
+            ></app-ticket-combo>
+            <span class="invalid-form" *ngIf="cErrorV('ticketId', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{
+              l("consumer_reward_consumer_name")
+            }}</label>
+            <dx-text-box
+              formControlName="consumerName"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("phone") }}</label>
+            <dx-text-box
+              formControlName="consumerPhone"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("note") }}</label>
+            <dx-text-area
+              formControlName="note"
+              [readOnly]="readOnly"
+              height="50"
+            ></dx-text-area>
+          </div>
+          <button
+            type="button"
+            (click)="saveAdd()"
+            *ngIf="saveAddVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsaveadd }}
+          </button>
+          <button
+            type="submit"
+            *ngIf="updateVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

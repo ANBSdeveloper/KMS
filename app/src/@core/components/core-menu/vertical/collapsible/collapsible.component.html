@@ -1,0 +1,39 @@
+<ng-container *ngIf="!item.hidden && checkItemHasChild(item)">
+  <!-- collapsible title -->
+  <a class="d-flex align-items-center" [ngClass]="item.classes" *ngIf="!item.url" (click)="toggleOpen($event)">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <!-- itemContent template -->
+  <ng-template #itemContent>
+    <span [data-feather]="item.icon" *ngIf="item.icon"></span>
+    <span class="menu-title text-truncate">{{ l(item.translate) }}</span>
+    <span
+      class="badge ml-auto mr-1"
+      *ngIf="item.badge"
+      [ngClass]="item.badge.classes"
+    >
+      {{ l(item.badge.translate) }}
+    </span>
+  </ng-template>
+
+  <!-- sub-menu item/collapsible -->
+  <ul class="menu-content">
+    <ng-container *ngFor="let item of item.children">
+      <!-- item -->
+      <li
+        core-menu-vertical-item
+        [item]="item"
+        *ngIf="
+          item.type == 'item' && (item.permissions ? currentUser.isGrantedAny(item.permissions) : false || item.permissions == undefined)
+        "
+        [ngClass]="{ disabled: item.disabled === true }"
+        [routerLink]="item.openInNewTab ? [] : [item.url]"
+        [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
+        [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
+      ></li>
+      <!-- collapsible -->
+      <li core-menu-vertical-collapsible *ngIf="item.type == 'collapsible'" [item]="item" class="nav-item has-sub"></li>
+    </ng-container>
+  </ul>
+</ng-container>

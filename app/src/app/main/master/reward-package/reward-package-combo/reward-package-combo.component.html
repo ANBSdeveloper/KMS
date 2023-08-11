@@ -1,0 +1,30 @@
+<label class="form-label mr-1"
+  >{{ l(label)
+  }}<strong *ngIf="required" class="mark-required">(*)</strong></label
+>
+<button
+  type="button"
+  class="btn btn-icon btn-sm rounded-circle btn-flat-primary"
+  (click)="showRewardPackage()"
+  *ngIf="showRewardPackageVisible"
+  rippleEffect
+>
+  <span [data-feather]="'file-text'"></span>
+</button>
+<ng-select
+  [bindLabel]="displayName"
+  [bindValue]="valueName"
+  [(ngModel)]="value"
+  [items]="items"
+  [typeahead]="input$"
+  [minTermLength]="2"
+  [virtualScroll]="true"
+  [loading]="loading"
+  (scroll)="onScroll($event)"
+  (scrollToEnd)="onScrollToEnd()"
+  (ngModelChange)="onChange($event)"
+  [readonly]="readOnly"
+  [placeholder]="placeholder"
+  [class.error]="error"
+>
+</ng-select>

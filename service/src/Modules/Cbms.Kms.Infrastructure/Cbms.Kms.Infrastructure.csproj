@@ -1,0 +1,205 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="EntityFramework\Seed\Tenants\**" />
+		<EmbeddedResource Remove="EntityFramework\Seed\Tenants\**" />
+		<None Remove="EntityFramework\Seed\Tenants\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="EntityFramework\Migrations\20210730083009_RemoveAreas.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210730083009_RemoveAreas.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210730142732_Zones.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210730142732_Zones.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210730144710_UpdateZones.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210730144710_UpdateZones.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731050422_UpdateCustomers.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731050422_UpdateCustomers.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731051238_CommentCustomers.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731051238_CommentCustomers.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731052708_AddCustomers.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731052708_AddCustomers.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731053904_AddCustomers.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731053904_AddCustomers.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731054945_AddBranches.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731054945_AddBranches.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731055759_AddCustomers.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731055759_AddCustomers.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731145027_UpdateDistrict.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731145027_UpdateDistrict.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731145625_UpdateDistrict.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731145625_UpdateDistrict.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731155945_UpdateDistrict.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210731155945_UpdateDistrict.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801032822_UpdateBranches.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801032822_UpdateBranches.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801033200_UpdateBranchesv2.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801033200_UpdateBranchesv2.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801034414_UpdateWard.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801034414_UpdateWard.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801034829_AddUpdateDate_Branch.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801034829_AddUpdateDate_Branch.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801035048_UpdateWardDb.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801035048_UpdateWardDb.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801081819_UpdateWardIncrements.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801081819_UpdateWardIncrements.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801083955_updateCusttomer0108.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801083955_updateCusttomer0108.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801085231_AddCycles.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801085231_AddCycles.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801085358_updateCusttomer0108.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801085358_updateCusttomer0108.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801120617_EditCustomer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801120617_EditCustomer.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801144912_Fix_Cycles_Ward.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801144912_Fix_Cycles_Ward.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801145423_Fix_Cycles_Ward.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801145423_Fix_Cycles_Ward.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801133733_UpdateSalesOrg.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801133733_UpdateSalesOrg.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801134309_UpdateSalesOrg.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801134309_UpdateSalesOrg.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801135829_UpdateSalesOrg.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801135829_UpdateSalesOrg.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801152707_UpdateSalesOrg.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210801152707_UpdateSalesOrg.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210802150312_AddStaff.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210802150312_AddStaff.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210804102409_Budget_Add__Staff_Add_Area.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210804102409_Budget_Add__Staff_Add_Area.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210804124047_Rename_RewardBranches.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210804124047_Rename_RewardBranches.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210809052432_Add_Branch_SalesOrg.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210809052432_Add_Branch_SalesOrg.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812082409_Add_TicketInvestment.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812082409_Add_TicketInvestment.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812082656_Add_TicketInvestment.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812082656_Add_TicketInvestment.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812085006_Update_TicketSalesCommitment.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812085006_Update_TicketSalesCommitment.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812085246_Remove_TicketSalesCommitment.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812085246_Remove_TicketSalesCommitment.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812174227_Update_TicketSalesCommitment_Budget.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210812174227_Update_TicketSalesCommitment_Budget.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210813115440_Test_TicketOperation.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210813115440_Test_TicketOperation.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210813123203_Remove_TicketAcceptance_Owned.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210813123203_Remove_TicketAcceptance_Owned.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210814160725_Edit_Customer_Otp.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210814160725_Edit_Customer_Otp.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035346_Add_Consumer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035346_Add_Consumer.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035433_Add_Consumer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035433_Add_Consumer.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035458_Add_FromDate_ToDate_RewarPackage.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821035458_Add_FromDate_ToDate_RewarPackage.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821095808_Add_Order.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821095808_Add_Order.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821095906_Add_Order.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821095906_Add_Order.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821090751_edit_RewardPackage.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821090751_edit_RewardPackage.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821100605_Add_Order.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821100605_Add_Order.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821102930_Add_AppLog.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821102930_Add_AppLog.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821104744_Add_AppSetting.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821104744_Add_AppSetting.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821105851_Edit_AppSetting_Description.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210821105851_Edit_AppSetting_Description.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822062915_Edit_Cycle.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822062915_Edit_Cycle.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822124536_Edit_Order_Points.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822124536_Edit_Order_Points.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822124840_Remove_AppLog.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210822124840_Remove_AppLog.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823081115_Add_SubProcessClass.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823081115_Add_SubProcessClass.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823084054_Edit_SubProcessClass.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823084054_Edit_SubProcessClass.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823090323_Edit_Product.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823090323_Edit_Product.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823092218_Edit_DateTime.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210823092218_Edit_DateTime.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210824082541_Edit_Material_Type.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210824082541_Edit_Material_Type.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904170258_OrderTicket_ReferenceDetail.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904170258_OrderTicket_ReferenceDetail.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904180629_OrderTicket_ReferenceDetail.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904180629_OrderTicket_ReferenceDetail.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904181216_OrderTicket_QrCode.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210904181216_OrderTicket_QrCode.Designer.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210905092624_Product_Config.cs" />
+		<Compile Remove="EntityFramework\Migrations\20210905092624_Product_Config.Designer.cs" />
+		<Compile Remove="EntityFramework\Seed\ProductsCreator.cs" />
+		<Compile Remove="EntityFramework\Seed\SeedHelper.cs" />
+		<Compile Remove="Migrations\20210909122211_Edit_Table_ProductUnit.cs" />
+		<Compile Remove="Migrations\20210909122211_Edit_Table_ProductUnit.Designer.cs" />
+		<Compile Remove="Migrations\20211001131908_Edit_Unique_Reward.cs" />
+		<Compile Remove="Migrations\20211001131908_Edit_Unique_Reward.Designer.cs" />
+		<Compile Remove="Migrations\20211003080729_ProductPointHistory.cs" />
+		<Compile Remove="Migrations\20211003080729_ProductPointHistory.Designer.cs" />
+		<Compile Remove="Migrations\20211003085459_ProductPointHistory.cs" />
+		<Compile Remove="Migrations\20211003085459_ProductPointHistory.Designer.cs" />
+		<Compile Remove="Migrations\20211003085645_ProductPointHistory.cs" />
+		<Compile Remove="Migrations\20211003085645_ProductPointHistory.Designer.cs" />
+		<Compile Remove="Migrations\20211023142036_RegisterMaterialNote.cs" />
+		<Compile Remove="Migrations\20211023142036_RegisterMaterialNote.Designer.cs" />
+		<Compile Remove="Migrations\20211122045816_UserIndex.cs" />
+		<Compile Remove="Migrations\20211122045816_UserIndex.Designer.cs" />
+		<Compile Remove="Migrations\20221204003403_PosmInvestment.cs" />
+		<Compile Remove="Migrations\20221204003403_PosmInvestment.Designer.cs" />
+		<Compile Remove="Migrations\20221204004404_PosmInvestment2.cs" />
+		<Compile Remove="Migrations\20221204004404_PosmInvestment2.Designer.cs" />
+		<Compile Remove="Migrations\20230720055820_PosmType.cs" />
+		<Compile Remove="Migrations\20230720055820_PosmType.Designer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.2.0" />
+		<PackageReference Include="Dapper" Version="2.0.90" />
+		<PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
+		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.16">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.16">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.1" />
+		<PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cbms.Kms.Domain\Cbms.Kms.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Cbms">
+			<HintPath>..\..\BuildingBlocks\Cbms.dll</HintPath>
+		</Reference>
+		<Reference Include="Cbms.EntityFrameworkCore">
+			<HintPath>..\..\BuildingBlocks\Cbms.EntityFrameworkCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="EntityFramework\Migrations\" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+@import '@core/scss/base/pages/dashboard-ecommerce.scss';
+@import '@core/scss/base/plugins/charts/chart-apex.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+
+// Earning Chart Tooltip
+#earnings-donut-chart {
+  .apexcharts-tooltip {
+    &.apexcharts-theme-dark {
+      background: rgba($black, 0.8) !important;
+    }
+  }
+}
+
+
+.card-statistics {
+    .card-header {
+      padding-left: 2.4rem;
+    }
+    .statistics-body {
+        padding: 2rem 2.4rem !important;
+  
+      .avatar .avatar-content {
+        width: 48px;
+        height: 48px;
+  
+        .avatar-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }

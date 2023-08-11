@@ -1,0 +1,57 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog">
+      <form [formGroup]="formGroup" class="modal-content pt-0">
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <ng-container formArrayName="commitments">
+            <ng-container
+              *ngFor="let commitmentForm of commitments.controls; let i = index"
+            >
+              <div [formGroup]="commitmentForm">
+                <div class="form-group">
+                  <label class="form-label"
+                    >{{ cValue(commitmentForm, "yearMonth") }}</label
+                  >
+                  <dx-number-box
+                    formControlName="amount"
+                    [readOnly]="readOnly"
+                    format="#,##0"
+                    [min]="0"
+                    [max]="1000000000000"
+                    [isValid]="!amountError(commitmentForm, 'amount')"
+                  ></dx-number-box>
+                  <span
+                    class="invalid-form"
+                    *ngIf="amountErrorValidation(commitmentForm, 'required')"
+                  >
+                    <small class="form-text text-danger">{{ lreq() }}</small>
+                  </span>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <button
+            type="submit"
+            class="btn btn-primary mr-1 mt-1"
+            (click)="updateData()"
+            *ngIf="updateVisible"
+            rippleEffect
+          >
+            {{ l("update") }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ l("close") }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

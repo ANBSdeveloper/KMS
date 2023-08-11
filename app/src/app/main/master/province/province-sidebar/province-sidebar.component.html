@@ -1,0 +1,92 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade">
+    <div class="modal-dialog" *blockUI="'province_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label">{{ lcode }}</label>
+            <dx-text-box
+              formControlName="code"
+              [readOnly]="readOnly"
+              [isValid]="!cError('code')"
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+              <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("code", 30)
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ lname }}</label>
+            <dx-text-box
+              formControlName="name"
+              [readOnly]="readOnly"
+              [isValid]="!cError('name')"
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("name", 200)
+              }}</small>
+            </span>
+          </div>
+          <!-- <div class="form-group">
+            <div class="custom-control custom-switch">
+              <p class="form-label mb-50">{{ l("active") }}</p>
+              <input
+                id="province-isActive"
+                type="checkbox"
+                class="custom-control-input"
+                formControlName="isActive"
+              />
+              <label for="province-isActive" class="custom-control-label">
+                <span class="switch-icon-left"
+                  ><i data-feather="check"></i
+                ></span>
+                <span class="switch-icon-right"><i data-feather="x"></i></span>
+              </label>
+            </div>
+          </div> -->
+
+          <button
+            type="submit"
+            *ngIf="saveVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

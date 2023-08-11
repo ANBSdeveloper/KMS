@@ -1,0 +1,282 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <section>
+      <div class="row match-height">
+        <div class="col-12 p-1">
+          <div class="card">
+            <div class="card-body">
+              <ng-container *ngTemplateOutlet="form"></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form
+    class="form-validate"
+    [formGroup]="formGroup"
+    (ngSubmit)="submit()"
+    autocomplete="off"
+  >
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="user" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("user_information") }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("username") }}</label>
+          <dx-text-box
+            [readOnly]="true"
+            [maxLength]="30"
+            formControlName="userName"
+            [isValid]="!cError('userName')"
+          ></dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('userName', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('userName', 'minlength')">
+            <small class="form-text text-danger">{{ lmin(5) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('userName', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax(30) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-role-combo
+            #roleCombo
+            formControlName="roleId"
+            [assignmentRole]="false"
+            [readOnly]="true"
+            [error]="cError('roleId')"
+          ></app-role-combo>
+          <span class="invalid-form" *ngIf="cErrorV('roleId', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label>{{ l("password") }}</label>
+          <div class="input-group input-group-merge form-password-toggle">
+            <input
+              formControlName="password"
+              [type]="passwordTextType ? 'text' : 'password'"
+              class="form-control form-control-merge"
+              autofocus=""
+              [maxlength]="50"
+              [class.error]="cError('password')"
+              required
+            />
+            <div class="input-group-append">
+              <span class="input-group-text cursor-pointer"
+                ><i
+                  class="feather font-small-4"
+                  [ngClass]="{
+                    'icon-eye-off': passwordTextType,
+                    'icon-eye': !passwordTextType
+                  }"
+                  (click)="togglePasswordTextType()"
+                ></i
+              ></span>
+            </div>
+          </div>
+
+          <span class="invalid-form" *ngIf="cErrorV('password', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+
+          <span class="invalid-form" *ngIf="cErrorV('password', 'minlength')">
+            <small class="form-text text-danger">{{
+              lmin("password", 5)
+            }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('password', 'maxLength')">
+            <small class="form-text text-danger">{{
+              lmax("password", 250)
+            }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label>{{ l("confirm_password") }}</label>
+
+          <div class="input-group input-group-merge form-password-toggle">
+            <input
+              formControlName="confirmPassword"
+              [type]="confirmPasswordTextType ? 'text' : 'password'"
+              [maxlength]="50"
+              class="form-control form-control-merge"
+              [class.error]="cError('confirmPassword')"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text cursor-pointer"
+                ><i
+                  class="feather font-small-4"
+                  [ngClass]="{
+                    'icon-eye-off': confirmPasswordTextType,
+                    'icon-eye': !confirmPasswordTextType
+                  }"
+                  (click)="toggleConfirmPasswordTextType()"
+                ></i
+              ></span>
+            </div>
+          </div>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('confirmPassword', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('confirmPassword', 'minlength')"
+          >
+            <small class="form-text text-danger">{{ lmin(5) }}</small>
+          </span>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('confirmPassword', 'maxLength')"
+          >
+            <small class="form-text text-danger">{{ lmax(250) }}</small>
+          </span>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('confirmPassword', 'mismatch')"
+          >
+            <small class="form-text text-danger">{{
+              l("reset_pasword_mismatch")
+            }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-1 mt-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("contact_information") }}</span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("full_name") }}</label>
+          <dx-text-box
+            [readOnly]="readOnly"
+            [maxLength]="200"
+            formControlName="name"
+            [isValid]="!cError('name')"
+          ></dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax(250) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div>
+          <label class="form-label">{{ l("register_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            [readOnly]="true"
+            formControlName="registerDate"
+          >
+          </dx-date-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("expire_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            [readOnly]="true"
+            formControlName="expireDate"
+          >
+          </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div>
+          <label class="form-label">{{ l("birthday") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            [readOnly]="readOnly"
+            formControlName="birthday"
+          >
+          </dx-date-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("email") }}</label>
+          <dx-text-box
+            [readOnly]="readOnly"
+            [maxLength]="200"
+            formControlName="emailAddress"
+            [isValid]="!cError('emailAddress')"
+          ></dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('emailAddress', 'email')">
+            <small class="form-text text-danger">{{
+              l("email_invalid")
+            }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("phone") }}</label>
+          <dx-text-box
+            [readOnly]="readOnly"
+            [maxLength]="50"
+            formControlName="phoneNumber"
+            [isValid]="!cError('phoneNumber')"
+          >
+          </dx-text-box>
+
+          <span class="invalid-form" *ngIf="cErrorV('phoneNumber', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="submit"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+  >
+    {{ l("update") }}
+  </button>
+</ng-template>

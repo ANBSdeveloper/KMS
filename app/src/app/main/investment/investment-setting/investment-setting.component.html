@@ -1,0 +1,406 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="investment_setting"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="row match-height">
+        <div class="col-lg-4 p-1 col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <ng-container *ngTemplateOutlet="form"></ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8 p-1 col-sm-12" *ngIf="assignmentVisible">
+          <div class="card">
+            <div class="card-body">
+              <ng-container *ngTemplateOutlet="branchGrid"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="investmentBranches"
+              ></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <block-ui> </block-ui>
+  </div>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="col-12">
+      <h4 class="mb-1 mt-1">
+        <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("general-configuration") }}</span>
+      </h4>
+    </div>
+    <div class="card p-2">
+      <form [formGroup]="formGroup">
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <label class="form-label"
+                >{{ l("max_invest_amount")
+                }}<strong class="mark-required">(*)</strong></label
+              >
+              <dx-number-box
+                format="#,##0.##"
+                [min]="0"
+                [max]="1000000000000"
+                formControlName="maxInvestAmount"
+                [isValid]="!cError('maxInvestAmount')"
+              ></dx-number-box>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('maxInvestAmount', 'required')"
+              >
+                <small class="form-text text-danger">{{
+                  lreq("max_invest_amount")
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('maxInvestAmount', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnminv("max_invest_amount", 0)
+                }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <label class="form-label"
+                >{{ l("amount_per_point")
+                }}<strong class="mark-required">(*)</strong></label
+              >
+              <dx-number-box
+                format="#,##0.##"
+                formControlName="amountPerPoint"
+                [min]="0"
+                [max]="1000000000000"
+                [isValid]="!cError('amountPerPoint')"
+              ></dx-number-box>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('amountPerPoint', 'required')"
+              >
+                <small class="form-text text-danger">{{
+                  lreq("amount_per_point")
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('amountPerPoint', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnminv("amount_per_point", 0)
+                }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <label class="form-label"
+                >{{ l("max_investment_query_months")
+                }}<strong class="mark-required">(*)</strong></label
+              >
+              <dx-number-box
+                format="#,##0.##"
+                [min]="0"
+                formControlName="maxInvestmentQueryMonths"
+                [isValid]="!cError('maxInvestmentQueryMonths')"
+              ></dx-number-box>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('maxInvestmentQueryMonths', 'required')"
+              >
+                <small class="form-text text-danger">{{
+                  lreq("max_investment_query_months")
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('maxInvestmentQueryMonths', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnminv("max_investment_query_months", 0)
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('maxInvestmentQueryMonths', 'max')"
+              >
+                <small class="form-text text-danger">{{
+                  lnmaxv("max_investment_query_months", 36)
+                }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <label class="form-label"
+                >{{ l("begin_issue_days_after_current")
+                }}<strong class="mark-required">(*)</strong></label
+              >
+              <dx-number-box
+                format="#,##0.##"
+                [min]="0"
+                formControlName="beginIssueDaysAfterCurrent"
+                [isValid]="!cError('beginIssueDaysAfterCurrent')"
+              ></dx-number-box>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('beginIssueDaysAfterCurrent', 'required')"
+              >
+                <small class="form-text text-danger">{{
+                  lreq("begin_issue_days_after_current")
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('beginIssueDaysAfterCurrent', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnminv("begin_issue_days_after_current", 0)
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('beginIssueDaysAfterCurrent', 'max')"
+              >
+                <small class="form-text text-danger">{{
+                  lnmaxv("begin_issue_days_after_current", 365)
+                }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <label class="form-label"
+                >{{ l("end_issue_days_before_operation")
+                }}<strong class="mark-required">(*)</strong></label
+              >
+              <dx-number-box
+                format="#,##0.##"
+                [min]="0"
+                formControlName="endIssueDaysBeforeOperation"
+                [isValid]="!cError('endIssueDaysBeforeOperation')"
+              ></dx-number-box>
+              <span
+                class="invalid-form"
+                *ngIf="
+                  cErrorValidate('endIssueDaysBeforeOperation', 'required')
+                "
+              >
+                <small class="form-text text-danger">{{
+                  lreq("end_issue_days_before_operation")
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('endIssueDaysBeforeOperation', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnminv("end_issue_days_before_operation", 0)
+                }}</small>
+              </span>
+              <span
+                class="invalid-form"
+                *ngIf="cErrorValidate('endIssueDaysBeforeOperation', 'max')"
+              >
+                <small class="form-text text-danger">{{
+                  lnmaxv("end_issue_days_before_operation", 365)
+                }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8 col-sm-12">
+            <div class="form-group">
+              <div class="custom-control custom-switch">
+                <p class="form-label mb-50">
+                  {{ l("investment-qrcode-branch") }}
+                </p>
+                <!-- Must specify input id match to label for id -->
+                <input
+                  id="investment-checkQrCodeBranch"
+                  type="checkbox"
+                  class="custom-control-input"
+                  formControlName="checkQrCodeBranch"
+                />
+                <label
+                  for="investment-checkQrCodeBranch"
+                  class="custom-control-label"
+                >
+                  <span class="switch-icon-left"
+                    ><i data-feather="check"></i
+                  ></span>
+                  <span class="switch-icon-right"
+                    ><i data-feather="x"></i
+                  ></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #branchGrid>
+  <div class="row">
+    <div class="col-12">
+      <h4 class="mb-1 mt-1">
+        <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("investment-point-one-vote") }}</span>
+      </h4>
+    </div>
+  </div>
+
+  <div class="card p-1">
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <div class="col-lg-3 col-sm-12">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("default-points-for-ticket")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              format="#,##0.##"
+              [min]="0"
+              [max]="1000000"
+              formControlName="defaultPointsForTicket"
+              [isValid]="!cError('defaultPointsForTicket')"
+            ></dx-number-box>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorValidate('defaultPointsForTicket', 'required')"
+            >
+              <small class="form-text text-danger">{{
+                lreq("default-points-for-ticket")
+              }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorValidate('defaultPointsForTicket', 'min')"
+            >
+              <small class="form-text text-danger">{{
+                lnminv("default-points-for-ticket", 0)
+              }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #investmentBranches>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-2">
+      <div class="col-lg-6 col-sm-12">
+        <div class="d-flex align-items-center mt-1">
+          <h4 class="">
+            <i data-feather="home" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{
+              l("branch_editable_point_list")
+            }}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-lg-12 col-md-12">
+      <div class="col-lg-12 col-md-12">
+        <app-filter-branch-by-zone-area
+          (zoneId)="zoneChange($event)"
+          (areaId)="areaChange($event)"
+          (isDisplayAllBranch)="displayAllBranchChange($event)"
+          (searchValue)="searchChange($event)"
+        >
+        </app-filter-branch-by-zone-area>
+      </div>
+    </div>
+    <dx-data-grid
+      class="ext-grid mt-1"
+      [dataSource]="investmentBranchDataSource.items"
+      keyExpr="rowId"
+      [showBorders]="false"
+      [showColumnLines]="false"
+      [showRowLines]="true"
+      [columnHidingEnabled]="true"
+      [columnAutoWidth]="true"
+      [wordWrapEnabled]="true"
+      [(selectedRowKeys)]="selectedNotificationBranches"
+      (onSelectionChanged)="selectionChanged($event)"
+    >
+      <dxo-selection
+        selectAllMode="allPages"
+        showCheckBoxesMode="always"
+        mode="multiple"
+      ></dxo-selection>
+      <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+      <dxo-paging [pageSize]="10"> </dxo-paging>
+      <dxo-editing
+        mode="cell"
+        [allowUpdating]="false"
+        [allowDeleting]="false"
+        [allowAdding]="false"
+      >
+      </dxo-editing>
+      <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [showInfo]="false"
+        [showNavigationButtons]="true"
+      >
+      </dxo-pager>
+      <dxi-column dataField="zoneName" [caption]="l('zone')"></dxi-column>
+      <dxi-column dataField="areaName" [caption]="l('area')"></dxi-column>
+      <dxi-column dataField="branchCode" [caption]="lcode"></dxi-column>
+      <dxi-column dataField="branchName" [caption]="lname"></dxi-column>
+    </dx-data-grid>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+
+    <button
+      type="submit"
+      *ngIf="saveVisible"
+      class="btn btn-primary mr-1 mt-1"
+      rippleEffect
+      (click)="save()"
+    >
+      {{ lsave }}
+    </button>
+  </div>
+</ng-template>

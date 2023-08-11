@@ -1,0 +1,104 @@
+<div class="content-wrapper">
+    <div class="content-body">
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          <app-content-header contentHeaderName="branch"></app-content-header>
+        </div>
+        <div class="ml-auto">
+          <ng-container *ngTemplateOutlet="buttons"></ng-container>
+        </div>
+      </div>
+      <section>
+        <div class="card">
+          <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+          <dx-data-grid
+            #dataGrid
+            class="ext-grid mb-1"
+            [dataSource]="store"
+            [showBorders]="false"
+            [showColumnLines]="false"
+            [showRowLines]="true"
+            [columnHidingEnabled]="true"
+            [columnAutoWidth]="true"
+            [remoteOperations]="true"
+          >
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+            <dxo-pager
+              [showPageSizeSelector]="true"
+              [showInfo]="true"
+              [showNavigationButtons]="true"
+            >
+            </dxo-pager>
+            <dxi-column dataField="code" [caption]="lcode"></dxi-column>            
+           
+            <dxi-column  dataField="name" [caption]="lname"></dxi-column>
+  
+            <dxi-column dataField="provinceName" [caption]="l('province_name')"></dxi-column>
+  
+            <dxi-column
+              dataField="isActive"
+              [caption]="lstatus"
+              cellTemplate="statusTemplate"
+            >
+              <div *dxTemplate="let cell of 'statusTemplate'">
+                <div
+                  class="badge badge-pill"
+                  [ngClass]="{
+                    'badge-light-primary': cell.data.isActive,
+                    'badge-light-secondary': !cell.data.isActive
+                  }"
+                >
+                  {{ l(cell.data.isActive ? "active" : "inactive") }}
+                </div>
+              </div>
+            </dxi-column>            
+          </dx-data-grid>  
+          <block-ui> </block-ui>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <ng-template #buttons>
+    <div class="d-flex align-items-center">
+      <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+        <span class="sr-only">{{ lloading }}</span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-icon btn-outline-primary ml-1"
+        rippleEffect
+        (click)="refresh()"
+      >
+        <span [data-feather]="'refresh-ccw'"></span>
+      </button>
+    </div>
+  </ng-template>
+  
+  <ng-template #filterForm>
+    <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <app-status-active-combo
+              [placeholder]="l('all')"
+              formControlName="statusActive"
+            ></app-status-active-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <label class="form-label">{{ l("search") }}</label>
+            <input
+              type="search"
+              class="form-control"
+              [placeholder]="l('search_placeholder')"
+              (input)="searchChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  

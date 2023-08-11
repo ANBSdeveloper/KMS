@@ -1,0 +1,162 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="product"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <!-- <ng-container *ngTemplateOutlet="photo"></ng-container> -->
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+        </div>
+      </div>
+    </section>
+    <block-ui></block-ui>
+  </div>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-1">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("product_information") }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('product_code') }}</label>
+          <dx-text-box
+            formControlName="code"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('case_unit') }}</label>
+          <dx-text-box
+            formControlName="caseUnit"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('product_name') }}</label>
+          <dx-text-box
+            formControlName="name"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('stk_unit') }}</label>
+          <dx-text-box
+            formControlName="unit"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('product_class_name') }}</label>
+          <dx-text-box
+            formControlName="productClassName"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('pack_size') }}</label>
+          <dx-text-box
+            formControlName="packSize"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('sub_product_class_name') }}</label>
+          <dx-text-box
+            formControlName="subProductClassName"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('description') }}</label>
+          <dx-text-box
+            formControlName="description"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('brand_name') }}</label>
+          <dx-text-box
+            formControlName="brandName"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l('status') }}</label>
+          <dx-text-box
+            formControlName="status"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+  type="submit"
+  class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+  rippleEffect
+  (click)="submit()"
+>
+  {{ lsave }}
+</button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+</ng-template>

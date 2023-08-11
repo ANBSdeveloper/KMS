@@ -1,0 +1,12 @@
+﻿IF OBJECT_ID(N'RP_Cycle') IS NOT NULL
+BEGIN
+    DROP PROCEDURE RP_Cycle
+END
+GO
+CREATE PROCEDURE RP_Cycle
+@UserId int
+AS
+SELECT TOP 8 Id, Year, Number, FromDate, ToDate 
+FROM Cycles
+WHERE [Year] IN (YEAR(GetDATE()) - 1, YEAR(GetDATE()))
+ORDER BY Number DESC

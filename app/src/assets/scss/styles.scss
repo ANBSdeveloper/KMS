@@ -1,0 +1,139 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.swal2-title {
+  margin-bottom: 0.5rem !important;
+  font-family: inherit !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  color: #5e5873 !important;
+  font-size: 1.286rem !important;
+}
+
+.swal2-content {
+  padding: unset !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+.main-menu .navbar-header .navbar-brand .brand-logo img {
+  max-width: 40px;
+}
+
+.main-menu .navbar-header .navbar-brand .brand-text {
+  padding-left: 0.8rem;
+}
+
+datatable-scroller {
+  width: 100% !important;
+}
+
+.dark-layout {
+  .ng-value-label,
+  .form-label {
+    color: #d0d2d6;
+  }
+
+  .image-border {
+    border: 1px solid #404656;
+  }
+}
+
+.image-border {
+  border: 1px solid #d8d6de;
+}
+
+.form-label {
+  padding: 0.5rem 0;
+  color: #212529;
+  font-size: $small-font-size;
+  margin-bottom: 0.2857rem;
+  line-height: $line-height-base;
+}
+
+// .dx-texteditor-input {
+
+//   height: 2.714rem;
+//   padding: $input-padding-y $input-padding-x;
+// }
+
+// .dx-textbox:valid, .dx-textbox:focus.is-valid {
+//   color: $input-focus-color;
+//     background-color: $input-focus-bg;
+//     border-color: $input-focus-border-color;
+//     outline: 0;
+
+// }
+
+.dx-widget input,
+.dx-widget textarea {
+  font-family: "Segoe UI", Helvetic;
+}
+
+.dx-texteditor.dx-state-active.dx-editor-filled,
+.dx-texteditor.dx-state-active.dx-editor-outlined,
+.dx-texteditor.dx-state-active.dx-editor-underlined,
+.dx-texteditor.dx-state-focused.dx-editor-filled,
+.dx-texteditor.dx-state-focused.dx-editor-outlined,
+.dx-texteditor.dx-state-focused.dx-editor-underlined {
+  border-color: $input-focus-border-color;
+  @if $enable-shadows {
+    @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+  } @else {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    box-shadow: $input-focus-box-shadow;
+  }
+}
+
+.dx-invalid.dx-texteditor {
+  border-color: $danger !important;
+}
+.dx-invalid.dx-texteditor.dx-editor-filled.dx-state-focused,
+.dx-invalid.dx-texteditor.dx-editor-outlined.dx-state-focused,
+.dx-invalid.dx-texteditor.dx-editor-underlined.dx-state-focused {
+  border-color: $danger !important;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  font-family: "Helvetica Neue", "Segoe UI", helvetica, verdana, sans-serif;
+}
+.cbms-form {
+  input.form-control {
+    line-height: 1.35715;
+    margin: 0;
+    padding: 7px 9px 8px !important;
+    background: rgba(0, 0, 0, 0);
+    color: #333;
+    font-size: 1em;
+    border-radius: 4px;
+    min-height: 34px;
+  }
+  .ng-value,
+  .ng-option {
+    color: #333;
+    font-family: "Helvetica Neue", "Segoe UI", helvetica, verdana, sans-serif;
+  }
+}
+
+form {
+  ng-select.error,
+  ng-select.error:focus {
+    .ng-select-container {
+      border-color: $danger !important;
+    }
+  }
+}

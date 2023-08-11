@@ -1,0 +1,232 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header contentHeaderName="order"></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+
+    <section>
+      <div class="card">
+        <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+
+        <dx-data-grid
+          #dataGrid
+          class="ext-grid mb-1"
+          [dataSource]="store"
+          [showBorders]="false"
+          [showColumnLines]="false"
+          [showRowLines]="true"
+          [columnHidingEnabled]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]="true"
+          [wordWrapEnabled]="true"
+        >
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+          <dxo-pager
+            [showPageSizeSelector]="true"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+          >
+          </dxo-pager>
+
+          <dxi-column
+            dataField="orderNumber"
+            [caption]="l('order_number')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="ticketInvestmentCode"
+            [caption]="l('ticket_investment_code')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="customerCode"
+            [caption]="l('customer_code')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="customerName"
+            [caption]="l('customer_name')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="orderDate"
+            [caption]="l('order_date')"
+            width="160"
+            [type]="date"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="consumerPhone"
+            [caption]="l('phone')"
+            width="140"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="consumerName"
+            [caption]="l('consumer_name')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="totalQuantity"
+            [caption]="l('total_quantity')"
+            format="#,##0.##"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="totalAmount"
+            [caption]="l('total_amount')"
+            format="#,##0.##"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="totalPoints"
+            [caption]="l('total_points')"
+            format="#,##0.##"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="ticketCodes"
+            [caption]="l('ticket_codes')"
+          ></dxi-column>
+
+          <dxo-master-detail
+            [enabled]="true"
+            template="dxTemplate"
+          ></dxo-master-detail>
+          <div *dxTemplate="let cell of 'dxTemplate'">
+            <app-order-detail-list
+              [OrderId]="cell.data.id"
+            ></app-order-detail-list>
+          </div>
+        </dx-data-grid>
+
+        <block-ui> </block-ui>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-icon btn-outline-primary ml-1"
+      rippleEffect
+      (click)="refresh()"
+    >
+      <span [data-feather]="'refresh-ccw'"></span>
+    </button>
+  </div>
+</ng-template>
+<ng-template #filterForm>
+  <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-12" *ngIf="!(isRsm || isSS || isAsm)">
+        <div class="form-group">
+          <app-ticket-investment-rsm-staff-combo
+            #rsmStaffCombo
+            formControlName="rsmStaffId"
+            [placeholder]="l('all')"
+            (change)="rsmStaffChange($event)"
+            [isValid]="!cError('rsmStaffId')"
+          ></app-ticket-investment-rsm-staff-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12" *ngIf="!(isSS || isAsm)">
+        <div class="form-group">
+          <app-ticket-investment-asm-staff-combo
+            #asmStaffCombo
+            [supervisorId]="cValue('rsmStaffId')"
+            formControlName="asmStaffId"
+            [placeholder]="l('all')"
+            (change)="asmStaffChange($event)"
+          ></app-ticket-investment-asm-staff-combo>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12" *ngIf="!isSS">
+        <div class="form-group">
+          <app-ticket-investment-ss-staff-combo
+            #ssStaffCombo
+            [supervisorId]="cValue('asmStaffId')"
+            [placeholder]="l('all')"
+            formControlName="ssStaffId"
+            (change)="ssStaffChange($event)"
+          ></app-ticket-investment-ss-staff-combo>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+          <app-shop-combo
+            #shopCombo
+            [placeholder]="l('all')"
+            [rsmStaffId]="cValue('rsmStaffId')"
+            [asmStaffId]="cValue('asmStaffId')"
+            [ssStaffId]="cValue('ssStaffId')"
+            formControlName="cutormerId"
+          ></app-shop-combo>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+          <label class="form-label">{{ l("from_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #fromDate
+            formControlName="fromDate"
+            [isValid]="!cError('fromDate')"
+            (onValueChanged)="fromDateChange($event)"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+          <label class="form-label">{{ l("to_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #toDate
+            formControlName="toDate"
+            [isValid]="!cError('toDate')"
+            (onValueChanged)="toDateChange($event)"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+          <label class="form-label">{{ l("search") }}</label>
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="l('search_placeholder')"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

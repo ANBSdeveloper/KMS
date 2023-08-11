@@ -1,0 +1,192 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <app-content-header contentHeaderName="role"></app-content-header>
+    <section>
+      <div class="row match-height">
+        <div
+          class="col-12 p-1"
+          [ngClass]="{
+            'col-lg-12': !assignmentVisible,
+            'col-lg-7': assignmentVisible
+          }"
+        >
+          <div class="card">
+            <div class="card-body">
+              <ng-container *ngTemplateOutlet="form"></ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-12 p-1" *ngIf="assignmentVisible">
+          <div class="card">
+            <div class="card-body">
+              <ng-container *ngTemplateOutlet="salesOrgTree"></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="row mt-1">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="user" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("role_information") }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lcode }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [readOnly]="readOnly || this.modelId"
+            [maxLength]="30"
+            formControlName="roleName"
+            [isValid]="!cError('roleName')"
+          ></dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('roleName', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('roleName', 'minlength')">
+            <small class="form-text text-danger">{{ lmin(2) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('roleName', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax(200) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lname }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="100"
+            formControlName="displayName"
+            [isValid]="!cError('displayName')"
+          ></dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('displayName', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('displayName', 'minlength')"
+          >
+            <small class="form-text text-danger">{{ lmin(2) }}</small>
+          </span>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('displayName', 'maxLength')"
+          >
+            <small class="form-text text-danger">{{ lmax(200) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="form-group">
+          <div class="custom-control custom-switch">
+            <p class="form-label mb-50">{{ l("role-active") }}</p>
+            <!-- Must specify input id match to label for id -->
+            <input
+              id="role-isActive"
+              type="checkbox"
+              class="custom-control-input"
+              [readOnly]="readOnly"
+              formControlName="isActive"
+            />
+            <label for="role-isActive" class="custom-control-label">
+              <span class="switch-icon-left"><i data-feather="check"></i></span>
+              <span class="switch-icon-right"><i data-feather="x"></i></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label for="basicTextarea">{{ l("description") }}</label>
+          <div class="full-width-content">
+            <dx-text-area
+              [height]="90"
+              formControlName="description"
+              [isValid]="!cError('description')"
+            >
+            </dx-text-area>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('description', 'minlength')"
+            >
+              <small class="form-text text-danger">{{ lmin(2) }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('description', 'maxLength')"
+            >
+              <small class="form-text text-danger">{{ lmax(2000) }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex col-12">
+        <button
+          type="button"
+          *ngIf="saveVisible"
+          class="btn btn-primary mr-1 mt-1"
+          rippleEffect
+          (click)="submit()"
+        >
+          {{ lsave }}
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #salesOrgTree>
+  <div class="col-12">
+    <h4 class="mb-1 mt-1">
+      <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+      <span class="align-middle">{{ l("role-decentralization") }}</span>
+    </h4>
+  </div>
+  <div class="col-12">
+    <div>
+      <div class="input-group mb-1">
+        <input
+          #filter
+          class="form-control form-control"
+          (keyup)="assignmentTree.treeModel.filterNodes(filter.value)"
+          [placeholder]="lsearch"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn btn-primary"
+            (click)="assignmentTree.treeModel.clearFilter(); filter.value = ''"
+            rippleEffect
+          >
+            {{ l("clear_filter") }}
+          </button>
+        </div>
+      </div>
+      <tree-root
+        #assignmentTree
+        [(state)]="assignmentState"
+        [ngClass]="'tree-wrapper tree-checkbox'"
+        [focused]="true"
+        [options]="optionsFilter"
+        [nodes]="nodes"
+        (select)="onTreeSelect($event)"
+        (deselect)="onTreeDeselect($event)"
+      ></tree-root>
+    </div>
+  </div>
+</ng-template>

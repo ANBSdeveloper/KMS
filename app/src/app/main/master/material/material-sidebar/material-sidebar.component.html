@@ -1,0 +1,177 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog cbms-form" *blockUI="'material_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ lcode }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-text-box
+              [maxLength]="30"
+              formControlName="code"
+              [readOnly]="readOnly || modelId"
+              [isValid]="!cError('code')"
+              autofocus
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+              <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("code", 30)
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ lname }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-text-box
+              [maxLength]="100"
+              formControlName="name"
+              [readOnly]="readOnly"
+              [isValid]="!cError('name')"
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("name", 200)
+              }}</small>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <app-material-type-combo
+              [required]="true"
+              [readOnly]="formReadOnly"
+              formControlName="materialTypeId"
+              [error]="cError('materialTypeId')"
+            >
+            </app-material-type-combo>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('materialTypeId', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+
+          <!-- <div class="form-group">
+            <label class="form-label">{{ l('description') }}</label>
+            <dx-text-box
+              formControlName="description"
+              [readOnly]="readOnly"
+              [isValid]="!cError('description')"
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('description', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('description', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("name", 2000)
+              }}</small>
+            </span>
+          </div> -->
+
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("value_price")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              format="#,##0.##"
+              formControlName="value"
+              [isValid]="!cError('value')"
+            ></dx-number-box>
+            <span class="invalid-form" *ngIf="cErrorV('value', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('value', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("name", 2000)
+              }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('value', 'min')">
+              <small class="form-text text-danger">{{
+                lnminv("value_price", 0)
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <p class="form-label mb-50">{{ l("design") }}</p>
+              <input
+                id="material-isDesign"
+                type="checkbox"
+                class="custom-control-input"
+                formControlName="isDesign"
+              />
+              <label class="custom-control-label" for="material-isDesign">
+                <span class="switch-icon-left"
+                  ><i data-feather="check"></i
+                ></span>
+                <span class="switch-icon-right"><i data-feather="x"></i></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <p class="form-label mb-50">{{ l("active") }}</p>
+              <input
+                id="material-isActive"
+                type="checkbox"
+                class="custom-control-input"
+                formControlName="isActive"
+              />
+              <label class="custom-control-label" for="material-isActive">
+                <span class="switch-icon-left"
+                  ><i data-feather="check"></i
+                ></span>
+                <span class="switch-icon-right"><i data-feather="x"></i></span>
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            *ngIf="saveVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

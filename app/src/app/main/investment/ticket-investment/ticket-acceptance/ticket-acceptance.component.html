@@ -1,0 +1,350 @@
+<form class="form-validate" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-lg-8 col-md-12">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex align-items-center mt-1 mb-1">
+            <h4>
+              <i
+                data-feather="info"
+                [size]="16"
+                class="mr-75 font-medium-4"
+              ></i>
+              <span class="align-middle">{{
+                l("ticket_acceptance_info")
+              }}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("acceptance_date")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-date-box
+              [showClearButton]="true"
+              [useMaskBehavior]="true"
+              formControlName="acceptanceDate"
+              [readOnly]="readOnly"
+              [isValid]="!cError('acceptanceDate')"
+            ></dx-date-box>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('acceptanceDate', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('acceptanceDate', 'invalidRange')"
+            >
+              <small class="form-text text-danger">{{
+                l("invalid_acceptance_date")
+              }}</small>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("update_user") }}</label>
+            <dx-text-box
+              formControlName="updateUserName"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("update_time") }}</label>
+            <dx-date-box
+              formControlName="updateTime"
+              [readOnly]="true"
+            ></dx-date-box>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("note") }}</label>
+            <dx-text-area
+              [height]="60"
+              [readOnly]="readOnly"
+              formControlName="note"
+            ></dx-text-area>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center mt-1 mb-1">
+                <h4>
+                  <i
+                    data-feather="image"
+                    [size]="16"
+                    class="mr-75 font-medium-4"
+                  ></i>
+                  <span class="align-middle">{{ l("acceptance_photo") }}</span>
+                </h4>
+              </div>
+            </div>
+            <app-image-viewer
+              #imageViewer
+              [dataImages]="photos"
+              [header]="l('acceptance_photo')"
+              [readOnly]="readOnly"
+            ></app-image-viewer>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ng-container *ngTemplateOutlet="rewardItemGrid"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex align-items-center mt-1 mb-1">
+            <h4>
+              <i
+                data-feather="info"
+                [size]="16"
+                class="mr-75 font-medium-4"
+              ></i>
+              <span class="align-middle">{{ l("ticket_summary_info") }}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("remark_sales") }}</label>
+            <div class="rating">
+              <ngb-rating
+                [(rate)]="remarkOfSales"
+                [max]="5"
+                [readonly]="!salesRemarkable"
+                class="outline-none"
+              ></ngb-rating>
+              <button
+                *ngIf="salesRemarkableButtonVisible"
+                (click)="saveRemark('remarkOfSales')"
+                type="button"
+                class="btn btn-icon btn-flat-success ml-1"
+                rippleEffect
+              >
+                <span [data-feather]="'save'"></span>
+              </button>
+              <button
+                *ngIf="salesRemarkableButtonVisible"
+                (click)="clearRemark('remarkOfSales')"
+                type="button"
+                class="btn btn-icon btn-flat-danger"
+                rippleEffect
+              >
+                <span [data-feather]="'x'"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{
+              l("remark_customer_developement")
+            }}</label>
+            <div class="rating">
+              <ngb-rating
+                [(rate)]="remarkOfCustomerDevelopement"
+                [max]="5"
+                [readonly]="!customerDevelopmentRemarkable"
+                class="outline-none"
+              ></ngb-rating>
+              <button
+                *ngIf="customerDevelopmentRemarkableButtonVisible"
+                (click)="saveRemark('remarkOfCustomerDevelopment')"
+                type="button"
+                class="btn btn-icon btn-flat-success ml-1"
+                rippleEffect
+              >
+                <span [data-feather]="'save'"></span>
+              </button>
+              <button
+                *ngIf="customerDevelopmentRemarkableButtonVisible"
+                (click)="clearRemark('remarkOfCustomerDevelopment')"
+                type="button"
+                class="btn btn-icon btn-flat-danger"
+                rippleEffect
+              >
+                <span [data-feather]="'x'"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("remark_company") }}</label>
+            <div class="rating">
+              <ngb-rating
+                [(rate)]="remarkOfCompany"
+                [max]="5"
+                [readonly]="!companyRemarkable"
+                class="outline-none"
+              ></ngb-rating>
+              <button
+                *ngIf="companyRemarkableButtonVisible"
+                (click)="saveRemark('remarkOfCompany')"
+                type="button"
+                class="btn btn-icon btn-flat-success ml-1"
+                rippleEffect
+              >
+                <span [data-feather]="'save'"></span>
+              </button>
+              <button
+                *ngIf="companyRemarkableButtonVisible"
+                (click)="clearRemark('remarkOfCompany')"
+                type="button"
+                class="btn btn-icon btn-flat-danger"
+                rippleEffect
+              >
+                <span [data-feather]="'x'"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{
+              l("register_ticket_quantity")
+            }}</label>
+            <dx-number-box
+              formControlName="registerTicketQuantity"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("sms_ticket_quantity") }}</label>
+            <dx-number-box
+              formControlName="smsTicketQuantity"
+              format="#,##0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("print_ticket_quantity") }}</label>
+            <dx-number-box
+              formControlName="printTicketQuantity"
+              format="#,##0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("commitment_amount") }}</label>
+            <dx-number-box
+              formControlName="commitmentSalesAmount"
+              format="#,##0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("actual_amount") }}</label>
+            <dx-number-box
+              formControlName="actualSalesAmount"
+              format="#,##0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<ng-template #rewardItemGrid>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="gift" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("reward_item_list") }}</span>
+      </h4>
+    </div>
+  </div>
+  <dx-data-grid
+    class="ext-grid mt-1"
+    [dataSource]="rewardItemDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnAutoWidth]="true"
+    [wordWrapEnabled]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column
+      dataField="rewardItemCode"
+      [caption]="lcode"
+      [allowEditing]="false"
+    ></dxi-column>
+    <dxi-column
+      dataField="rewardItemName"
+      [caption]="lname"
+      [allowEditing]="false"
+    ></dxi-column>
+    <dxi-column
+      dataField="quantity"
+      [caption]="l('quantity')"
+      format="#,##0"
+      [allowEditing]="false"
+    ></dxi-column>
+    <dxi-column
+      dataField="rewardQuantity"
+      [caption]="l('reward_quantity')"
+      format="#,##0"
+      [allowEditing]="false"
+    ></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="50"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            [ngClass]="{ 'toolbar-item-disabled': !rewardItemEditable }"
+            (click)="showRewardDetail(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>

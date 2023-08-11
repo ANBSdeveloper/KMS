@@ -1,0 +1,409 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="reward_package"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <!-- <ng-container *ngTemplateOutlet="photo"></ng-container> -->
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+          <ng-container *ngTemplateOutlet="rewardItems"></ng-container>
+          <ng-container *ngTemplateOutlet="rewardBranches"></ng-container>
+        </div>
+      </div>
+    </section>
+    <block-ui></block-ui>
+    <core-sidebar
+      class="modal modal-slide-in fade"
+      [name]="rewardItemConfig.sidebarName"
+      overlayClass="modal-backdrop"
+    >
+      <app-reward-item-sidebar
+        [dataSource]="rewardItemDataSource"
+        [rewardPackage]="formGroup.value"
+      >
+      </app-reward-item-sidebar>
+    </core-sidebar>
+  </div>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-1">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{
+            l("reward_package_information")
+          }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lcode }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="30"
+            formControlName="code"
+            [isValid]="!cError('code')"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+            <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("code", 50) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lname }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="100"
+            formControlName="name"
+            [isValid]="!cError('name')"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("name", 200) }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-reward-type-combo
+            required="true"
+            formControlName="type"
+            [isValid]="!cError('type')"
+          ></app-reward-type-combo>
+          <span class="invalid-form" *ngIf="cErrorV('type', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <div class="custom-control custom-switch">
+            <p class="form-label mb-50">{{ l("active") }}</p>
+            <!-- Must specify input id match to label for id -->
+            <input
+              id="rewarda-pakage-isActive"
+              type="checkbox"
+              class="custom-control-input"
+              formControlName="isActive"
+            />
+            <label for="rewarda-pakage-isActive" class="custom-control-label">
+              <span class="switch-icon-left"><i data-feather="check"></i></span>
+              <span class="switch-icon-right"><i data-feather="x"></i></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("from_date")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            max="2200/12/31"
+            min="1900/1/1"
+            type="date"
+            formControlName="fromDate"
+            [isValid]="!cError('fromDate')"
+            (onValueChanged)="fromDateChange($event)"
+            #fromDate
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("to_date") }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            max="2200/12/31"
+            min="1900/1/1"
+            type="date"
+            formControlName="toDate"
+            [isValid]="!cError('toDate')"
+            (onValueChanged)="toDateChange($event)"
+            #toDate
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <label class="form-label">{{ l("total_tickets") }}</label>
+            <dx-number-box
+              [readOnly]="true"
+              [value]="totalTickets"
+              format="#,##0.##"
+            ></dx-number-box>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label class="form-label">{{ l("total_amount") }}</label>
+            <dx-number-box
+              [readOnly]="true"
+              [value]="totalAmount"
+              format="#,##0.##"
+            ></dx-number-box>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #rewardItems>
+  <div class="row mt-2">
+    <div class="col-lg-6 col-sm-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center mt-1">
+          <h4>
+            <i data-feather="box" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("reward_item_list") }}</span>
+          </h4>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-primary ml-2"
+            rippleEffect
+            *ngIf="createItemVisible"
+            (click)="createRewardItem()"
+          >
+            <span [data-feather]="'plus'"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dx-data-grid
+    class="ext-grid mt-1"
+    [dataSource]="rewardItemDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+    [wordWrapEnabled]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column dataField="code" [caption]="lcode"></dxi-column>
+    <dxi-column dataField="name" [caption]="lname"></dxi-column>
+
+    <!-- <dxi-column dataField="documentLink" [caption]="l('description')">
+        <a href="{{ documentLink }}" target="_blank">{{ documentLink }}</a>
+    </dxi-column> -->
+
+    <dxi-column
+      dataField="documentLink"
+      cellTemplate="cellTemplate"
+      [caption]="l('description')"
+    >
+      <div *dxTemplate="let data of 'cellTemplate'">
+        <a href="{{ data.value }}" target="_blank">{{ data.value }}</a>
+      </div>
+    </dxi-column>
+
+    <dxi-column
+      dataField="quantity"
+      [caption]="l('quantity')"
+      format="#,##0"
+      [width]="100"
+    ></dxi-column>
+    <dxi-column
+      dataField="price"
+      [caption]="l('reward_price')"
+      format="#,##0.##"
+      [width]="100"
+    ></dxi-column>
+    <dxi-column
+      dataField="productCode"
+      [caption]="l('dms_product_code')"
+      [width]="100"
+    ></dxi-column>
+    <dxi-column
+      dataField="productUnitCode"
+      [caption]="l('product_unit')"
+      [width]="100"
+    ></dxi-column>
+
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="80"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="deleteRewardItemVisible(cell.data)"
+            (click)="deleteRewardItem(cell.data)"
+            ><i class="mr-1" size="16" data-feather="trash"></i
+          ></a>
+
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="editRewardItemVisible(cell.data)"
+            (click)="editRewardItem(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+
+<ng-template #rewardBranches>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-2">
+      <div class="col-lg-6 col-sm-12">
+        <div class="d-flex align-items-center mt-1">
+          <h4>
+            <i data-feather="home" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("reward_branch_list") }}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-lg-12 col-md-12">
+        <app-filter-branch-by-zone-area
+          (zoneId)="zoneChange($event)"
+          (areaId)="areaChange($event)"
+          (searchValue)="searchChange($event)"
+          [isSelectAll]="isDisplayAllBranch"
+          (isDisplayAllBranch)="displayAllBranchChange($event)"
+        >
+        </app-filter-branch-by-zone-area>
+      </div>
+    </div>
+
+    <dx-data-grid
+      class="ext-grid mt-1"
+      [dataSource]="rewardBranchDataSource.items"
+      keyExpr="rowId"
+      [showBorders]="false"
+      [showColumnLines]="false"
+      [showRowLines]="true"
+      [columnHidingEnabled]="true"
+      [columnAutoWidth]="true"
+      [wordWrapEnabled]="true"
+      [(selectedRowKeys)]="selectedRewardBranches"
+      (onSelectionChanged)="selectionChanged($event)"
+    >
+      <dxo-selection
+        selectAllMode="allPages"
+        showCheckBoxesMode="always"
+        mode="multiple"
+      ></dxo-selection>
+      <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+      <dxo-paging [pageSize]="10"> </dxo-paging>
+      <dxo-editing
+        mode="cell"
+        [allowUpdating]="false"
+        [allowDeleting]="false"
+        [allowAdding]="false"
+      >
+      </dxo-editing>
+      <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [showInfo]="false"
+        [showNavigationButtons]="true"
+      >
+      </dxo-pager>
+
+      <dxi-column dataField="zoneName" [caption]="l('zone')"></dxi-column>
+      <dxi-column dataField="areaName" [caption]="l('area')"></dxi-column>
+      <dxi-column dataField="branchCode" [caption]="lcode"></dxi-column>
+      <dxi-column dataField="branchName" [caption]="lname"></dxi-column>
+    </dx-data-grid>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="submit()"
+  >
+    {{ lsave }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="deleteVisible"
+    (click)="delete()"
+  >
+    {{ ldelete }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="duplicateVisible"
+    (click)="duplicate()"
+  >
+    <span [data-feather]="'copy'"></span>
+  </button>
+</ng-template>

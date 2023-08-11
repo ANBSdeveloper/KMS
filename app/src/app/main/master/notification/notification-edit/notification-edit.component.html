@@ -1,0 +1,313 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="notification"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <!-- <ng-container *ngTemplateOutlet="photo"></ng-container> -->
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+          <ng-container *ngTemplateOutlet="notificationBranches"></ng-container>
+        </div>
+      </div>
+    </section>
+    <block-ui></block-ui>
+  </div>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-1">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("notification_information") }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ lcode }}</label>
+          <dx-text-box
+            formControlName="code"
+            [isValid]="!cError('code')"
+            [readOnly]="true"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+            <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("code", 50) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("description")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="100"
+            formControlName="description"
+            [isValid]="!cError('description')"
+            [readOnly]="readOnly"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('description', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('description', 'maxLength')"
+          >
+            <small class="form-text text-danger">{{
+              lmax("description", 200)
+            }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-status-type-notification-combo
+            [placeholder]="l('all')"
+            [readOnly]="true"
+            formControlName="status"
+            [readOnly]="true"
+          >
+          </app-status-type-notification-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-object-type-notification-combo
+            required="true"
+            [readOnly]="objectTypeReadOnly"
+            formControlName="objectType"
+            [error]="cError('objectType')"
+            [readOnly]="readOnly"
+          ></app-object-type-notification-combo>
+          <span class="invalid-form" *ngIf="cErrorV('objectType', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label for="basicTextarea"
+            >{{ l("shortContent")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <div class="full-width-content">
+            <dx-text-area
+              [height]="50"
+              [maxLength]="500"
+              formControlName="shortContent"
+              [isValid]="!cError('shortContent')"
+              [readOnly]="readOnly"
+            >
+            </dx-text-area>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('shortContent', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('shortContent', 'maxLength')"
+            >
+              <small class="form-text text-danger">{{
+                lmax("shortContent", 200)
+              }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label for="basicTextarea"
+            >{{ l("content") }}<strong class="mark-required">(*)</strong></label
+          >
+          <div class="full-width-content">
+            <dx-text-area
+              [height]="100"
+              formControlName="content"
+              [isValid]="!cError('content')"
+              [readOnly]="readOnly"
+            >
+            </dx-text-area>
+            <span class="invalid-form" *ngIf="cErrorV('content', 'minlength')">
+              <small class="form-text text-danger">{{ lmin(2) }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('content', 'maxLength')">
+              <small class="form-text text-danger">{{ lmax(2000) }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #notificationBranches>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-2">
+      <div class="col-lg-6 col-sm-12">
+        <div class="d-flex align-items-center mt-1">
+          <h4>
+            <i data-feather="home" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("reward_branch_list") }}</span>
+          </h4>
+        </div>
+      </div>
+      <!-- <div class="col-lg-6 col-sm-12">
+        <div
+          class="
+            d-flex
+            align-items-center
+            justify-content-end
+            pb-1 pb-md-0
+            mt-sm-1
+          "
+        >
+          <div class="custom-control custom-checkbox mr-1">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              (change)="displayAllBranchChange($event)"
+              id="displayAllBranchCheckbox"
+            />
+            <label
+              class="custom-control-label"
+              style="width: 240px"
+              for="displayAllBranchCheckbox"
+              >{{ l("display_all_branch") }}</label
+            >
+          </div>
+
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="lsearch"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div> -->
+    </div>
+    <div class="row mt-1">
+      <div class="col-lg-12 col-md-12">
+        <app-filter-branch-by-zone-area
+          (zoneId)="zoneChange($event)"
+          (areaId)="areaChange($event)"
+          (searchValue)="searchChange($event)"
+          [isSelectAll]="isDisplayAllBranch"
+          (isDisplayAllBranch)="displayAllBranchChange($event)"
+        >
+        </app-filter-branch-by-zone-area>
+      </div>
+    </div>
+    <dx-data-grid
+      class="ext-grid mt-1"
+      [dataSource]="notificationBranchDataSource.items"
+      keyExpr="rowId"
+      [showBorders]="false"
+      [showColumnLines]="false"
+      [showRowLines]="true"
+      [columnHidingEnabled]="true"
+      [columnAutoWidth]="true"
+      [wordWrapEnabled]="true"
+      (onEditorPreparing)="editorPreparing($event)"
+      [(selectedRowKeys)]="selectedNotificationBranches"
+      (onSelectionChanged)="selectionChanged($event)"
+    >
+      <dxo-selection
+        selectAllMode="allPages"
+        showCheckBoxesMode="always"
+        mode="multiple"
+      ></dxo-selection>
+      <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+      <dxo-paging [pageSize]="10"> </dxo-paging>
+      <dxo-editing
+        mode="cell"
+        [allowUpdating]="false"
+        [allowDeleting]="false"
+        [allowAdding]="false"
+      >
+      </dxo-editing>
+      <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [showInfo]="false"
+        [showNavigationButtons]="true"
+      >
+      </dxo-pager>
+      <dxi-column dataField="zoneName" [caption]="l('zone')"></dxi-column>
+      <dxi-column dataField="areaName" [caption]="l('area')"></dxi-column>
+      <dxi-column dataField="branchCode" [caption]="lcode"></dxi-column>
+      <dxi-column dataField="branchName" [caption]="lname"></dxi-column>
+    </dx-data-grid>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="updateVisible"
+    (click)="submit()"
+  >
+    {{ lsave }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="sendVisible"
+    (click)="send()"
+  >
+    {{ l("send") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="deleteVisible"
+    (click)="delete()"
+  >
+    {{ ldelete }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    (click)="create()"
+    *ngIf="createVisible"
+  >
+    <span [data-feather]="'plus'"></span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+</ng-template>

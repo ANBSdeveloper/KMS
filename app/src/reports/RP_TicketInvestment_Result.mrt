@@ -1,0 +1,1510 @@
+{
+  "ReportVersion": "2020.2.1.0",
+  "ReportGuid": "f80cd12ac30849d7b73846676614572c",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(1584125654000+0700)/",
+  "ReportChanged": "/Date(1630684435904+0700)/",
+  "EngineVersion": "EngineV2",
+  "ReportUnit": "Inches",
+  "AutoLocalizeReportOnRun": true,
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "GlobalizationStrings": {
+    "0": {
+      "CultureName": "vi-VN"
+    }
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiDataTableSource",
+        "Name": "root",
+        "Alias": "root",
+        "Key": "8c4aff29280445d08572551e4f3692fd",
+        "Columns": {
+          "0": {
+            "Name": "ZoneName",
+            "Index": -1,
+            "NameInSource": "ZoneName",
+            "Alias": "ZoneName",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "AreaName",
+            "Index": -1,
+            "NameInSource": "AreaName",
+            "Alias": "AreaName",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "ProvinceName",
+            "Index": -1,
+            "NameInSource": "ProvinceName",
+            "Alias": "ProvinceName",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "BranchCode",
+            "Index": -1,
+            "NameInSource": "BranchCode",
+            "Alias": "BranchCode",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "BranchName",
+            "Index": -1,
+            "NameInSource": "BranchName",
+            "Alias": "BranchName",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "ShopCode",
+            "Index": -1,
+            "NameInSource": "ShopCode",
+            "Alias": "ShopCode",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "ShopName",
+            "Index": -1,
+            "NameInSource": "ShopName",
+            "Alias": "ShopName",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "ContactName",
+            "Index": -1,
+            "NameInSource": "ContactName",
+            "Alias": "ContactName",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "Phone",
+            "Index": -1,
+            "NameInSource": "Phone",
+            "Alias": "Phone",
+            "Type": "System.Decimal"
+          },
+          "9": {
+            "Name": "Address",
+            "Index": -1,
+            "NameInSource": "Address",
+            "Alias": "Address",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "CreationTime",
+            "Index": -1,
+            "NameInSource": "CreationTime",
+            "Alias": "CreationTime",
+            "Type": "System.DateTime"
+          },
+          "11": {
+            "Name": "RewardItemCode",
+            "Index": -1,
+            "NameInSource": "RewardItemCode",
+            "Alias": "RewardItemCode",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "RewardItemName",
+            "Index": -1,
+            "NameInSource": "RewardItemName",
+            "Alias": "RewardItemName",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "ConsumerName",
+            "Index": -1,
+            "NameInSource": "ConsumerName",
+            "Alias": "ConsumerName",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "ConsumerPhone",
+            "Index": -1,
+            "NameInSource": "ConsumerPhone",
+            "Alias": "ConsumerPhone",
+            "Type": "System.Decimal"
+          },
+          "15": {
+            "Name": "TicketCode",
+            "Index": -1,
+            "NameInSource": "TicketCode",
+            "Alias": "TicketCode",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "RewardQuantity",
+            "Index": -1,
+            "NameInSource": "RewardQuantity",
+            "Alias": "RewardQuantity",
+            "Type": "System.Decimal"
+          },
+          "17": {
+            "Name": "LeadCode",
+            "Index": -1,
+            "NameInSource": "LeadCode",
+            "Alias": "LeadCode",
+            "Type": "System.String"
+          },
+          "18": {
+            "Name": "LeadName",
+            "Index": -1,
+            "NameInSource": "LeadName",
+            "Alias": "LeadName",
+            "Type": "System.String"
+          },
+          "19": {
+            "Name": "FromDate",
+            "Index": -1,
+            "NameInSource": "FromDate",
+            "Alias": "FromDate",
+            "Type": "System.DateTime"
+          },
+          "20": {
+            "Name": "ToDate",
+            "Index": -1,
+            "NameInSource": "ToDate",
+            "Alias": "ToDate",
+            "Type": "System.DateTime"
+          }
+        },
+        "NameInSource": "Data.root"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiJsonDatabase",
+        "Name": "Data",
+        "Alias": "Data",
+        "PathData": "C:\\WindowsData\\Other\\KMS\\Document\\ReportJson\\RP_Ticket_Result.json"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "6e0938c5b52b4384aed6f333e6869a43",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiGroupHeaderBand",
+          "Name": "GroupHeaderBand1",
+          "ClientRectangle": "0,0.2,16.24,1",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0,4.7,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Báo Cáo Kết Quả Thực Hiện Chương Trình"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;16;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiImage",
+              "Name": "Image1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,1.4,0.6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "Stretch": true,
+              "ImageBytes": "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"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text3",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0.8,0.3,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "STT"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,0.8,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Vùng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text11",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1,0.8,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Khu Vực"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0.8,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tỉnh Thành"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text5",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4,0.8,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã NPP"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text7",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.8,0.8,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên NPP"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text10",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.7,0.8,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã C.Hàng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text13",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.5,0.8,1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên C.Hàng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text15",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.5,0.8,1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Người Đại Diện"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text20",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.5,0.8,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Điện Thoại"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 1.0,
+                "Top": 1.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text24",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.6,0.8,0.6,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã TLD"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.2,0.8,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên TLD"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text28",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.2,0.8,1.2,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Địa Chỉ"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text23",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.4,0.8,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "T.Gian Tạo"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text30",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.1,0.8,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Ngày Tạo"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text32",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.8,0.8,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã Quà Tặng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text34",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "12.7,0.8,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên Quà Tặng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text36",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "13.6,0.8,1.1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Tên Khách Hàng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "20": {
+              "Ident": "StiText",
+              "Name": "Text38",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.7,0.8,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Mã T.Thưởng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "21": {
+              "Ident": "StiText",
+              "Name": "Text40",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "15.6,0.8,0.6,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "S.Lượng"
+              },
+              "Font": "Segoe UI;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:242,242,242",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "22": {
+              "Ident": "StiText",
+              "Name": "Text42",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0.4,4.6,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Từ Ngày: {root.FromDate} - Đến Ngày: {root.ToDate}"
+              },
+              "Font": "Segoe UI;9;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "23": {
+              "Ident": "StiText",
+              "Name": "Text46",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.5,0.07,1.63,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Print time: {Time}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";9;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Margins": {
+                "Left": 0.0,
+                "Right": 2.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "G"
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiDataBand",
+          "Name": "DataBand1",
+          "ClientRectangle": "0,1.6,16.24,0.2",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1,0,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.AreaName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,0,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ZoneName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text19",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,0.3,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Line}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text4",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.8,0,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ProvinceName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text6",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4,0,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.BranchCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text9",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.8,0,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.BranchName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text12",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.7,0,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ShopCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text14",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.5,0,1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ShopName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text16",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.5,0,1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ContactName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text21",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.5,0,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Phone}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.6,0,0.6,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.LeadCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.2,0,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.LeadName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.2,0,1.2,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.Address}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "Type": "DataColumn"
+            },
+            "13": {
+              "Ident": "StiText",
+              "Name": "Text29",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.4,0,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.CreationTime}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiTimeFormatService"
+              },
+              "Type": "DataColumn"
+            },
+            "14": {
+              "Ident": "StiText",
+              "Name": "Text31",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.1,0,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.CreationTime}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            },
+            "15": {
+              "Ident": "StiText",
+              "Name": "Text33",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "11.8,0,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.RewardItemCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            },
+            "16": {
+              "Ident": "StiText",
+              "Name": "Text35",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "12.7,0,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.RewardItemName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            },
+            "17": {
+              "Ident": "StiText",
+              "Name": "Text37",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "13.6,0,1.1,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.ConsumerName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            },
+            "18": {
+              "Ident": "StiText",
+              "Name": "Text39",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.7,0,0.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.TicketCode}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            },
+            "19": {
+              "Ident": "StiText",
+              "Name": "Text41",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "15.6,0,0.6,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{root.RewardQuantity}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Segoe UI;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 2.0,
+                "Right": 2.0,
+                "Top": 2.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd/MM/yyyy"
+              },
+              "Type": "DataColumn"
+            }
+          },
+          "DataSourceName": "root",
+          "Sort": {
+            "0": "ASC",
+            "1": "ProductNumber",
+            "2": "ASC",
+            "3": "ClassCode",
+            "4": "ASC",
+            "5": "SiteCode",
+            "6": "ASC",
+            "7": "LocCode",
+            "8": "ASC",
+            "9": "PalletNumber"
+          }
+        }
+      },
+      "PaperSize": "A3",
+      "Orientation": "Landscape",
+      "PageWidth": 16.54,
+      "PageHeight": 11.69,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.15,
+        "Right": 0.15,
+        "Top": 0.19,
+        "Bottom": 0.19
+      },
+      "ReportUnit": {
+        "Ident": "StiInchesUnit"
+      }
+    }
+  }
+}

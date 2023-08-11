@@ -1,0 +1,34 @@
+<label class="form-label mr-1">{{ l(label) }}</label>
+<!-- <button
+  *ngIf="isCreateVisible"
+  type="button"
+  class="btn btn-icon btn-sm rounded-circle btn-flat-primary"
+  (click)="add()"
+  rippleEffect
+>
+  <span [data-feather]="'plus'"></span>
+</button>
+<button
+  *ngIf="isEditVisible"
+  type="button"
+  class="btn btn-icon btn-sm rounded-circle btn-flat-primary"
+  (click)="edit()"
+  rippleEffect
+>
+  <span [data-feather]="'edit'"></span>
+</button> -->
+<ng-select
+  [bindLabel]="displayName"
+  [bindValue]="valueName"
+  [(ngModel)]="value"
+  [typeahead]="input$"
+  [items]="items"
+  [minTermLength]="2"
+  [virtualScroll]="true"
+  [loading]="loading"
+  (scroll)="onScroll($event)"
+  (scrollToEnd)="onScrollToEnd()"
+  (ngModelChange)="onChange($event)"
+  [readonly]="readOnly"
+>
+</ng-select>

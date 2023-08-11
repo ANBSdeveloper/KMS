@@ -1,0 +1,133 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog cbms-form" *blockUI="'cycle_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("cycle_year")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="year"
+              max="9999"
+              min="0"
+              [readOnly]="readOnly || this.id"
+              [isValid]="!cError('year')"
+              autofocus
+            ></dx-number-box>
+            <span class="invalid-form" *ngIf="cErrorV('year', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("cycle_number")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-text-box
+              formControlName="number"
+              [maxLength]="6"
+              [readOnly]="readOnly || this.id"
+              [isValid]="!cError('number')"
+            ></dx-text-box>
+            <span class="invalid-form" *ngIf="cErrorV('number', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('number', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("number", 200)
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("from_date")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-date-box
+              [showClearButton]="true"
+              [useMaskBehavior]="true"
+              formControlName="fromDate"
+              [max]="fromDateMax"
+              #fromDate
+              [readOnly]="readOnly"
+              (onValueChanged)="fromDateChange($event)"
+              [isValid]="!cError('fromDate')"
+            ></dx-date-box>
+            <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("to_date")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-date-box
+              [showClearButton]="true"
+              [useMaskBehavior]="true"
+              formControlName="toDate"
+              #toDate
+              (onValueChanged)="toDateChange($event)"
+              [readOnly]="readOnly"
+              [isValid]="!cError('toDate')"
+            ></dx-date-box>
+            <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <p class="form-label mb-50">{{ l("active") }}</p>
+              <input
+                id="cycle-isActive"
+                type="checkbox"
+                class="custom-control-input"
+                formControlName="isActive"
+              />
+              <label class="custom-control-label" for="cycle-isActive">
+                <span class="switch-icon-left"
+                  ><i data-feather="check"></i
+                ></span>
+                <span class="switch-icon-right"><i data-feather="x"></i></span>
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            *ngIf="saveVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

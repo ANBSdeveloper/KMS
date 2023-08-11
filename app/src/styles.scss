@@ -1,0 +1,212 @@
+@import "@core/scss/core.scss";
+@import "./assets/scss/styles";
+
+.ext-grid {
+  text-align: left;
+  font-size: $base-font-size !important;
+  font-family: Roboto, Helvetica, "sans-serif";
+  .dx-datagrid {
+    color: #212529;
+  }
+
+  .dx-header-row > td > .dx-datagrid-text-content {
+    color: rgb(110, 107, 123) !important;
+    text-transform: uppercase;
+    line-height: 24px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-bottom: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .dx-datagrid .dx-row > td {
+    padding: 0.65rem 0.7rem;
+  }
+
+  &.ext-grid-editor .dx-datagrid .dx-row > td {
+    padding: 0.65rem 0.7rem;
+  }
+
+  .dx-datagrid .dx-row > td.dx-editor-cell {
+    padding: 0px;
+  }
+
+  .dx-datagrid-borders .dx-datagrid-rowsview,
+  .dx-datagrid-headers + .dx-datagrid-rowsview {
+    border-top: 1px solid #f3f6f9;
+  }
+
+  .dx-datagrid .dx-row-lines > td {
+    border-top: 1px solid #f3f6f9;
+    border-bottom: none !important;
+  }
+  .dx-datagrid-headers {
+    border-bottom: none !important;
+  }
+  .dx-datagrid-headers .dx-datagrid-table .dx-row > td {
+    border-bottom: none !important;
+    // padding-top: 1rem;
+    // padding-bottom: 1rem;
+
+    background-color: #f3f2f7;
+    text-transform: uppercase;
+    height: 40px !important;
+  }
+  .dx-datagrid-content .dx-datagrid-table .dx-row > td {
+    vertical-align: middle;
+  }
+  .dx-datagrid-checkbox-size .dx-checkbox-icon {
+    height: 18px;
+    width: 18px;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.42rem;
+    background-color: #ebedf3;
+  }
+  .dx-datagrid-checkbox-size {
+    .dx-checkbox-icon {
+      border: none;
+    }
+    &.dx-state-hover .dx-checkbox-icon {
+      border: none;
+    }
+    &.dx-checkbox-checked .dx-checkbox-icon {
+      background-color: $primary;
+      color: #ffffff;
+    }
+    &.dx-checkbox-indeterminate .dx-checkbox-icon {
+      background-color: $primary;
+      color: #ffffff;
+    }
+    &.dx-state-focused .dx-checkbox-icon {
+      border: none;
+    }
+  }
+
+  .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
+  .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > tr > td,
+  .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td,
+  .dx-datagrid-rowsview
+    .dx-selection.dx-row:not(.dx-row-focused):hover
+    > tr
+    > td {
+    background-color: unset;
+    color: #333;
+  }
+  .dx-datagrid-pager {
+    border-top: none;
+    padding: 0.5rem;
+  }
+
+  .dx-pager .dx-page-sizes .dx-page-size {
+    margin-right: 0.5rem;
+    color: #7e8299;
+    background-color: #f3f6f9;
+  }
+  .dx-pager .dx-pages .dx-page {
+    margin-left: 0.5rem;
+    color: #7e8299;
+    background-color: #f3f6f9;
+  }
+  .dx-pager .dx-page-sizes .dx-selection,
+  .dx-pager .dx-pages .dx-selection {
+    color: white;
+    background-color: $primary;
+  }
+  .dx-pager .dx-pages .dx-info {
+    opacity: unset;
+  }
+
+  .dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-select {
+    padding: 0;
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+
+  .action-placeholder {
+    width: 1px;
+    display: inline-block;
+  }
+
+  &.dx-state-disabled.dx-widget,
+  &.dx-state-disabled.dx-widget {
+    opacity: unset;
+  }
+
+  grid-actions {
+    display: flex;
+  }
+}
+.dx-widget input,
+.dx-widget textarea {
+  font-family: "Segoe UI", helvetica, verdana, sans-serif;
+  line-height: 1.35715;
+  font-size: 1rem;
+}
+.dx-widget {
+  font-size: 1rem;
+  font-family: "Segoe UI", helvetica;
+}
+
+.menu-title {
+  white-space: break-spaces;
+}
+
+html .content {
+  height: 100%;
+}
+
+.toast:after {
+  left: 1.44rem;
+  top: 1.58rem;
+}
+
+.toast {
+  &:after {
+    left: 1.44rem !important;
+    top: 1.58rem !important;
+  }
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.bs-stepper-header {
+  font-size: 0.9rem;
+}
+
+.content-header-title {
+  font-size: 1.4rem;
+}
+
+.nav .modern-nav-toggle {
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.main-menu {
+  .navbar-header {
+    .navbar-brand {
+      margin-top: 0.3rem;
+    }
+    padding: 0.35rem 1rem 0.3rem 0.8rem;
+  }
+}
+
+.ng-select .ng-select-container {
+  border-color: #ddd;
+}
+
+.dx-texteditor.dx-state-readonly {
+  border-style: solid;
+  background: #f9f9f9;
+}
+
+label .mark-required {
+  color: red;
+  display: inline-block;
+  margin-left: 4px;
+}

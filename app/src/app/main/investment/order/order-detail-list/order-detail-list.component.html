@@ -1,0 +1,48 @@
+<dx-data-grid
+  [dataSource]="store"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+>
+  <dxi-column dataField="qrCode" [caption]="l('qr_code')"></dxi-column>
+  <dxi-column
+    dataField="productCode"
+    [caption]="l('product_code')"
+  ></dxi-column>
+  <dxi-column
+    dataField="productName"
+    [caption]="l('product_name')"
+  ></dxi-column>
+  <dxi-column dataField="spoonCode" [caption]="l('spoon_code')"></dxi-column>
+  <dxi-column dataField="unitName" [caption]="l('unit_name')"></dxi-column>
+  <dxi-column
+    dataField="quantity"
+    [caption]="l('quantity')"
+    format="#,##0.##"
+  ></dxi-column>
+  <dxi-column
+    dataField="unitPrice"
+    [caption]="l('unit_price')"
+    format="#,##0.##"
+  ></dxi-column>
+  <dxi-column
+    dataField="lineAmount"
+    [caption]="l('line_amount')"
+    format="#,##0.##"
+  ></dxi-column>
+  <dxi-column
+    dataField="points"
+    [caption]="l('points')"
+    format="#,##0.##"
+  ></dxi-column>
+  <dxi-column dataField="api" [caption]="l('api_update')"></dxi-column>
+  <dxi-column
+    dataField="lastModificationTime"
+    [caption]="l('last_modification_time')"
+    [type]="date"
+  ></dxi-column>
+  <dxi-column
+    dataField="usedForTicket"
+    [caption]="l('used_for_ticket')"
+    [type]="checkbox"
+  ></dxi-column>
+</dx-data-grid>

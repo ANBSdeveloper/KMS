@@ -1,0 +1,383 @@
+<div class="row match-height">
+  <!-- Medal Card -->
+
+  <div class="col-xl-4 col-md-6 col-12">
+    <div class="card earnings-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <h4 class="card-title mb-1">Ngân Sách</h4>
+            <div class="card-text font-small-3">Phân Bổ</div>
+            <h4 class="font-weight-bolder mb-1">{{getNumber(budget?.AllocateAmount)}}</h4>
+            <div class="card-text font-small-3">Đã Dùng</div>
+            <h4 class="font-weight-bolder mb-1">{{getNumber(budget?.UsedAmount)}}</h4>
+            <div class="card-text font-small-3">Còn Lại</div>
+            <h4 class="font-weight-bolder mb-1">{{getNumber(budget?.RemainAmount)}}</h4>
+          </div>
+          <div class="col-6">
+            <div *ngIf="budget">
+              <!-- Apexchart component-->
+              <apx-chart 
+                #budgetTotalChartRef
+                [chart]="budgetTotalChartoptions.chart"
+                [dataLabels]="budgetTotalChartoptions.dataLabels"
+                [series]="budgetTotalChartoptions.series"
+                [legend]="budgetTotalChartoptions.legend"
+                [labels]="budgetTotalChartoptions.labels"
+                [stroke]="budgetTotalChartoptions.stroke"
+                [colors]="budgetTotalChartoptions.colors"
+                [grid]="budgetTotalChartoptions.grid"
+                [plotOptions]="budgetTotalChartoptions.plotOptions"
+              ></apx-chart>
+              <!-- / Apexchart component-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Medal Card -->
+
+  <!-- Statistics Card -->
+  <div class="col-xl-8 col-md-6 col-12">
+    <div class="card card-statistics">
+      <div class="card-header">
+        <h4 class="card-title">Thống Tin Cửa Hàng</h4>
+        <div class="d-flex align-items-center">
+          <div class="btn-group">
+            <div ngbDropdown>
+              <button
+                type="button"
+                class="
+                  btn btn-outline-primary btn-sm
+                  dropdown-toggle
+                  budget-dropdown
+                "
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                ngbDropdownToggle
+                rippleEffect
+              >
+                {{currentCycle?.Number}}
+              </button>
+              <div ngbDropdownMenu>
+                <a
+                  *ngFor="let cycle of cycles"
+                  ngbDropdownItem
+                  (click)="cycleChange(cycle)"
+                  href="javascript:void(0);"
+                  >{{ cycle.Number }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body statistics-body">
+        <div class="row">
+          <div class="col-sm-6 col-xl-4 mb-2 mb-xl-0">
+            <div class="media">
+              <div class="avatar bg-light-primary mr-2">
+                <div class="avatar-content">
+                  <i data-feather="user" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ analytic?.Shops | numberFormat}}
+                </h4>
+                <p class="card-text font-small-3 mb-0">Cửa Hàng</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-4 mb-2 mb-xl-0">
+            <div class="media">
+              <div class="avatar bg-light-primary mr-2">
+                <div class="avatar-content">
+                  <i data-feather="key" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ analytic?.KeyShops | numberFormat}}
+                </h4>
+                <p class="card-text font-small-3 mb-0">Cửa Hàng Trọng Tâm</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-4 mb-2 mb-sm-0">
+            <div class="media">
+              <div class="avatar bg-light-primary mr-2">
+                <div class="avatar-content">
+                  <i data-feather="user" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ analytic?.TicketShops | numberFormat}}
+                </h4>
+                <p class="card-text font-small-3 mb-0">Cửa Hàng Có BTTT</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-sm-6 col-xl-4 mb-2 mb-xl-0">
+            <div class="media">
+              <div class="avatar bg-light-warning mr-2">
+                <div class="avatar-content">
+                  <i data-feather="dollar-sign" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ (analytic?.MaterialAmount / 1000) | numberFormat }}k
+                </h4>
+                <p class="card-text font-small-3 mb-0">Tiền Vật Tư</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-4 mb-2 mb-xl-0">
+            <div class="media">
+              <div class="avatar bg-light-warning mr-2">
+                <div class="avatar-content">
+                  <i data-feather="dollar-sign" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ (analytic?.RewardAmount / 1000) | numberFormat }}k
+                </h4>
+                <p class="card-text font-small-3 mb-0">Tiền Quà Tặng</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-4 mb-2 mb-sm-0">
+            <div class="media">
+              <div class="avatar bg-light-warning mr-2">
+                <div class="avatar-content">
+                  <i data-feather="dollar-sign" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">
+                  {{ (analytic?.AvgInvestmentAmount / 1000) | numberFormat }}k
+                </h4>
+                <p class="card-text font-small-3 mb-0">Bình Quân Tiền Đầu Tư</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Statistics Card -->
+</div>
+
+<div class="row match-height">
+  <div class="col-lg-4 col-12 match-height">
+    <div class="row match-height">
+      <!-- Bar Chart Orders -->
+      <div class="col-lg-6 col-md-3 col-6">
+        <div class="card">
+          <div class="card-body pb-50">
+            <h6>Đơn Hàng</h6>
+            <h2 class="font-weight-bolder mb-1">
+              {{ analytic?.Orders | numberFormat }}
+            </h2>
+            <div id="statistics-bar-chart">
+              <!-- Apexchart component-->
+
+              <apx-chart
+                #orderBarChartRef
+                [series]="orderBar.series"
+                [chart]="orderBar.chart"
+                [tooltip]="orderBar.tooltip"
+                [colors]="orderBar.colors"
+                [dataLabels]="orderBar.dataLabels"
+                [grid]="orderBar.grid"
+                [plotOptions]="orderBar.plotOptions"
+                [dataLabels]="orderBar.dataLabels"
+                [xaxis]="orderBar.xaxis"
+                [yaxis]="orderBar.yaxis"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Bar Chart Orders -->
+
+      <!-- Line Chart Profit -->
+      <div class="col-lg-6 col-md-3 col-6">
+        <div class="card card-tiny-line-stats">
+          <div class="card-body pb-50">
+            <h6>Số Lượng Trúng Thưởng</h6>
+            <h2 class="font-weight-bolder mb-1">
+              {{ analytic?.RewardQuantity | numberFormat }}
+            </h2>
+            <div id="statistics-line-chart">
+              <apx-chart
+                [series]="rewardBar.series"
+                [chart]="rewardBar.chart"
+                [tooltip]="rewardBar.tooltip"
+                [colors]="rewardBar.colors"
+                [dataLabels]="rewardBar.dataLabels"
+                [grid]="rewardBar.grid"
+                [plotOptions]="rewardBar.plotOptions"
+                [dataLabels]="rewardBar.dataLabels"
+                [xaxis]="rewardBar.xaxis"
+                [yaxis]="rewardBar.yaxis"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Line Chart Profit -->
+
+      <div class="col-lg-6 col-md-3 col-6">
+        <div class="card card-tiny-line-stats">
+          <div class="card-body">
+            <h6>Doanh Số Cam Kết</h6>
+            <h2 class="font-weight-bolder mb-1">
+              {{ (analytic?.InvestAmount / 1000) | numberFormat }}k
+            </h2>
+            <div id="statistics-line-chart">
+              <apx-chart
+                #investmentLineChartRef
+                [chart]="investmentLine.chart"
+                [grid]="investmentLine.grid"
+                [stroke]="investmentLine.stroke"
+                [colors]="investmentLine.colors"
+                [series]="investmentLine.series"
+                [markers]="investmentLine.markers"
+                [xaxis]="investmentLine.xaxis"
+                [yaxis]="investmentLine.yaxis"
+                [tooltip]="investmentLine.tooltip"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-3 col-6">
+        <div class="card card-tiny-line-stats">
+          <div class="card-body">
+            <h6>Doanh Số Thực Đạt</h6>
+            <h2 class="font-weight-bolder mb-1">
+              {{ (analytic?.ActualAmount / 1000) | numberFormat }}k
+            </h2>
+            <div id="statistics-line-chart">
+              <apx-chart
+                [chart]="actualLine.chart"
+                [grid]="actualLine.grid"
+                [stroke]="actualLine.stroke"
+                [colors]="actualLine.colors"
+                [series]="actualLine.series"
+                [markers]="actualLine.markers"
+                [xaxis]="actualLine.xaxis"
+                [yaxis]="actualLine.yaxis"
+                [tooltip]="actualLine.tooltip"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6 col-12 match-height">
+    <div class="card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h4 class="card-title">Bốc Thăm Trúng Thưởng</h4>
+        <i
+          data-feather="help-circle"
+          class="font-medium-3 text-muted cursor-pointer"
+        ></i>
+      </div>
+      <div class="card-body p-0">
+        <div id="goalChartoptions" class="mb-1 mt-1 pt-1">
+          <!-- Apexchart component-->
+          <apx-chart *ngIf="analytic"
+            #goalChartRef
+            [chart]="goalChartoptions.chart"
+            [colors]="goalChartoptions.colors"
+            [plotOptions]="goalChartoptions.plotOptions"
+            [fill]="goalChartoptions.fill"
+            [series]="goalChartoptions.series"
+            [stroke]="goalChartoptions.stroke"
+            [grid]="goalChartoptions.grid"
+          ></apx-chart>
+          <!-- / Apexchart component-->
+        </div>
+        <div class="row border-top text-center mx-0">
+          <div class="col-6 border-right py-1">
+            <p class="card-text mb-0">Hoàn Tất</p>
+            <h3 class="font-weight-bolder mb-0">
+              {{ analytic?.CompletedTickets | numberFormat }}
+            </h3>
+          </div>
+          <div class="col-6 py-1">
+            <p class="card-text mb-0">Đang Thực Hiện</p>
+            <h3 class="font-weight-bolder mb-0">
+              {{ analytic?.DoingTickets | numberFormat }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6 col-12 match-height">
+    <!-- Revenue Report Card -->
+    <div class="card card-revenue-budget">
+      <div class="row mx-0">
+        <div class="col-md-12 col-12 revenue-report-wrapper">
+          <div
+            class="d-sm-flex justify-content-between align-items-center mb-3"
+          >
+            <h4 class="card-title mb-50 mb-sm-0">Đầu Tư Trong 12 Tháng</h4>
+            <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center mr-2">
+                <span
+                  class="
+                    bullet bullet-primary
+                    font-small-3
+                    mr-50
+                    cursor-pointer
+                  "
+                ></span>
+                <span>Doanh Số</span>
+              </div>
+              <div class="d-flex align-items-center ml-75">
+                <span
+                  class="
+                    bullet bullet-warning
+                    font-small-3
+                    mr-50
+                    cursor-pointer
+                  "
+                ></span>
+                <span>Đầu Tư</span>
+              </div>
+            </div>
+          </div>
+          <div id="revenue-report-chart">
+            <apx-chart
+              #revenueReportChartRef
+              [series]="revenueReportChartoptions.series"
+              [chart]="revenueReportChartoptions.chart"
+              [plotOptions]="revenueReportChartoptions.plotOptions"
+              [colors]="revenueReportChartoptions.colors"
+              [dataLabels]="revenueReportChartoptions.dataLabels"
+              [legend]="revenueReportChartoptions.legend"
+              [grid]="revenueReportChartoptions.grid"
+              [xaxis]="revenueReportChartoptions.xaxis"
+              [yaxis]="revenueReportChartoptions.yaxis"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Revenue Report Card -->
+  </div>
+</div>

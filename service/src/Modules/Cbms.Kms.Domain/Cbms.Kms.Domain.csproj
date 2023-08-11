@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Orders\Actions\OrderDetailUpdateSpoonCodeAction.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Localization\SourceFiles\Kms-vi.xml" />
+    <None Remove="Localization\SourceFiles\Kms.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\SourceFiles\Kms-vi.xml" />
+    <EmbeddedResource Include="Localization\SourceFiles\Kms.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Cbms">
+      <HintPath>..\..\BuildingBlocks\Cbms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Localization\SourceFiles\Kms-vi.xml" />
+    <Resource Include="Localization\SourceFiles\Kms.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

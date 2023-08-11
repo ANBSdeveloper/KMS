@@ -1,0 +1,126 @@
+<form class="form-validate" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center mt-1 mb-1">
+            <h4>
+              <i
+                data-feather="image"
+                [size]="16"
+                class="mr-75 font-medium-4"
+              ></i>
+              <span class="align-middle">{{ l("operation_photo") }}</span>
+            </h4>
+          </div>
+        </div>
+        <app-image-viewer
+          #operationImageViewer
+          [dataImages]="operationPhotos"
+          [header]="l('operation_photo')"
+          [readOnly]="readOnly"
+        ></app-image-viewer>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center mt-1 mb-1">
+          <h4>
+            <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("ticket_operation_info") }}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label"
+          >{{ l("current_stock_quantity")
+          }}<strong class="mark-required">(*)</strong></label
+        >
+        <dx-number-box
+          formControlName="stockQuantity"
+          format="#,##0"
+          [min]="0"
+          [max]="1000000"
+          [readOnly]="readOnly"
+          [isValid]="!cError('stockQuantity')"
+        ></dx-number-box>
+        <span class="invalid-form" *ngIf="cErrorV('stockQuantity', 'required')">
+          <small class="form-text text-danger">{{ lreq() }}</small>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("update_user") }}</label>
+        <dx-text-box
+          formControlName="updateUserName"
+          [readOnly]="true"
+        ></dx-text-box>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label"
+          >{{ l("operation_date")
+          }}<strong class="mark-required">(*)</strong></label
+        >
+        <dx-date-box
+          [showClearButton]="true"
+          [useMaskBehavior]="true"
+          formControlName="operationDate"
+          [readOnly]="readOnly"
+          [isValid]="!cError('operationDate')"
+        ></dx-date-box>
+        <span class="invalid-form" *ngIf="cErrorV('operationDate', 'required')">
+          <small class="form-text text-danger">{{ lreq() }}</small>
+        </span>
+        <span
+          class="invalid-form"
+          *ngIf="cErrorV('operationDate', 'invalidRange')"
+        >
+          <small class="form-text text-danger">{{
+            l("invalid_operation_date")
+          }}</small>
+        </span>
+        <span
+          class="invalid-form"
+          *ngIf="cErrorV('operationDate', 'invalidRangeBuy')"
+        >
+          <small class="form-text text-danger">{{
+            l("invalid_operation_date_buy")
+          }}</small>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("update_time") }}</label>
+        <dx-date-box
+          [showClearButton]="true"
+          [useMaskBehavior]="true"
+          formControlName="updateTime"
+          [readOnly]="true"
+        ></dx-date-box>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <div class="form-group mr-2">
+        <label class="form-label">{{ l("note") }}</label>
+        <dx-text-area
+          [readOnly]="readOnly"
+          formControlName="note"
+        ></dx-text-area>
+      </div>
+    </div>
+  </div>
+</form>

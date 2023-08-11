@@ -1,0 +1,110 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog" *blockUI="'ticket_material_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <app-material-combo
+              #materialCombo
+              required="true"
+              formControlName="materialId"
+              [readOnly]="readOnly || modelId"
+              [error]="cError('materialId')"
+              (change)="materialChange($event)"
+            ></app-material-combo>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('materialId', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("register_quantity")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              format="#,##0.##"
+              formControlName="registerQuantity"
+              [min]="0"
+              [max]="1000000"
+              [readOnly]="readOnly"
+              [isValid]="!cError('registerQuantity')"
+            >
+            </dx-number-box>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('registerQuantity', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('registerQuantity', 'min')"
+            >
+              <small class="form-text text-danger">{{ lminv(1) }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("price") }}</label>
+            <dx-number-box
+              format="#,##0.##"
+              formControlName="price"
+              [readOnly]="true"
+            >
+            </dx-number-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("amount") }}</label>
+            <dx-number-box
+              format="#,##0.##"
+              formControlName="amount"
+              [readOnly]="true"
+            >
+            </dx-number-box>
+          </div>
+
+          <button
+            type="button"
+            (click)="saveAdd()"
+            *ngIf="saveAddVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsaveadd }}
+          </button>
+          <button
+            type="submit"
+            *ngIf="updateVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

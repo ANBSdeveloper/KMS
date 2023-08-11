@@ -1,0 +1,124 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="ticket_investment_calendar"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+
+        <div class="app-calendar overflow-hidden border">
+          <div class="row no-gutters">
+            <div class="col-lg-9 col-md-6">
+              <div class="col position-relative">
+                <div class="card shadow-none border-0 mb-0 rounded-0">
+                  <div class="card-body pb-0">
+                    <full-calendar
+                      #calendar
+                      [options]="calendarOptions"
+                    ></full-calendar>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="col-12">
+                <!-- <h4 class="mb-1">
+                    <i data-feather="dollar-sign" [size]="16" class="mr-75 font-medium-4"></i>
+                    <span class="align-middle">{{ l("total-ticketinvestment") }}</span>                
+                </h4> -->
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12" style="margin-top: 70px">
+                      <label style="font-size: 13px; font-weight: bold"
+                        >{{ l("total-ticketinvestment") }}
+                        {{ total | numberFormat }}</label
+                      >
+                      <div *ngFor="let item of data; let i = index">
+                        <div class="col-12">
+                          <label style="font-size: 13px">
+                            {{
+                              "(" +
+                                (i + 1) +
+                                ") " +
+                                item.customerCode +
+                                " - " +
+                                item.customerName +
+                                " Địa Chỉ: " +
+                                item.address
+                            }}</label
+                          >
+                          <br />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- calendar -->
+
+            <!-- calendar -->
+          </div>
+        </div>
+
+        <block-ui> </block-ui>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #filterForm>
+  <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngIf="!(isRsm || isSS || isAsm)">
+        <div class="form-group">
+          <app-ticket-investment-rsm-staff-combo
+            #rsmStaffCombo
+            [placeholder]="l('all')"
+            formControlName="rsmStaffId"
+            (change)="rsmStaffChange($event)"
+          ></app-ticket-investment-rsm-staff-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" *ngIf="!(isSS || isAsm)">
+        <div class="form-group">
+          <app-ticket-investment-asm-staff-combo
+            #asmStaffCombo
+            [placeholder]="l('all')"
+            [supervisorId]="cValue('rsmStaffId')"
+            formControlName="asmStaffId"
+            (change)="asmStaffChange($event)"
+          ></app-ticket-investment-asm-staff-combo>
+        </div>
+      </div>
+
+      <!-- <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("search") }}</label>
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="l('search_placeholder')"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div> -->
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+  </div>
+</ng-template>

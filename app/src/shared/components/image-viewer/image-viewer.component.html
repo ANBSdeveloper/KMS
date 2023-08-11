@@ -1,0 +1,88 @@
+<div class="d-flex flex-wrap">
+  <ng-container
+    *ngFor="let placeholder of placeholderImages; let imageIndex = index"
+  >
+    <div class="m-1">
+      <div
+        *ngIf="!placeholder.data"
+        (click)="uploadImage(imageInput)"
+        class="image-input image-input-empty image-input-outline"
+        style="background-image: url(assets/images/avatars/empty.png)"
+      >
+        <div
+          *ngIf="placeholder.loading"
+          class="image-spinner spinner-border text-primary"
+          role="status"
+          aria-hidden="true"
+        ></div>
+      </div>
+      <div *ngIf="placeholder.data" style="position: relative">
+        <img
+          *ngIf="placeholder.data"
+          (click)="viewImage(imageIndex)"
+          class="image-input image-input-outline"
+          [src]="base64Image(placeholder.data)"
+        />
+
+        <div
+          *ngIf="placeholder.loading"
+          class="image-spinner spinner-border text-primary"
+          role="status"
+          aria-hidden="true"
+        ></div>
+        <button
+          *ngIf="!readOnly"
+          (click)="clearImage(imageIndex)"
+          type="button"
+          style="position: absolute; top: 0; right: 0"
+          class="btn btn-icon btn-danger btn-sm rounded-circle"
+          rippleEffect
+        >
+          <span [data-feather]="'trash'"></span>
+        </button>
+      </div>
+
+      <input
+        #imageInput
+        style="display: none"
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        (change)="onFileChange(imageIndex, $event)"
+      />
+    </div>
+  </ng-container>
+  <p-dialog
+    [(visible)]="displayDialog"
+    [dismissableMask]="true"
+    [breakpoints]="{ '960px': '75vw', '800px': '100vw' }"
+  >
+    <ng-template pTemplate="header">
+      <h4>
+        <span class="align-middle">{{ header }}</span>
+      </h4>
+    </ng-template>
+    <img
+      style="width: auto; height: auto; max-width: 100%; max-height: 90%"
+      [src]="base64Image(currentImageData)"
+    />
+    <ng-template pTemplate="footer">
+      <div class="mt-1">
+        <button
+          (click)="prevImage()"
+          type="button"
+          class="btn btn-outline-primary"
+          rippleEffect
+        >
+          {{ l("previous") }}</button
+        ><button
+          (click)="nextImage()"
+          type="button"
+          class="btn btn-outline-primary"
+          rippleEffect
+        >
+          {{ l("next") }}
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>

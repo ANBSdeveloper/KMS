@@ -1,0 +1,23 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+bin
+obj
+.vs
+src/.vs
+src/API/Cbms.Kms.Web/bin
+src/API/Cbms.Kms.Web/obj
+src/Modules/Cbms.Kms.Application/bin
+src/Modules/Cbms.Kms.Application/obj
+src/Modules/Cbms.Kms.Domain/bin
+src/Modules/Cbms.Kms.Domain/obj
+src/Modules/Cbms.Kms.Infrastructure/bin
+src/Modules/Cbms.Kms.Infrastructure/obj
+**/bin/
+**/obj/
+/src/API/Cbms.Wms.Web/Properties/PublishProfiles
+/src/API/Cbms.Wms.Web/Properties/ServiceDependencies/cbms-kms - Zip Deploy
+/src/API/Cbms.Wms.Web/Properties/serviceDependencies.json
+/src/API/Cbms.Wms.Web/Properties/serviceDependencies.cbms-kms - Zip Deploy.json.user
+/src/API/Cbms.Wms.Web/Properties/serviceDependencies.cbms-kms - Zip Deploy.json
+/src/API/Cbms.Wms.Web/appsettings.Development.json

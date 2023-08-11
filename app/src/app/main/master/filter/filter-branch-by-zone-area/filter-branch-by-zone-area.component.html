@@ -1,0 +1,59 @@
+<form class="form-validate" [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="form-group">
+                <app-zone-combo
+                #zoneCombo
+                [placeholder]="l('all')"
+                formControlName="zoneId"
+                (change)="zoneComboChange($event)"
+                >
+                </app-zone-combo>        
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="form-group">
+                <app-area-combo
+                #areaCombo
+                [placeholder]="l('all')"
+                [zoneId]="cValue('zoneId')"
+                formControlName="areaId"
+                (change)="areaComboChange($event)"
+                >
+                </app-area-combo>        
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="form-label">{{ l('search') }}</label>
+              <input
+                type="search"
+                class="form-control"
+                [placeholder]="lsearch"
+                (input)="searchChange($event)"
+              />
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-xs-12">
+            <div class="form-group">
+              <div class="custom-control custom-switch">
+                <p class="form-label mb-50">{{ l("display_all_branch") }}</p>
+                <input
+                  id="displayAllBranchCheckbox"
+                  type="checkbox"
+                  (change)="displayAllBranchChange($event)"
+                  class="custom-control-input"
+                  formControlName="isSelectAll"
+                />
+                <label for="displayAllBranchCheckbox" class="custom-control-label">
+                  <span class="switch-icon-left"><i data-feather="check"></i></span>
+                  <span class="switch-icon-right"><i data-feather="x"></i></span>
+                </label>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>

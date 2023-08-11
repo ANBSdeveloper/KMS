@@ -1,0 +1,28 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="app-calendar overflow-hidden border">
+      <div class="row no-gutters">  
+        <!-- calendar -->
+        <div class="col position-relative">
+          <div class="card shadow-none border-0 mb-0 rounded-0">
+            <div class="card-body pb-0">
+              <full-calendar [options]="calendarOptions" #calendarID></full-calendar>
+            </div>
+          </div>
+        </div>
+        <!-- calendar -->
+      </div>
+    </div>
+
+    <!-- calendar event sidebar -->
+    <core-sidebar
+      class="modal modal-slide-in fade event-sidebar"
+      name="calendar-event-sidebar"
+      overlayClass="modal-backdrop"
+      hideOnEsc="true"
+    >
+      <app-calendar-event-sidebar></app-calendar-event-sidebar>
+    </core-sidebar>
+    <!--/ calendar event sidebar -->
+  </div>
+</div>

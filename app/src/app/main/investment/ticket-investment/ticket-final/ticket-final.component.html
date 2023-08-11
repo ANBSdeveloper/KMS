@@ -1,0 +1,89 @@
+<form class="form-validate" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center mt-1 mb-1">
+          <h4>
+            <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("ticket_final_info") }}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("status") }}</label>
+        <dx-text-box [value]="status" [readOnly]="true"></dx-text-box>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <app-customer-development-user-combo
+          #decideUserCombo
+          required="true"
+          formControlName="decideUserId"
+          [readOnly]="readOnly"
+          label="decide_user"
+          (change)="decideUserChange($event)"
+          [error]="cError('decideUserId')"
+        >
+        </app-customer-development-user-combo>
+        <span class="invalid-form" *ngIf="cErrorV('decideUserId', 'required')">
+          <small class="form-text text-danger">{{ lreq() }}</small>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label"
+          >{{ l("ticket_final_date")
+          }}<strong class="mark-required">(*)</strong></label
+        >
+        <dx-date-box
+          [showClearButton]="true"
+          [useMaskBehavior]="true"
+          formControlName="finalDate"
+          [readOnly]="readOnly"
+          [isValid]="!cError('finalDate')"
+        ></dx-date-box>
+        <span class="invalid-form" *ngIf="cErrorV('finalDate', 'required')">
+          <small class="form-text text-danger">{{ lreq() }}</small>
+        </span>
+        <span class="invalid-form" *ngIf="cErrorV('finalDate', 'invalidRange')">
+          <small class="form-text text-danger">{{
+            l("invalid_ticket_final_date_date")
+          }}</small>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("note") }}</label>
+        <dx-text-box [readOnly]="readOnly" formControlName="note"></dx-text-box>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("update_user") }}</label>
+        <dx-text-box
+          formControlName="updateUserName"
+          [readOnly]="true"
+        ></dx-text-box>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="form-group">
+        <label class="form-label">{{ l("update_time") }}</label>
+        <dx-date-box
+          formControlName="updateTime"
+          [readOnly]="true"
+        ></dx-date-box>
+      </div>
+    </div>
+  </div>
+</form>

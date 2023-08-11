@@ -1,0 +1,175 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="ticket_print"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+        <dx-data-grid
+          #dataGrid
+          class="ext-grid mb-1"
+          [dataSource]="store"
+          [showBorders]="false"
+          [showColumnLines]="false"
+          [showRowLines]="true"
+          [columnHidingEnabled]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]="true"
+          (onSelectionChanged)="onSelectionChanged($event)"
+          [(selectedRowKeys)]="selectedTickets"
+        >
+          <dxo-selection
+            selectAllMode="page"
+            showCheckBoxesMode="always"
+            mode="multiple"
+          ></dxo-selection>
+          <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+          <dxo-pager
+            [showPageSizeSelector]="true"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+          >
+          </dxo-pager>
+          <dxi-column
+            dataField="code"
+            [caption]="l('ticket_code')"
+          ></dxi-column>
+          <dxi-column
+            dataField="consumerPhone"
+            [caption]="l('consumer_phone')"
+          ></dxi-column>
+          <dxi-column
+            dataField="consumerName"
+            [caption]="l('consumer_name')"
+          ></dxi-column>
+          <dxi-column
+            dataField="issueDate"
+            [caption]="l('issue_date')"
+            [type]="date"
+          ></dxi-column>
+          <dxi-column
+            dataField="printDate"
+            [caption]="l('print_date')"
+            [type]="date"
+          ></dxi-column>
+          <dxi-column
+            dataField="printCount"
+            [caption]="l('print_count')"
+            format="#,##0.##"
+          ></dxi-column>
+          <dxi-column
+            dataField="lastPrintUserName"
+            [caption]="l('last_print_user_name')"
+          ></dxi-column>
+        </dx-data-grid>
+
+        <block-ui> </block-ui>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+    <button
+      class="btn btn-primary ml-1"
+      rippleEffect
+      [disabled]="!printEnable"
+      *ngIf="printVisible"
+      (click)="print()"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("print_ticket") }} </span>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-icon btn-outline-primary ml-1"
+      rippleEffect
+      (click)="refresh()"
+    >
+      <span [data-feather]="'refresh-ccw'"></span>
+    </button>
+  </div>
+</ng-template>
+<ng-template #filterForm>
+  <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-ticket-investment-by-user-combo
+            #ticketInvestmentCombo
+            formControlName="ticketInvestmentId"
+            (change)="ticketInvestmentIdChange($event)"
+            [isValid]="!cError('ticketInvestmentId')"
+            [error]="cError('ticketInvestmentId')"
+          >
+          </app-ticket-investment-by-user-combo>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('ticketInvestmentId', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("search") }}</label>
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="l('search_placeholder')"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <div div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("ticket_customer_name") }}</label>
+          <dx-text-box formControlName="customerName" [readOnly]="true">
+          </dx-text-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("address") }}</label>
+          <dx-text-box formControlName="address" [readOnly]="true">
+          </dx-text-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("ticket_investment_code") }}</label>
+          <dx-text-box formControlName="code" [readOnly]="true"> </dx-text-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("status") }}</label>
+          <dx-text-box formControlName="status" [readOnly]="true">
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

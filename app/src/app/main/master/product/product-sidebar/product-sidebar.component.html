@@ -1,0 +1,77 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog" *blockUI="'product_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label">{{ lcode }}</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="code"
+              [readOnly]="readOnly || modelId"
+              [class.error]="cError('code')"
+            />
+            <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+              <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+              <small class="form-text text-danger">{{
+                lmax("code", 30)
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+              <label class="form-label">{{ l('point') }}</label>
+              <dx-number-box
+              format="#,##0.##"
+              formControlName="point"
+            ></dx-number-box>
+            <span
+                class="invalid-form"
+                *ngIf="cError('point', 'min')"
+              >
+                <small class="form-text text-danger">{{
+                  lnmin("point", 0)
+                }}</small>
+              </span>
+          </div>
+          <button
+            type="submit"
+            *ngIf="saveVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

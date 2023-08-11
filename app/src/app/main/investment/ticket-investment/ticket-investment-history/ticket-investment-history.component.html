@@ -1,0 +1,94 @@
+<div class="row" *blockUI="'ticket_investment_history_content_block'">
+  <div class="col-md-6">
+    <h4 class="card-title">{{ l("history_approval_title") }}</h4>
+    <div class="card-body">
+      <ul class="timeline">
+        <li class="timeline-item" *ngFor="let item of items">
+          <ng-container
+            *ngIf="isRequest(item)"
+            [ngTemplateOutlet]="requestTemplate"
+            [ngTemplateOutletContext]="{ item: item }"
+          ></ng-container>
+          <ng-container
+            *ngIf="!isRequest(item)"
+            [ngTemplateOutlet]="approveTemplate"
+            [ngTemplateOutletContext]="{ item: item }"
+          ></ng-container>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #requestTemplate let-item="item">
+  <span class="timeline-point timeline-point-indicator"></span>
+  <div class="timeline-event" *ngIf="getData(item); let data">
+    <div
+      class="
+        d-flex
+        justify-content-between
+        flex-sm-row flex-column
+        mb-sm-0 mb-1
+      "
+    >
+      <h6>{{ l("send_request_investment") }}</h6>
+      <span class="timeline-event-time">{{
+        item.creationTime | dateFormat: "shortDateShortTime"
+      }}</span>
+    </div>
+
+    <p>
+      <strong>{{ getStaff(data.RegisterStaffId) | async }}</strong>
+      {{ l("staff_request_for_shop") }}
+      <strong>{{ getCustomer(data.CustomerId) | async }}</strong>
+    </p>
+    <div
+      class="d-flex justify-content-between flex-wrap flex-sm-row flex-column"
+    >
+      <div>
+        <p class="text-muted mb-50">{{ l("reward_amount") }}</p>
+        <p class="mb-0">{{ getData(item).RewardAmount | numberFormat }}</p>
+      </div>
+      <div class="mt-sm-0 mt-1">
+        <p class="text-muted mb-50">{{ l("material_amount") }}</p>
+        <p class="mb-0">{{ getData(item).MaterialAmount | numberFormat }}</p>
+      </div>
+      <div class="mt-sm-0 mt-1">
+        <p class="text-muted mb-50">{{ l("investment_amount") }}</p>
+        <p class="mb-0">
+          {{ getData(item).InvestmentAmount | numberFormat }}
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #approveTemplate let-item="item">
+  <div *ngIf="getData(item); let data">
+    <span
+      class="timeline-point timeline-point-indicator {{
+        getTimePointCss(data)
+      }}"
+    ></span>
+    <div class="timeline-event">
+      <div
+        class="
+          d-flex
+          justify-content-between
+          flex-sm-row flex-column
+          mb-sm-0 mb-1
+        "
+      >
+        <h6>{{ getApproveTitle(data) }}</h6>
+        <span class="timeline-event-time">{{
+          item.creationTime | dateFormat: "shortDateShortTime"
+        }}</span>
+      </div>
+      <div>
+        <p>
+          <strong>{{ item.userCode }} - {{ item.userName }}</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
