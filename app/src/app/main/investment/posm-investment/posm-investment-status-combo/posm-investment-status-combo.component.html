@@ -1,0 +1,13 @@
+<label *ngIf="label" class="form-label mr-1">{{ l(label) }}</label>
+<ng-select
+  [readonly]="readOnly"
+  [bindLabel]="displayName"
+  [bindValue]="valueName"
+  [(ngModel)]="value"
+  [items]="items"
+  [loading]="loading"
+  (ngModelChange)="onChange($event)"
+  [class.error]="error"
+  [placeholder]="placeholder"
+>
+</ng-select>

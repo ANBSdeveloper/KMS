@@ -15,8 +15,8 @@ export class InvestmentTypeDataSource {
         name: this.localizationService.get("investment_type_bttt"),
       },
       {
-        id: InvestmentType.GV,
-        name: this.localizationService.get("investment_type_gv"),
+        id: InvestmentType.POSM,
+        name: this.localizationService.get("investment_type_posm"),
       },
     ];
   }

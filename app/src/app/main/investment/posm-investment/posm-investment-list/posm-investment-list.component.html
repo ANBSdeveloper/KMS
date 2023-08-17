@@ -1,0 +1,317 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="posm_investment"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+
+    <section>
+      <div class="card">
+        <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+        <dx-data-grid
+          #dataGrid
+          class="ext-grid mb-1"
+          [dataSource]="store"
+          [showBorders]="false"
+          [showColumnLines]="false"
+          [showRowLines]="true"
+          [columnHidingEnabled]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]="true"
+          [wordWrapEnabled]="true"
+          (onSelectionChanged)="onSelectionChanged($event)"
+        >
+          <dxo-selection
+            *ngIf="allowSelection"
+            selectAllMode="page"
+            showCheckBoxesMode="always"
+            mode="multiple"
+          ></dxo-selection>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-load-panel [enabled]="false"> </dxo-load-panel>
+          <dxo-pager
+            [showPageSizeSelector]="true"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+          >
+          </dxo-pager>
+          <dxi-column
+            dataField="code"
+            [caption]="lcode"
+            cellTemplate="codeTemplate"
+          >
+            <div *dxTemplate="let cell of 'codeTemplate'">
+              <a
+                href="javascript:;"
+                (click)="showDetail(cell.data)"
+                class="font-weight-bold"
+                >{{ cell.data.code }}</a
+              >
+            </div>
+          </dxi-column>
+
+          <dxi-column
+            dataField="customerCode"
+            [caption]="l('customer_code')"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="customerName"
+            [caption]="l('customer_name')"
+          ></dxi-column>
+          <dxi-column dataField="zoneName" [caption]="l('zone')"></dxi-column>
+
+          <dxi-column dataField="areaName" [caption]="l('area')"></dxi-column>
+
+          <dxi-column
+            dataField="address"
+            [caption]="l('address')"
+            width="160"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="registerStaffName"
+            [caption]="l('register_staff_name')"
+            width="140"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="investmentAmount"
+            [caption]="l('investment_amount')"
+            format="#,##0.##"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="creationTime"
+            [caption]="l('request_date')"
+            type="date"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="status"
+            [caption]="l('status')"
+            cellTemplate="statusTemplate"
+            alignment="left"
+          >
+            <div *dxTemplate="let cell of 'statusTemplate'">
+              <div>
+                {{ cell.data.status }}
+              </div>
+            </div>
+          </dxi-column>
+
+          <dxi-column
+            cellTemplate="actionTemplate"
+            [allowExporting]="false"
+            [allowEditing]="false"
+            [width]="50"
+          >
+            <div *dxTemplate="let cell of 'actionTemplate'">
+              <div class="d-flex align-items-center">
+                <a
+                  href="javascript:void(0);"
+                  container="body"
+                  placement="top"
+                  (click)="showDetail(cell.data)"
+                  ><i class="mr-1" size="16" data-feather="edit"></i
+                ></a>
+              </div>
+            </div>
+          </dxi-column>
+        </dx-data-grid>
+        <block-ui> </block-ui>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #buttons>
+  <div class="d-flex align-items-center">
+    <div class="spinner-border text-primary ml-1" role="status" *ngIf="loading">
+      <span class="sr-only">{{ lloading }}</span>
+    </div>
+
+    <button
+      class="btn btn-primary ml-1"
+      rippleEffect
+      *ngIf="registerVisible"
+      (click)="register()"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("register") }}</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger ml-1"
+      rippleEffect
+      *ngIf="tradeApproveVisible"
+      (click)="tradeDeny()"
+    >
+      {{ l("deny") }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-success ml-1"
+      rippleEffect
+      *ngIf="tradeConfirmVisible"
+      (click)="tradeConfirm()"
+    >
+      {{ l("approve") }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-success ml-1"
+      rippleEffect
+      *ngIf="tradeApproveVisible"
+      (click)="tradeApprove()"
+    >
+      {{ l("approve") }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger ml-1"
+      rippleEffect
+      *ngIf="directorApproveVisible"
+      (click)="directorDeny()"
+    >
+      {{ l("deny") }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-success ml-1"
+      rippleEffect
+      *ngIf="directorApproveVisible"
+      (click)="directorApprove()"
+    >
+      {{ l("approve") }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary ml-1"
+      rippleEffect
+      (click)="export()"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("export") }}</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary ml-1"
+      rippleEffect
+      (click)="fileInput.click()"
+      *ngIf="importVisible"
+    >
+      <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{ l("import_history") }}</span>
+    </button>
+    <input hidden (change)="onReadFile($event)" #fileInput type="file" />
+    <button
+      type="button"
+      class="btn btn-icon btn-outline-primary ml-1"
+      rippleEffect
+      (click)="refresh()"
+    >
+      <span [data-feather]="'refresh-ccw'"></span>
+    </button>
+  </div>
+</ng-template>
+<ng-template #filterForm>
+  <form [formGroup]="filterFormGroup" class="mt-1 mr-1 ml-1">
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngIf="!(isRsm || isSS || isAsm)">
+        <div class="form-group">
+          <app-posm-investment-rsm-staff-combo
+            #rsmStaffCombo
+            formControlName="rsmStaffId"
+            [placeholder]="l('all')"
+            (change)="rsmStaffChange($event)"
+            [isValid]="!cError('rsmStaffId')"
+          ></app-posm-investment-rsm-staff-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" *ngIf="!(isSS || isAsm)">
+        <div class="form-group">
+          <app-posm-investment-asm-staff-combo
+            #asmStaffCombo
+            [placeholder]="l('all')"
+            [supervisorId]="cValue('rsmStaffId')"
+            formControlName="asmStaffId"
+            (change)="asmStaffChange($event)"
+          ></app-posm-investment-asm-staff-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" *ngIf="!isSS">
+        <div class="form-group">
+          <app-posm-investment-ss-staff-combo
+            #ssStaffCombo
+            [supervisorId]="cValue('asmStaffId')"
+            [placeholder]="l('all')"
+            formControlName="ssStaffId"
+          ></app-posm-investment-ss-staff-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-posm-investment-status-combo
+            #status
+            formControlName="status"
+            [placeholder]="l('all')"
+          ></app-posm-investment-status-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("from_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #fromDate
+            formControlName="fromDate"
+            [isValid]="!cError('fromDate')"
+            (onValueChanged)="fromDateChange($event)"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("to_date") }}</label>
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            type="date"
+            #toDate
+            formControlName="toDate"
+            [isValid]="!cError('toDate')"
+            (onValueChanged)="toDateChange($event)"
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("search") }}</label>
+          <input
+            type="search"
+            class="form-control"
+            [placeholder]="l('search_placeholder')"
+            (input)="searchChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

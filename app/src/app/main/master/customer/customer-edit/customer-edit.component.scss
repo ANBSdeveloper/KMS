@@ -5,28 +5,36 @@
 @import "@core/scss/angular/libs/datatables.component.scss";
 @import "@core/scss/angular/libs/toastr.component.scss";
 @import "@core/scss/angular/libs/tree-view.component.scss";
-@import '@core/scss/angular/libs/ratings.component.scss';
+@import "@core/scss/angular/libs/ratings.component.scss";
 app-customer-edit {
-    .ql-toolbar {
-      border-top: none !important;
-    }
-    .ql-container {
-      border-bottom: none !important;
-    }
-    .datatable-scroll {
-      width: auto !important;
-    }
-  
-    .ngx-datatable.scroll-horz .datatable-body {
-      -webkit-overflow-scrolling: touch;
-      overflow-x: hidden;
-    }
-  
-    .ngx-datatable {
-      overflow-wrap: break-word;
-    }
-    .rating {
-      line-height: 2rem;
-    }    
+  .ql-toolbar {
+    border-top: none !important;
   }
-  
+  .ql-container {
+    border-bottom: none !important;
+  }
+  .datatable-scroll {
+    width: auto !important;
+  }
+
+  .ngx-datatable.scroll-horz .datatable-body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  .ngx-datatable {
+    overflow-wrap: break-word;
+  }
+  .rating {
+    line-height: 2rem;
+  }
+  .year-card:hover{
+    cursor: pointer;
+  }
+
+ 
+}
+.dx-pivotgrid .dx-pivotgrid-area td {
+  color: black;
+  padding: 7px 10px;
+}

@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+
+          <div class="row">
+            <div class="col-12 d-flex flex-sm-row mt-2">
+              <ng-container *ngTemplateOutlet="buttons"></ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6" *ngIf="!(isRsm || isAsm || isSS)">
+          <div class="form-group">
+            <app-cycle-combo
+              [required]="true"
+              [placeholder]="l('all')"
+              formControlName="cycleId"
+            ></app-cycle-combo>
+            <span class="invalid-form" *ngIf="cErrorV('cycleId', 'required')">
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" *ngIf="!(isAsm || isSS)">
+          <div class="form-group">
+            <app-zone-combo
+              [placeholder]="l('all')"
+              formControlName="zoneId"
+            ></app-zone-combo>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="printPreview()"
+  >
+    {{ l("print_preview") }}
+  </button>
+</ng-template>

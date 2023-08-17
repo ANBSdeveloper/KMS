@@ -1,0 +1,259 @@
+<form class="form-validate" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="d-flex align-items-center mt-1 mb-1">
+            <h4>
+              <i
+                data-feather="info"
+                [size]="16"
+                class="mr-75 font-medium-4"
+              ></i>
+              <span class="align-middle">{{
+                l("ticket_acceptance_info")
+              }}</span>
+            </h4>
+          </div>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-12">
+          <ng-container *ngTemplateOutlet="posmItemGrid"></ng-container>
+        </div>
+      </div>
+      <div *ngIf="detailVisible" class="mt-2">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label"
+                    >{{ l("confirm_date")
+                    }}<strong class="mark-required">(*)</strong></label
+                  >
+                  <dx-date-box
+                    [showClearButton]="true"
+                    [useMaskBehavior]="true"
+                    formControlName="prepareDate"
+                    [readOnly]="true"
+                    [isValid]="!cError('prepareDate')"
+                  ></dx-date-box>
+                  <span
+                    class="invalid-form"
+                    *ngIf="cErrorV('prepareDate', 'required')"
+                  >
+                    <small class="form-text text-danger">{{ lreq() }}</small>
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <app-vendor-combo
+                    formControlName="vendorId"
+                    [readOnly]="!editable"
+                    [required]="true"
+                  >
+                  </app-vendor-combo>
+                  <span
+                    class="invalid-form"
+                    *ngIf="cErrorV('vendorId', 'required')"
+                  >
+                    <small class="form-text text-danger">{{ lreq() }}</small>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label"
+                    >{{ l("unit_price")
+                    }}<strong class="mark-required">(*)</strong></label
+                  >
+                  <dx-number-box
+                    formControlName="unitPrice"
+                    format="#,##0"
+                    [min]="0"
+                    [readOnly]="true"
+                  ></dx-number-box>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label">{{ l("total_cost") }}</label>
+                  <dx-number-box
+                    formControlName="totalCost"
+                    format="#,##0"
+                    [min]="0"
+                    [readOnly]="true"
+                  ></dx-number-box>
+                </div>
+              </div>
+              
+            </div>
+            <!-- <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label"
+                    >{{ l("actual_unit_price")
+                    }}<strong class="mark-required">(*)</strong></label
+                  >
+                  <dx-number-box
+                    formControlName="actualUnitPrice"
+                    format="#,##0"
+                    [min]="0"
+                    [readOnly]="!editable"
+                    (onValueChanged)="actualUnitPriceValueChanged($event)"
+                  ></dx-number-box>
+                  <span
+                    class="invalid-form"
+                    *ngIf="cErrorV('actualUnitPrice', 'required')"
+                  >
+                    <small class="form-text text-danger">{{ lreq() }}</small>
+                  </span>
+                </div>
+              </div>
+           
+            </div> -->
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label">{{ l("actual_total_cost") }}<strong class="mark-required">(*)</strong></label>
+                  <dx-number-box
+                    #actualTotalCost
+                    formControlName="actualTotalCost"
+                    format="#,##0"
+                    [min]="0"
+                    [readOnly]="!editable"
+                    (onValueChanged)="actualTotalCostValueChanged($event)"
+                  ></dx-number-box>
+                  <span
+                  class="invalid-form"
+                  *ngIf="cErrorV('actualTotalCost', 'required')"
+                >
+                  <small class="form-text text-danger">{{ lreq() }}</small>
+                </span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label class="form-label">{{ l("note") }}</label>
+                  <dx-text-area
+                    [height]="60"
+                    [readOnly]="!editable"
+                    formControlName="prepareNote"
+                  ></dx-text-area>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+              <h5 class="mb-1">
+                {{l('customer_code')}}: {{investment?.customerCode}} -
+                {{l('customer_name')}}: {{investment?.customerName}} -
+                {{l('investment_code')}}: {{investment?.code}}
+              </h5>
+              <app-posm-investment-history
+                [status]="status"
+                [posmInvestmentItemId]="item?.id"
+                [investment]="investment"
+              ></app-posm-investment-history>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<ng-template #posmItemGrid>
+  <!-- <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="gift" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("reward_item_list") }}</span>
+      </h4>
+    </div>
+  </div> -->
+  <dx-data-grid
+    #posmItemDataGrid
+    class="ext-grid"
+    [dataSource]="posmItemDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+    (onSelectionChanged)="selectionChanged($event)"
+    [hoverStateEnabled]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="posmItemCode" [caption]="l('posm_item_code')">
+    </dxi-column>
+    <dxi-column
+      dataField="posmItemName"
+      [caption]="l('posm_item_name')"
+    ></dxi-column>
+    <dxi-column
+      dataField="status"
+      [caption]="l('status')"
+      cellTemplate="designTemplate"
+      alignment="left"
+    >
+      <div *dxTemplate="let cell of 'designTemplate'">
+        <div>
+          {{
+            posmInvestmentItemStatusDataSource.findItem(cell.data.status).name
+          }}
+        </div>
+      </div>
+    </dxi-column>
+    <dxi-column
+      [caption]="l('posm_unit_type')"
+      cellTemplate="unitTypeTemplate"
+      [allowEditing]="false"
+      alignment="left"
+    >
+      <div *dxTemplate="let cell of 'unitTypeTemplate'">
+        <div>
+          {{ posmUnitTypeDataSource.findItem(cell.data.unitType).name }}
+        </div>
+      </div>
+    </dxi-column>
+    <dxi-column
+      [caption]="l('specification')"
+      [calculateCellValue]="calculateSpecification"
+    >
+    </dxi-column>
+    <dxi-column
+      dataField="qty"
+      [caption]="l('quantity')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column
+      dataField="unitPrice"
+      [caption]="l('register_price')"
+      format="#,##0"
+    ></dxi-column>
+
+    <dxi-column
+      dataField="totalCost"
+      [caption]="l('total_cost')"
+      format="#,##0"
+    ></dxi-column>
+    <!-- <dxi-column
+      dataField="actualUnitPrice"
+      [caption]="l('actual_price')"
+      format="#,##0"
+    ></dxi-column> -->
+    <dxi-column
+      dataField="actualTotalCost"
+      [caption]="l('actual_total_cost')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column dataField="note" [caption]="l('note')"></dxi-column>
+  </dx-data-grid>
+</ng-template>

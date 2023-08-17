@@ -1,22 +1,7 @@
-<label class="form-label mr-1">{{ l(label) }}</label>
-<button
-  *ngIf="isCreateVisible"
-  type="button"
-  class="btn btn-icon btn-sm rounded-circle btn-flat-primary"
-  (click)="add()"
-  rippleEffect
+<label class="form-label mr-1"
+  >{{ l(label)
+  }}<strong *ngIf="required" class="mark-required">(*)</strong></label
 >
-  <span [data-feather]="'plus'"></span>
-</button>
-<button
-  *ngIf="isEditVisible"
-  type="button"
-  class="btn btn-icon btn-sm rounded-circle btn-flat-primary"
-  (click)="edit()"
-  rippleEffect
->
-  <span [data-feather]="'edit'"></span>
-</button>
 <ng-select
   [bindLabel]="displayName"
   [bindValue]="valueName"

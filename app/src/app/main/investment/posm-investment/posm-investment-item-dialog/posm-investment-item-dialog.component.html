@@ -1,0 +1,404 @@
+<div
+  class="content-wrapper d-flex flex-column"
+  style="min-height: 60vh"
+  *blockUI="'posm_investment_item_dialog_block'"
+>
+  <form class="form-validate mb-auto" [formGroup]="formGroup">
+    <div class="content-body">
+      <div class="row">
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <app-posm-class-combo
+              formControlName="posmClassId"
+              [readOnly]="readOnly"
+              [required]="true"
+            >
+            </app-posm-class-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <app-posm-item-combo
+              formControlName="posmItemId"
+              [readOnly]="readOnly"
+              [required]="true"
+            >
+            </app-posm-item-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <app-posm-catalog-combo
+              formControlName="posmCatalogId"
+              [readOnly]="readOnly"
+              [required]="true"
+            >
+            </app-posm-catalog-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("setup_plan_date")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-date-box
+              [showClearButton]="true"
+              [useMaskBehavior]="true"
+              formControlName="setupPlanDate"
+              [readOnly]="!registerEditable"
+              [isValid]="!cError('setupPlanDate')"
+            ></dx-date-box>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('setupPlanDate', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <!-- <span
+              class="invalid-form"
+              *ngIf="cErrorV('setupPlanDate', 'invalidRange')"
+            >
+              <small class="form-text text-danger">{{
+                l("invalid_range_date")
+              }}</small>
+            </span> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <app-posm-request-type-combo
+              formControlName="requestType"
+              [readOnly]="readOnly"
+              [required]="true"
+            >
+            </app-posm-request-type-combo>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-12">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("request_reason")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-text-box
+              formControlName="requestReason"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+        <!-- <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label">{{ l("reward_quantity") }}</label>
+            <dx-number-box
+              formControlName="rewardQuantity"
+              format="#,##0"
+              [min]="0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div> -->
+        <!-- <div class="col-lg-4 col-md-6">
+          <div class="form-group">
+            <label class="form-label">&nbsp;</label>
+            <div>
+              <button
+                type="button"
+                class="btn btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+                rippleEffect
+                (click)="addTicket()"
+                *ngIf="!readOnly"
+              >
+                {{ ladd }}
+              </button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center mt-1 mb-1">
+                <h4>
+                  <i
+                    data-feather="image"
+                    [size]="16"
+                    class="mr-75 font-medium-4"
+                  ></i>
+                  <span class="align-middle">{{
+                    l("posm_specification_title")
+                  }}</span>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <app-posm-unit-type-combo
+              formControlName="unitType"
+              [required]="true"
+              [readOnly]="true"
+            >
+            </app-posm-unit-type-combo>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isWidthVisible || isSideVisible">
+          <div class="form-group">
+            <label *ngIf="isWidthVisible" class="form-label"
+              >{{ l("width") }}<strong class="mark-required">(*)</strong></label
+            >
+            <label *ngIf="isSideVisible" class="form-label"
+              >{{ l("width_face")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="width"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isSideVisible">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("side_width_1")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="sideWidth1"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isSideVisible">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("side_width_2")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="sideWidth2"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isHeightVisibile">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("height")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="height"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isDepthVisibile">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("depth") }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="depth"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4" *ngIf="isSizeVisible">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("size") }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="size"
+              format="#,###.##"
+              [min]="0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("quantity")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="qty"
+              format="#,##0"
+              [min]="0"
+              [readOnly]="readOnly"
+            ></dx-number-box>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("unit_price")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="unitPrice"
+              format="#,##0"
+              [min]="0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <div class="form-group">
+            <label class="form-label">{{ l("total_cost") }}</label>
+            <dx-number-box
+              formControlName="totalCost"
+              format="#,##0"
+              [min]="0"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="isPanelInfoVisibility">
+        <div class="col-12">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center mt-1 mb-1">
+                <h4>
+                  <i
+                    data-feather="image"
+                    [size]="16"
+                    class="mr-75 font-medium-4"
+                  ></i>
+                  <span class="align-middle">{{
+                    l("information_panel_title")
+                  }}</span>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("shop_name_panel")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-text-box
+              formControlName="panelShopName"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("shop_phone_panel")
+              }}</label
+            >
+            <dx-text-box
+              formControlName="panelShopPhone"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("shop_product_line_panel") }}</label>
+            <dx-text-box
+              formControlName="panelProductLine"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("shop_address_panel") }}<strong class="mark-required">(*)</strong></label>
+            <dx-text-box
+              formControlName="panelShopAddress"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            <label class="form-label">{{ l("shop_other_info_panel") }}</label>
+            <dx-text-box
+              formControlName="panelOtherInfo"
+              [readOnly]="readOnly"
+            ></dx-text-box>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center mt-1 mb-1">
+                <h4>
+                  <i
+                    data-feather="image"
+                    [size]="16"
+                    class="mr-75 font-medium-4"
+                  ></i>
+                  <span class="align-middle">{{
+                    l("investment_location_photo")
+                  }}</span>
+                </h4>
+              </div>
+            </div>
+            <app-image-viewer
+              #imageViewer
+              [size]="4"
+              [dataImages]="photos"
+              [header]="l('investment_location_photo')"
+              [readOnly]="readOnly"
+            ></app-image-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-end">
+    <button
+      *ngIf="!readOnly"
+      class="btn btn-primary mr-1 mt-1"
+      rippleEffect
+      (click)="save()"
+    >
+      {{ lsave }}
+    </button>
+    <button
+      class="btn btn-outline-secondary mt-1"
+      (click)="close()"
+      rippleEffect
+    >
+      {{ lclose }}
+    </button>
+  </div>
+</div>
+<!-- <core-sidebar
+  class="modal modal-slide-in fade"
+  [name]="rewardDetailConfig.sidebarName"
+  overlayClass="modal-backdrop"
+>
+  <app-ticket-consumer-reward-detail-sidebar
+    [ticketInvestmentId]="ticketInvestmentId"
+    [allocateTickets]="allocateTickets"
+    [dataSource]="rewardDetailDataSource"
+  >
+  </app-ticket-consumer-reward-detail-sidebar>
+</core-sidebar> -->

@@ -76,6 +76,7 @@
             [readOnly]="roleReadOnly"
             [assignmentRole]="!modelId"
             [error]="cError('roleId')"
+            (change)="roleChange($event)"
           ></app-role-combo>
           <span class="invalid-form" *ngIf="cErrorV('roleId', 'required')">
             <small class="form-text text-danger">{{ lreq() }}</small>

@@ -31,7 +31,7 @@ export class CoreCardComponent implements OnInit {
     reload: false,
     close: false
   };
-
+  @Input() collapsed: boolean;
   @Input() actions: string[];
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     // on press of esc card will return to normal from full screen
@@ -74,6 +74,10 @@ export class CoreCardComponent implements OnInit {
     if (this.actions.includes('close')) {
       this.actionsView.close = true;
     }
+
+
+      this.onclickEvent.collapseStatus = this.collapsed;
+    
   }
 
   // Public Methods

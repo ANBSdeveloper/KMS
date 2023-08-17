@@ -35,6 +35,12 @@ import { ReportTicketInvestmentRemarkComponent } from "./ticket-investment/ticke
 import { ReportTicketInvestmentRewardComponent } from "./ticket-investment/ticket-investment-reward/ticket-investment-reward.component";
 import { ReportTicketInvestmentOrderDetailComponent } from "./ticket-investment/ticket-investment-order-detail/ticket-investment-order-detail.component";
 import { ReportTicketInvestmentScanQrCodeComponent } from "./ticket-investment/ticket-investment-scan-qrcode/ticket-investment-scan-qrcode.component";
+import { ReportPosmInvestmentRequestComponent } from "./posm-investment/posm-investment-request/posm-investment-request.component";
+import { ReportPosmInvestmentOrderComponent } from "./posm-investment/posm-investment-order/posm-investment-order.component";
+import { ReportPosmInvestmentProgressComponent } from "./posm-investment/posm-investment-progress/posm-investment-progress.component";
+import { ReportPosmInvestmentProduceComponent } from "./posm-investment/posm-investment-produce/posm-investment-produce.component";
+import { ReportPosmInvestmentBudgetComponent } from "./posm-investment/posm-investment-budget/posm-investment-budget.component";
+import { MasterModule } from "../master/master.module";
 
 // routing
 const routes: Routes = [
@@ -63,6 +69,26 @@ const routes: Routes = [
     component: ReportTicketInvestmentScanQrCodeComponent,
   },
   {
+    path: "posm-investment/request",
+    component: ReportPosmInvestmentRequestComponent,
+  },
+  {
+    path: "posm-investment/order",
+    component: ReportPosmInvestmentOrderComponent,
+  },
+  {
+    path: "posm-investment/progress",
+    component: ReportPosmInvestmentProgressComponent,
+  },
+  {
+    path: "posm-investment/produce",
+    component: ReportPosmInvestmentProduceComponent,
+  },
+  {
+    path: "posm-investment/budget",
+    component: ReportPosmInvestmentBudgetComponent,
+  },
+  {
     path: "viewer",
     component: ReportViewerComponent,
   },
@@ -77,6 +103,11 @@ const routes: Routes = [
     ReportTicketInvestmentRewardComponent,
     ReportTicketInvestmentOrderDetailComponent,
     ReportTicketInvestmentScanQrCodeComponent,
+    ReportPosmInvestmentRequestComponent,
+    ReportPosmInvestmentOrderComponent,
+    ReportPosmInvestmentProgressComponent,
+    ReportPosmInvestmentProduceComponent,
+    ReportPosmInvestmentBudgetComponent
   ],
   imports: [
     CommonModule,
@@ -102,6 +133,7 @@ const routes: Routes = [
     DxTextAreaModule,
     InvestmentModule,
     SystemModule,
+    MasterModule
   ],
   exports: [ReportTicketInvestmentResultComponent],
   providers: [DataServiceProxy, ReportService],

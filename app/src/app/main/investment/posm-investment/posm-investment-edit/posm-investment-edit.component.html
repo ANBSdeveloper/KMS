@@ -1,0 +1,772 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header
+          contentHeaderName="posm_investment"
+        ></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div id="stepper1" class="bs-stepper horizontal-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#registerContent" data-stepIndex="1">
+            <button class="step-trigger" (click)="registerStepClick()">
+              <span class="bs-stepper-box">1</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{ l("register") }}</span>
+                <span class="posm-bs-stepper-subtitle"
+                  >{{ registerItemCount }} {{ l("item") }}</span
+                >
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#approveContent" data-stepIndex="2">
+            <button
+              class="step-trigger"
+              (click)="approveStepClick()"
+              [disabled]="approveStepDisabled"
+            >
+              <span class="bs-stepper-box">2</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{
+                  l("posm_approve_header")
+                }}</span>
+                <span class="posm-bs-stepper-subtitle"
+                  >{{ approveItemCount }} {{ l("item") }}</span
+                >
+              </span>
+            </button>
+          </div>
+
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#prepareContent" data-stepIndex="3">
+            <button
+              class="step-trigger"
+              (click)="prepareStepClick()"
+              [disabled]="prepareStepDisabled"
+            >
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{
+                  l("posm_prepare_header")
+                }}</span>
+                <span class="posm-bs-stepper-subtitle"
+                  >{{ prepareItemCount }} {{ l("item") }}</span
+                >
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#operationContent" data-stepIndex="4">
+            <button
+              class="step-trigger"
+              (click)="operationStepClick()"
+              [disabled]="operationStepDisabled"
+            >
+              <span class="bs-stepper-box">4</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{
+                  l("posm_operation_header")
+                }}</span>
+                <span class="posm-bs-stepper-subtitle"
+                  >{{ operationItemCount }} {{ l("item") }}</span
+                >
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#acceptanceContent" data-stepIndex="5">
+            <button
+              class="step-trigger"
+              (click)="acceptanceStepClick()"
+              [disabled]="acceptanceStepDisabled"
+            >
+              <span class="bs-stepper-box">5</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{
+                  l("posm_acceptance_header")
+                }}</span>
+                <span class="posm-bs-stepper-subtitle"
+                  >{{ acceptanceItemCount }} {{ l("item") }}</span
+                >
+              </span>
+            </button>
+          </div>
+          <!--
+         
+        
+        
+        
+        
+       
+        
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div
+            class="step"
+            data-target="#finalSettlementContent"
+            data-stepIndex="6"
+          >
+            <button class="step-trigger" [disabled]="finalStepDisabled">
+              <span class="bs-stepper-box">6</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">{{
+                  l("posm_final_header")
+                }}</span>
+                <span class="posm-bs-stepper-subtitle">{{
+                  l("posm_final_subtitle")
+                }}</span>
+              </span>
+            </button>
+          </div> -->
+          <!--<div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+          <div class="step" data-target="#address">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Address</span>
+                <span class="posm-bs-stepper-subtitle">Add Address</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+          <div class="step" data-target="#social-links">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Social Links</span>
+                <span class="posm-bs-stepper-subtitle">Add Social Links</span>
+              </span>
+            </button>
+          </div> -->
+        </div>
+        <div class="bs-stepper-content">
+          <div id="registerContent" class="content">
+            <ng-container *ngTemplateOutlet="form"></ng-container>
+            <ng-container *ngTemplateOutlet="posmItemGrid"></ng-container>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center mt-1 mb-1">
+                  <h4>
+                    <i
+                      data-feather="image"
+                      [size]="16"
+                      class="mr-75 font-medium-4"
+                    ></i>
+                    <span class="align-middle">{{ l("shop_photo_list") }}</span>
+                  </h4>
+                </div>
+              </div>
+              <app-image-viewer
+                #shopPanelImageViewer
+                [size]="4"
+                [dataImages]="shopPanelPhotos"
+                [header]="l('shop_photo_list')"
+                [readOnly]="!registerEditable"
+              ></app-image-viewer>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center mt-1 mb-1">
+                  <h4>
+                    <i
+                      data-feather="image"
+                      [size]="16"
+                      class="mr-75 font-medium-4"
+                    ></i>
+                    <span class="align-middle">{{
+                      l("visibility_photo_list")
+                    }}</span>
+                  </h4>
+                </div>
+              </div>
+              <app-image-viewer
+                #visibilityImageViewer
+                [size]="4"
+                [dataImages]="visibilityPhotos"
+                [header]="l('visibility_photo_list')"
+                [readOnly]="!registerEditable"
+              ></app-image-viewer>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center mt-1 mb-1">
+                  <h4>
+                    <i
+                      data-feather="image"
+                      [size]="16"
+                      class="mr-75 font-medium-4"
+                    ></i>
+                    <span class="align-middle">{{
+                      l("visibility_competitor_photo_list")
+                    }}</span>
+                  </h4>
+                </div>
+              </div>
+              <app-image-viewer
+                #visibilityImageViewer
+                [size]="4"
+                [dataImages]="visibilityCompetitorPhotos"
+                [header]="l('visibility_competitor_photo_list')"
+                [readOnly]="!registerEditable"
+              ></app-image-viewer>
+            </div>
+
+            <!-- <core-sidebar
+              class="modal modal-slide-in fade"
+              [name]="posmInvestmentItemConfig.sidebarName"
+              overlayClass="modal-backdrop"
+            >
+              <app-posm-investment-item-sidebar
+                [dataSource]="posmItemDataSource"
+                [setting]="setting"
+              >
+              </app-posm-investment-item-sidebar>
+            </core-sidebar> -->
+            <core-sidebar
+              class="modal modal-slide-in fade"
+              name="posm_investment_sales_commitment_sidebar"
+              overlayClass="modal-backdrop"
+            >
+              <app-posm-investment-sales-commitment-sidebar
+                [readOnly]="!registerEditable"
+                [fromDate]="cValue('buyBeginDate')"
+                [toDate]="cValue('buyEndDate')"
+                [investment]="model"
+                [data]="salesCommitments"
+                (update)="updateSalesCommitments($event)"
+              ></app-posm-investment-sales-commitment-sidebar>
+            </core-sidebar>
+          </div>
+          <div id="approveContent" class="content">
+            <app-posm-investment-approve
+              #posmInvestmentApprove
+              [investment]="model"
+            >
+            </app-posm-investment-approve>
+            <!-- <app-posm-investment-history
+              #history
+              [id]="modelId"
+            ></app-posm-investment-history> -->
+          </div>
+          <div id="prepareContent" class="content">
+            <app-posm-investment-prepare
+              #posmInvestmentPrepare
+              [investment]="model"
+            ></app-posm-investment-prepare>
+          </div>
+          <div id="operationContent" class="content">
+            <app-posm-investment-operation
+              #posmInvestmentOperation
+              [investment]="model"
+            ></app-posm-investment-operation>
+          </div>
+          <div id="acceptanceContent" class="content">
+            <app-posm-investment-acceptance
+              #posmInvestmentAcceptance
+              [investment]="model"
+            ></app-posm-investment-acceptance>
+          </div>
+          <!-- 
+        
+          <div id="operationContent" class="content">
+            <app-posm-operation
+              #operation
+              [investment]="model"
+            ></app-posm-operation>
+          </div>
+         
+          <div id="finalSettlementContent" class="content">
+            <app-posm-final #final [investment]="model"></app-posm-final>
+          </div> -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="user" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("shop_information") }}</span>
+        </h4>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group" *ngIf="!this.model.id">
+          <app-shop-combo
+            #shopCombo
+            formControlName="customerId"
+            [readOnly]="!customerEditable"
+            (change)="shopChange($event)"
+            detailButton="true"
+          >
+          </app-shop-combo>
+          <span class="invalid-form" *ngIf="cErrorV('customerId', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+        <div class="form-group" *ngIf="this.model.id">
+          <label class="form-label mr-1"
+            >{{ l('customer') }}
+            <strong *ngIf="required" class="mark-required">(*)</strong></label
+          >
+          <button
+            type="button"
+            class="btn btn-icon btn-sm rounded-circle btn-flat-primary ml-1"
+            (click)="showCustomerDetail($event)"
+            rippleEffect
+          >
+            <span [data-feather]="'info'"></span>
+          </button>
+          <dx-text-box
+            formControlName="customerCode"
+            [readOnly]="true"
+          ></dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-customer-location-combo
+            required="true"
+            formControlName="customerLocationId"
+            [readOnly]="!registerEditable"
+            [error]="cError('customerLocationId')"
+          >
+          </app-customer-location-combo>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('customerLocationId', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("mobile_phone") }}</label>
+          <dx-text-box
+            formControlName="mobilePhone"
+            [readOnly]="true"
+          ></dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("efficient") }}</label>
+          <div class="rating">
+            <ngb-rating
+              [rate]="cValue('efficient')"
+              [max]="5"
+              [readonly]="true"
+              class="outline-none"
+            ></ngb-rating>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group">
+          <label class="form-label">{{ l("address") }}</label>
+          <dx-text-box
+            formControlName="address"
+            [readOnly]="true"
+          ></dx-text-box>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-12">
+        <h4 class="mb-1 mt-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("register_information") }}</span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("investment_code") }}</label>
+          <dx-text-box formControlName="code" [readOnly]="true"></dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("register_date")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            formControlName="registerDate"
+            [readOnly]="!registerEditable"
+            [isValid]="!cError('registerDate')"
+          ></dx-date-box>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('registerDate', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("current_sales_amount")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-number-box
+            formControlName="currentSalesAmount"
+            format="#,##0"
+            [min]="0"
+            [max]="1000000000"
+            [readOnly]="!registerEditable"
+            [isValid]="!cError('currentSalesAmount')"
+          ></dx-number-box>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('currentSalesAmount', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("commitment_amount")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <button
+            type="button"
+            class="btn btn-icon btn-sm rounded-circle btn-flat-primary ml-1"
+            (click)="showCommitmentSales()"
+            rippleEffect
+          >
+            <span [data-feather]="'file-text'"></span>
+          </button>
+          <dx-number-box
+            formControlName="commitmentAmount"
+            format="#,##0"
+            [min]="0"
+            [max]="1000000000000"
+            [readOnly]="true"
+            [isValid]="!cError('commitmentAmount')"
+          ></dx-number-box>
+          <span class="invalid-form" *ngIf="cErrorV('commitmentAmount', 'min')">
+            <small class="form-text text-danger">{{
+              l("sales_commitment_must_allocate")
+            }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("investment_amount") }}</label>
+          <dx-number-box
+            formControlName="investmentAmount"
+            format="#,##0.##"
+            [min]="0"
+            [max]="1000000000000"
+            [readOnly]="true"
+          ></dx-number-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("setup_contact_1") }}</label>
+          <dx-text-box
+            formControlName="setupContact1"
+            [readOnly]="!registerEditable"
+          ></dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("setup_contact_2") }}</label>
+          <dx-text-box
+            formControlName="setupContact2"
+            [readOnly]="!registerEditable"
+          ></dx-text-box>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label class="form-label">{{ l("note") }}</label>
+          <dx-text-box
+            formControlName="note"
+            [readOnly]="!registerEditable"
+          ></dx-text-box>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #posmItemGrid>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="box" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("posm_item_list") }}</span>
+      </h4>
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-primary ml-2"
+        rippleEffect
+        *ngIf="createPosmItemVisible"
+        (click)="createPosmItem()"
+      >
+        <span [data-feather]="'plus'"></span>
+      </button>
+    </div>
+  </div>
+  <dx-data-grid
+    #posmItemDataGrid
+    class="ext-grid"
+    [dataSource]="posmItemDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column
+      dataField="posmItemCode"
+      [caption]="lcode"
+      cellTemplate="codeTemplate"
+    >
+      <div *dxTemplate="let cell of 'codeTemplate'">
+        <a
+          href="javascript:;"
+          (click)="editPosmItem(cell.data)"
+          class="font-weight-bold"
+          >{{ cell.data.posmItemCode }}</a
+        >
+      </div>
+    </dxi-column>
+
+    <dxi-column
+      dataField="posmItemName"
+      [caption]="l('posm_item_name')"
+    ></dxi-column>
+    <dxi-column
+      [caption]="l('posm_unit_type')"
+      cellTemplate="unitTypeTemplate"
+      [allowEditing]="false"
+      alignment="left"
+    >
+      <div *dxTemplate="let cell of 'unitTypeTemplate'">
+        <div>
+          {{ posmUnitTypeDataSource.findItem(cell.data.unitType).name }}
+        </div>
+      </div>
+    </dxi-column>
+    <dxi-column
+      [caption]="l('specification')"
+      [calculateCellValue]="calculateSpecification"
+    >
+    </dxi-column>
+    <dxi-column
+      dataField="unitPrice"
+      [caption]="l('price')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column
+      dataField="qty"
+      [caption]="l('quantity')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column
+      dataField="totalCost"
+      [caption]="l('cost')"
+      format="#,##0"
+    ></dxi-column>
+    <dxi-column dataField="note" [caption]="l('note')"></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="80"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="deletePosmItemVisible(cell.data)"
+            (click)="deletePosmItem(cell.data)"
+            ><i class="mr-1" size="16" data-feather="trash"></i
+          ></a>
+
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="editPosmItemVisible(cell.data)"
+            (click)="editPosmItem(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="register()"
+    *ngIf="registerButtonVisible"
+  >
+    {{ l("send_request") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="approve()"
+    *ngIf="approveButtonVisible"
+  >
+    {{ l("approve") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmProduce1()"
+    *ngIf="confirmProduce1ButtonVisible"
+  >
+    {{ l("confirm_produce_1") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmProduce2()"
+    *ngIf="confirmProduce2ButtonVisible"
+  >
+    {{ l("confirm_produce_2") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmVendorProduce()"
+    *ngIf="confirmVendorProduceButtonVisible"
+  >
+    {{ l("confirm_vendor_produce") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="suggestBudget()"
+    *ngIf="suggestButtonVisible"
+  >
+    {{ l("suggest_budget") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmSuggest()"
+    *ngIf="confirmSuggestButtonVisible"
+  >
+    {{ l("confirm_suggest") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmValid()"
+    *ngIf="confirmValidButtonVisible"
+  >
+    {{ l("confirm_valid") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="denyButtonVisible"
+    (click)="deny()"
+  >
+    {{ l("deny") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="confirmInvalidButtonVisible"
+    (click)="confirmInvalid()"
+  >
+    {{ l("confirm_invalid") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="acceptButtonVisible"
+    (click)="accept()"
+  >
+    {{ l("accept_posm") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="confirmAccept1ButtonVisible"
+    (click)="confirmAccept1()"
+  >
+    {{ l("confirm_accept_1") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="confirmAccept2ButtonVisible"
+    (click)="confirmAccept2()"
+  >
+    {{ l("confirm_accept_2") }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+</ng-template>

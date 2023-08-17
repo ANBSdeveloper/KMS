@@ -1,0 +1,54 @@
+<div
+  class="content-wrapper d-flex flex-column"
+  *blockUI="'posm_investment_item_dialog_block'"
+>
+<div class="row">
+  <div class="col-12">
+    <table>
+      <tbody>
+        <tr
+          *ngFor="let item of monthData"
+        >
+          <td class="pr-1 pb-1">
+            {{ l("gross_revenue_month") }} {{ item.month }}:
+          </td>
+          <td class="pr-1 pb-1">
+            <span class="font-weight-bold"
+              >{{ item.amount | numberFormat }} VNĐ</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td class="pr-1 pb-1">{{ l("total") }}:</td>
+          <td class="pr-1 pb-1">
+            <span class="font-weight-bold"
+              >{{ totalMonth | numberFormat }} VNĐ</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn btn-outline-secondary mt-1"
+      (click)="close()"
+      rippleEffect
+    >
+      {{ lclose }}
+    </button>
+  </div>
+</div>
+<!-- <core-sidebar
+  class="modal modal-slide-in fade"
+  [name]="rewardDetailConfig.sidebarName"
+  overlayClass="modal-backdrop"
+>
+  <app-ticket-consumer-reward-detail-sidebar
+    [ticketInvestmentId]="ticketInvestmentId"
+    [allocateTickets]="allocateTickets"
+    [dataSource]="rewardDetailDataSource"
+  >
+  </app-ticket-consumer-reward-detail-sidebar>
+</core-sidebar> -->

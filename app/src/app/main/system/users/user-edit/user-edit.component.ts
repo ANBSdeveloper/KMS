@@ -95,6 +95,7 @@ export class UserEditComponent extends PageEditFormComponentBase<
       roleId: [undefined, [Validators.required]],
       phoneNumber: [undefined, [Validators.required]],
       emailAddress: [undefined, [Validators.email]],
+      roleName: [undefined]
     });
 
     this.formGroup.valueChanges.subscribe((field) => {
@@ -377,10 +378,9 @@ export class UserEditComponent extends PageEditFormComponentBase<
 
   get assignmentVisible() {
     return (
-      this.roleCombo?.selectedItem &&
       this.assignmentRoles.find(
         (p) =>
-          p.toUpperCase() == this.roleCombo.selectedItem.roleName.toUpperCase()
+          this.cValue("roleName")?.toUpperCase() == p.toUpperCase()
       )
     );
   }
@@ -437,6 +437,8 @@ export class UserEditComponent extends PageEditFormComponentBase<
   deleteRequest(id) {
     return this.getDataService<DataServiceProxy>().deleteUser(id);
   }
-
+  roleChange(e) {
+    this.c("roleName").setValue(e.selectedItem?.roleName);
+  }
   //#endregion
 }

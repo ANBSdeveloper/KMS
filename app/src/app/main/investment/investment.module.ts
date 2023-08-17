@@ -77,6 +77,20 @@ import { CalendarService } from "../apps/calendar/calendar.service";
 import { BudgetAreaComboComponent } from "./budget/budget-area-combo/budget-area-combo.component";
 import { BudgetAreaSidebarComponent } from "./budget/budget-area-sidebar/budget-area-sidebar.component";
 import { BudgetBranchSidebarComponent } from "./budget/budget-branch-sidebar/budget-branch-sidebar.component";
+import { PosmInvestmentRSMStaffComboComponent } from "./posm-investment/posm-investment-rsm-staff-combo/posm-investment-rsm-staff-combo.component";
+import { PosmInvestmentASMStaffComboComponent } from "./posm-investment/posm-investment-asm-staff-combo/posm-investment-asm-staff-combo.component";
+import { PosmInvestmentSSStaffComboComponent } from "./posm-investment/posm-investment-ss-staff-combo/posm-investment-ss-staff-combo.component";
+import { PosmInvestmentStatusComboComponent } from "./posm-investment/posm-investment-status-combo/posm-investment-status-combo.component";
+import { PosmInvestmentListComponent } from "./posm-investment/posm-investment-list/posm-investment-list.component";
+import { PosmInvestmentStatusDataSource } from "./data-source/posm-investment-status.data-source";
+import { PosmInvestmentEditComponent } from "./posm-investment/posm-investment-edit/posm-investment-edit.component";
+import { PosmInvestmentSalesCommitmentSidebarComponent } from "./posm-investment/posm-investment-sales-commitment-sidebar/posm-investment-sales-commitment-sidebar.component";
+import { PosmInvesetmentItemDialogComponent } from "./posm-investment/posm-investment-item-dialog/posm-investment-item-dialog.component";
+import { PosmInvestmentApproveComponent } from "./posm-investment/posm-investment-approve/posm-investment-approve.component";
+import { PosmInvestmentPrepareComponent } from "./posm-investment/posm-investment-prepare/posm-investment-prepare.component";
+import { PosmInvestmentOperationComponent } from "./posm-investment/posm-investment-operation/posm-investment-operation.component";
+import { PosmInvestmentAcceptanceComponent } from "./posm-investment/posm-investment-acceptance/posm-investment-acceptance.component";
+import { PosmInvestmentHistoryComponent } from "./posm-investment/posm-investment-history/posm-investment-history.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -128,6 +142,18 @@ const routes: Routes = [
     component: TicketInvestmentCalendar,
   },
   {
+    path: "posm-investment-list",
+    component: PosmInvestmentListComponent,
+  },
+  {
+    path: "posm-investments/:id",
+    component: PosmInvestmentEditComponent,
+  },
+  {
+    path: "register-posm-investment",
+    component: PosmInvestmentEditComponent,
+  },
+  {
     path: "",
     redirectTo: "/budget-list",
     pathMatch: "full",
@@ -168,6 +194,20 @@ const routes: Routes = [
     TicketPrintComponent,
     TicketInvestmentByUserComboComponent,
     TicketInvestmentCalendar,
+
+    PosmInvestmentRSMStaffComboComponent,
+    PosmInvestmentASMStaffComboComponent,
+    PosmInvestmentSSStaffComboComponent,
+    PosmInvestmentStatusComboComponent,
+    PosmInvestmentListComponent,
+    PosmInvestmentEditComponent,
+    PosmInvestmentSalesCommitmentSidebarComponent,
+    PosmInvesetmentItemDialogComponent,
+    PosmInvestmentApproveComponent,
+    PosmInvestmentPrepareComponent,
+    PosmInvestmentOperationComponent,
+    PosmInvestmentAcceptanceComponent,
+    PosmInvestmentHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -206,6 +246,7 @@ const routes: Routes = [
     InvestmentTypeDataSource,
     BudgetAllocateTypeDataSource,
     TicketInvestmentStatusDataSource,
+    PosmInvestmentStatusDataSource,
     DialogService,
     SidebarService,
     ReportService,

@@ -1,0 +1,37 @@
+@import "@core/scss/angular/libs/flatpickr.component.scss";
+@import "@core/scss/angular/libs/select.component.scss";
+@import "@core/scss/angular/libs/quill-editor.component";
+@import "@core/scss/angular/libs/blockui.component.scss";
+@import "@core/scss/angular/libs/datatables.component.scss";
+@import "@core/scss/angular/libs/toastr.component.scss";
+@import "@core/scss/angular/libs/tree-view.component.scss";
+@import '@core/scss/angular/libs/form-wizard.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
+
+app-ticket-investment-edit {
+  .ql-toolbar {
+    border-top: none !important;
+  }
+  .ql-container {
+    border-bottom: none !important;
+  }
+  .datatable-scroll {
+    width: auto !important;
+  }
+
+  .ngx-datatable.scroll-horz .datatable-body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  .ngx-datatable {
+    overflow-wrap: break-word;
+  }
+  .rating {
+    line-height: 2rem;
+  }
+}
+
+.timeline .timeline-item .timeline-event {
+  min-height: unset !important;
+}

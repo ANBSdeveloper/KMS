@@ -12,4 +12,8 @@ export enum RoleType {
   TradeMarketing = "TM",
   SalesDirector = "NSD",
   Pg = "PG",
+  Supply = "SUPPLY",
+  Marketing = "MKT",
+  DevelopmentDirector = "BDD"
+
 }

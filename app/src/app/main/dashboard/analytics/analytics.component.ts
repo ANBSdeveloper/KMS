@@ -75,8 +75,9 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
   };
   investment12MonthsData: {
     YearMonth: string;
-    ActualAmount: number;
-    InvestmentAmount;
+    SalesAmount: number;
+    PosmAmount: number;
+    TicketAmount: number;
   }[] = [];
 
   analytic6MonthsData: {
@@ -232,17 +233,14 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
     this.revenueReportChartoptions = {
       chart: {
         height: 230,
-        stacked: true,
+        stacked: false,
         type: "bar",
         toolbar: { show: false },
       },
-      plotOptions: {
-        bar: {
-          columnWidth: "17%",
-          endingShape: "rounded",
-        },
+      tooltip: {
+        enabled: true,
       },
-      colors: [colors.solid.primary, colors.solid.warning],
+      colors: [colors.solid.primary, colors.solid.danger, colors.solid.success],
       dataLabels: {
         enabled: false,
       },
@@ -254,18 +252,19 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
           top: -20,
           bottom: -10,
         },
-        yaxis: {
-          lines: { show: false },
-        },
       },
       series: [
         {
-          name: "Đầu Tư",
-          data: this.investment12MonthsData.map((p) => p.InvestmentAmount),
+          name: "Doanh số",
+          data: this.investment12MonthsData.map((p) => p.SalesAmount),
         },
         {
-          name: "Doanh Số",
-          data: this.investment12MonthsData.map((p) => -1 * p.ActualAmount),
+          name: "BTTT",
+          data: this.investment12MonthsData.map((p) => p.TicketAmount),
+        },
+        {
+          name: "POSM",
+          data: this.investment12MonthsData.map((p) => p.PosmAmount),
         },
       ],
       xaxis: {
@@ -289,6 +288,9 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
             colors: this.$textMutedColor,
             fontSize: "0.86rem",
           },
+        },
+        axisTicks: {
+          show: false,
         },
       },
     };
@@ -340,7 +342,7 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
       series: [
         {
           name: "2020",
-          data: this.analytic6MonthsData.map(p=>p.Orders),
+          data: this.analytic6MonthsData.map((p) => p.Orders),
         },
       ],
       xaxis: {
@@ -388,12 +390,12 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
           startingShape: "rounded",
           colors: {
             backgroundBarColors: [
-               this.$barColor,
-               this.$barColor,
-               this.$barColor,
-               this.$barColor,
-               this.$barColor,
-               this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
+              this.$barColor,
             ],
             backgroundBarRadius: 5,
           },
@@ -409,7 +411,7 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
       series: [
         {
           name: "2020",
-          data: this.analytic6MonthsData.map(p=>p.RewardQuantity),
+          data: this.analytic6MonthsData.map((p) => p.RewardQuantity),
         },
       ],
       xaxis: {
@@ -471,7 +473,7 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
       colors: [colors.solid.primary],
       series: [
         {
-          data: this.analytic6MonthsData.map(p=>p.InvestmentAmount),
+          data: this.analytic6MonthsData.map((p) => p.InvestmentAmount),
         },
       ],
       markers: {
@@ -558,7 +560,7 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
       colors: [colors.solid.success],
       series: [
         {
-          data: this.analytic6MonthsData.map(p=>p.ActualAmount),
+          data: this.analytic6MonthsData.map((p) => p.ActualAmount),
         },
       ],
       markers: {
@@ -807,9 +809,9 @@ export class AnalyticsComponent extends AppComponentBase implements OnInit {
     this.setupAnalytic6Months();
     this.setupInvestment12Months();
     // Statistics Bar Chart
-  
+
     // Statistics Line Chart
-    
+
     // Budget Chart
     this.budgetChartoptions = {
       chart: {

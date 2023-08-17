@@ -11,21 +11,60 @@
     <section>
       <div class="card">
         <div class="card-body">
+          <div class="card-header m-0 p-0" #cardHeader>
+            <h4 class="card-title mb-1">
+              <i
+                data-feather="info"
+                [size]="16"
+                class="mr-75 font-medium-4"
+              ></i>
+              <span class="align-middle">{{ l('customer_information') }}</span>
+            </h4>
+            <div class="heading-elements p-0">
+              <ul class="list-inline mb-0">
+                <!-- collapse -->
+                <li (click)="collapse()">
+                  <a
+                    data-action="collapse"
+                    [ngClass]="{ rotate: collapseStatus }"
+                  >
+                    <i class="feather icon-chevron-down"></i>
+                  </a>
+                </li>
+                <!-- expand -->
+              </ul>
+            </div>
+          </div>
+
           <ng-container *ngTemplateOutlet="form"></ng-container>
         </div>
       </div>
     </section>
     <section>
-      <ng-container *ngTemplateOutlet="formInfoGrossRevenue"></ng-container>
+      <ng-container *ngTemplateOutlet="salesPivot"></ng-container>
     </section>
+    <!-- <section>
+      <ng-container *ngTemplateOutlet="formInfoGrossRevenue"></ng-container>
+    </section> -->
     <section>
       <div class="card">
         <div class="card-body">
           <ng-container
-            *ngTemplateOutlet="formInvestmentHistory"
+            *ngTemplateOutlet="ticketInvestmentHistory"
           ></ng-container>
         </div>
       </div>
+    </section>
+    <section>
+      <ng-container *ngTemplateOutlet="posmInvestmentPivot"></ng-container>
+    </section>
+    <section>
+      <ng-container
+        *ngTemplateOutlet="posmInvestmentPivotHistory"
+      ></ng-container>
+    </section>
+    <section>
+      <ng-container *ngTemplateOutlet="posmInvestmentHistory"></ng-container>
     </section>
   </div>
   <block-ui></block-ui>
@@ -33,14 +72,6 @@
 
 <ng-template #form>
   <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
-    <div class="row">
-      <div class="col-12">
-        <h4 class="mb-1">
-          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
-          <span class="align-middle">{{ l("customer_information") }}</span>
-        </h4>
-      </div>
-    </div>
     <div class="row">
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
@@ -55,10 +86,10 @@
             <small class="form-text text-danger">{{ lreq() }}</small>
           </span>
           <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
-            <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+            <small class="form-text text-danger">{{ lmin('code', 2) }}</small>
           </span>
           <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
-            <small class="form-text text-danger">{{ lmax("code", 50) }}</small>
+            <small class="form-text text-danger">{{ lmax('code', 50) }}</small>
           </span>
         </div>
       </div>
@@ -76,14 +107,14 @@
             <small class="form-text text-danger">{{ lreq() }}</small>
           </span>
           <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
-            <small class="form-text text-danger">{{ lmax("name", 50) }}</small>
+            <small class="form-text text-danger">{{ lmax('name', 50) }}</small>
           </span>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("phone") }}</label>
+          <label class="form-label">{{ l('phone') }}</label>
           <dx-text-box formControlName="mobilePhone" [readOnly]="formReadOnly">
           </dx-text-box>
         </div>
@@ -91,17 +122,17 @@
 
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("address") }}</label>
+          <label class="form-label">{{ l('address') }}</label>
           <dx-text-box formControlName="address" [readOnly]="formReadOnly">
           </dx-text-box>
         </div>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row collapse" #customerInfo1>
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("customer_type") }}</label>
+          <label class="form-label">{{ l('customer_type') }}</label>
           <dx-text-box formControlName="channelName" [readOnly]="formReadOnly">
           </dx-text-box>
         </div>
@@ -122,7 +153,7 @@
 
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("efficient") }}</label>
+          <label class="form-label">{{ l('efficient') }}</label>
           <div class="rating">
             <ngb-rating
               [rate]="cValue('efficient')"
@@ -135,7 +166,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row collapse" #customerInfo2>
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
           <app-ss-staff-combo
@@ -170,89 +201,30 @@
 </ng-template>
 
 <ng-template #formInfoGrossRevenue>
-  <div class="row match-height">
-    <div class="col-lg-6 lg-md-12">
-      <div class="card">
+  <div class="row">
+    <div
+      class="col-3"
+      *ngFor="let item of customerRecentSalesDataSource.yearData; let i = index"
+    >
+      <div
+        class="card"
+        [ngClass]="{ 'bg-primary': i == 0, 'year-card': i == 0 }"
+        (click)="i == 0 ? yearClick(item) : null"
+      >
         <div class="card-body">
-          <div class="row">
-            <div class="col-12">
-              <h4 class="mb-1">
-                <i
-                  data-feather="dollar-sign"
-                  [size]="16"
-                  class="mr-75 font-medium-4"
-                ></i>
-                <span class="align-middle">{{
-                  l("info_gross_revenue_monthly")
-                }}</span>
-              </h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <table>
-                <tbody>
-                  <tr
-                    *ngFor="let item of customerRecentSalesDataSource.monthData"
-                  >
-                    <td class="pr-1 pb-1">
-                      {{ l("gross_revenue_month") }} {{ item.month }}:
-                    </td>
-                    <td class="pr-1 pb-1">
-                      <span class="font-weight-bold"
-                        >{{ item.amount | numberFormat }} VNĐ</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="pr-1 pb-1">{{ l("total") }}:</td>
-                    <td class="pr-1 pb-1">
-                      <span class="font-weight-bold"
-                        >{{ totalMonth | numberFormat }} VNĐ</span
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 lg-md-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12">
-              <h4 class="mb-1">
-                <i
-                  data-feather="dollar-sign"
-                  [size]="16"
-                  class="mr-75 font-medium-4"
-                ></i>
-                <span class="align-middle">{{
-                  l("info_gross_revenue_yearly")
-                }}</span>
-              </h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <table>
-                <tbody>
-                  <tr
-                    *ngFor="let item of customerRecentSalesDataSource.yearData"
-                  >
-                    <td class="pr-1 pb-1">{{ item.measure }}:</td>
-                    <td class="pr-1 pb-1">
-                      <span class="font-weight-bold"
-                        >{{ item.amount | numberFormat }} VNĐ</span
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <h4
+            class="pr-1 pb-1"
+            [ngStyle]="{ color: i == 0 ? 'white' : 'inherite' }"
+          >
+            {{ item.measure }}
+          </h4>
+          <div class="pr-1 pb-1">
+            <span
+              class="font-weight-bold"
+              style="font-size: 1.6rem"
+              [ngStyle]="{ color: i == 0 ? 'white' : 'inherite' }"
+              >{{ item.amount | numberFormat }} VNĐ</span
+            >
           </div>
         </div>
       </div>
@@ -260,22 +232,22 @@
   </div>
 </ng-template>
 
-<ng-template #formInvestmentHistory>
+<ng-template #ticketInvestmentHistory>
   <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
     <div class="row">
       <div class="col-12">
         <h4 class="mb-1">
-          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
-          <span class="align-middle">{{ l("ticket_investment") }}</span>
+          <!-- <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i> -->
+          <span class="align-middle">{{ l('ticket_investment') }}</span>
         </h4>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("status_propose") }}</label>
+          <label class="form-label">{{ l('status_propose') }}</label>
           <dx-number-box
-            formControlName="totalRequest"
+            formControlName="totalRequestBttt"
             [readOnly]="formReadOnly"
             format="#,##0.##"
           >
@@ -285,10 +257,10 @@
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
           <label class="form-label">{{
-            l("ticket_investment_status_approved")
+            l('ticket_investment_status_approved')
           }}</label>
           <dx-number-box
-            formControlName="totalApproved"
+            formControlName="totalApprovedBttt"
             [readOnly]="formReadOnly"
             format="#,##0.##"
           >
@@ -298,7 +270,7 @@
 
       <div class="col-lg-3 col-md-6">
         <div class="form-group">
-          <label class="form-label">{{ l("total_amount_Bttt") }}</label>
+          <label class="form-label">{{ l('total_amount_Bttt') }}</label>
           <dx-number-box
             formControlName="totalAmountBttt"
             [value]="totalAmountBttt"
@@ -367,40 +339,40 @@
             {{
               l(
                 cell.data.status == 10
-                  ? "ticket_investment_status_request_investment"
+                  ? 'ticket_investment_status_request_investment'
                   : cell.data.status == 20
-                  ? "ticket_investment_status_denied_request_investment"
+                  ? 'ticket_investment_status_denied_request_investment'
                   : cell.data.status == 30
-                  ? "ticket_investment_status_confirmed_request_investment"
+                  ? 'ticket_investment_status_confirmed_request_investment'
                   : cell.data.status == 40
-                  ? "ticket_investment_status_valid_request_investment1"
+                  ? 'ticket_investment_status_valid_request_investment1'
                   : cell.data.status == 50
-                  ? "ticket_investment_status_in_valid_request_investment1"
+                  ? 'ticket_investment_status_in_valid_request_investment1'
                   : cell.data.status == 60
-                  ? "ticket_investment_status_valid_request_investment2"
+                  ? 'ticket_investment_status_valid_request_investment2'
                   : cell.data.status == 70
-                  ? "ticket_investment_status_in_valid_request_investment2"
+                  ? 'ticket_investment_status_in_valid_request_investment2'
                   : cell.data.status == 80
-                  ? "ticket_investment_status_confirmed_investment"
+                  ? 'ticket_investment_status_confirmed_investment'
                   : cell.data.status == 90
-                  ? "ticket_investment_status_denied_investment_confirmation"
+                  ? 'ticket_investment_status_denied_investment_confirmation'
                   : cell.data.status == 100
-                  ? "ticket_investment_status_approve_investment1"
+                  ? 'ticket_investment_status_approve_investment1'
                   : cell.data.status == 110
-                  ? "ticket_investment_status_denied_investment_approval"
+                  ? 'ticket_investment_status_denied_investment_approval'
                   : cell.data.status == 120
-                  ? "ticket_investment_status_approved"
+                  ? 'ticket_investment_status_approved'
                   : cell.data.status == 130
-                  ? "ticket_investment_status_denied"
+                  ? 'ticket_investment_status_denied'
                   : cell.data.status == 140
-                  ? "ticket_investment_status_updating"
+                  ? 'ticket_investment_status_updating'
                   : cell.data.status == 150
-                  ? "ticket_investment_status_operated"
+                  ? 'ticket_investment_status_operated'
                   : cell.data.status == 160
-                  ? "ticket_investment_status_acceptance"
+                  ? 'ticket_investment_status_acceptance'
                   : cell.data.status == 170
-                  ? "ticket_investment_status_final_settlement"
-                  : ""
+                  ? 'ticket_investment_status_final_settlement'
+                  : ''
               )
             }}
           </div>
@@ -413,11 +385,192 @@
             *ngIf="cell.data.id > 0"
             (click)="showDetail(cell.data)"
             class="font-weight-bold"
-            >{{ l("see_details") }}</a
+            >{{ l('see_details') }}</a
           >
         </div>
       </dxi-column>
     </dx-data-grid>
+  </form>
+</ng-template>
+
+<ng-template #posmInvestmentPivot>
+  <div class="row">
+    <div class="col-12">
+      <core-card [actions]="['collapse']">
+        <h4 class="card-title">{{ l('posm_investment_pivot') }}</h4>
+        <div class="card-body">
+          <dx-pivot-grid
+            #pivotGrid
+            [allowSortingBySummary]="true"
+            [allowFiltering]="true"
+            [showBorders]="true"
+            [allowExpandAll]="true"
+            [allowSortingBySummary]="true"
+            [showColumnGrandTotals]="true"
+            [showRowGrandTotals]="false"
+            [showRowTotals]="false"
+            [showColumnTotals]="false"
+            [dataSource]="pivotGridDataSource"
+          >
+            <dxo-field-chooser
+              [enabled]="true"
+              [height]="400"
+            ></dxo-field-chooser>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+          </dx-pivot-grid>
+        </div>
+      </core-card>
+    </div>
+  </div>
+</ng-template>
+<ng-template #salesPivot>
+  <div class="row">
+    <div class="col-12">
+      <core-card [actions]="['collapse']" [collapsed]="true">
+        <h4 class="card-title">{{ l('sales_pivot') }}</h4>
+        <div class="card-body">
+          <dx-pivot-grid
+            #pivotGridSales
+            [allowSortingBySummary]="true"
+            [allowFiltering]="true"
+            [showBorders]="true"
+            [allowExpandAll]="true"
+            [allowSortingBySummary]="true"
+            [showColumnGrandTotals]="true"
+            [showRowGrandTotals]="false"
+            [showRowTotals]="false"
+            [showColumnTotals]="false"
+            [dataSource]="pivotGridSalesDataSource"
+          >
+            <dxo-field-chooser
+              [enabled]="true"
+              [height]="400"
+            ></dxo-field-chooser>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+          </dx-pivot-grid>
+        </div>
+      </core-card>
+    </div>
+  </div>
+</ng-template>
+<ng-template #posmInvestmentPivotHistory>
+  <div class="row">
+    <div class="col-12">
+      <core-card [actions]="['collapse']" [collapsed]="true">
+        <h4 class="card-title">{{ l('posm_investment_pivot_history') }}</h4>
+        <div class="card-body">
+          <dx-pivot-grid
+            #pivotGridHistory
+            [allowSortingBySummary]="true"
+            [allowFiltering]="true"
+            [showBorders]="true"
+            [allowExpandAll]="true"
+            [allowSortingBySummary]="true"
+            [showColumnGrandTotals]="true"
+            [showRowGrandTotals]="false"
+            [showRowTotals]="false"
+            [showColumnTotals]="false"
+            [dataSource]="pivotGridHistoryDataSource"
+          >
+            <dxo-field-chooser
+              [enabled]="true"
+              [height]="400"
+            ></dxo-field-chooser>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+          </dx-pivot-grid>
+        </div>
+      </core-card>
+    </div>
+  </div>
+</ng-template>
+<ng-template #posmInvestmentHistory>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <core-card [actions]="['collapse']" [collapsed]="true">
+      <h4 class="card-title">{{ l('posm_investment_detail') }}</h4>
+      <div class="card-body">
+        <dx-data-grid
+          class="ext-grid"
+          [dataSource]="posmInvestmentListItemDataSource.items"
+          [showBorders]="false"
+          [showColumnLines]="false"
+          [showRowLines]="true"
+          [columnAutoWidth]="true"
+        >
+          <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+          <dxo-paging [pageSize]="10"> </dxo-paging>
+          <dxo-pager
+            [showPageSizeSelector]="true"
+            [showInfo]="false"
+            [showNavigationButtons]="true"
+          >
+          </dxo-pager>
+          <dxi-column
+            dataField="code"
+            [caption]="l('investment_id')"
+            cellTemplate="codeTemplate"
+          >
+            <div *dxTemplate="let cell of 'codeTemplate'">
+              <a
+                href="javascript:;"
+                (click)="showDetailPosm(cell.data)"
+                class="font-weight-bold"
+                >{{ cell.data.code }}</a
+              >
+            </div>
+          </dxi-column>
+          <dxi-column
+            dataField="posmItemCode"
+            [caption]="l('posm_item_code')"
+          ></dxi-column>
+          <dxi-column
+            dataField="posmItemName"
+            [caption]="l('posm_item_name')"
+          ></dxi-column>
+          <dxi-column
+            dataField="registerDate"
+            [caption]="l('register_date_time')"
+            type="date"
+          ></dxi-column>
+          <dxi-column
+            dataField="qty"
+            [caption]="l('quantity')"
+            format="#,##0"
+          ></dxi-column>
+          <dxi-column
+            dataField="unitPrice"
+            [caption]="l('unit_price')"
+            format="#,##0.##"
+          ></dxi-column>
+          <dxi-column
+            dataField="investmentAmount"
+            [caption]="l('total_amount_posm')"
+            format="#,##0.##"
+          ></dxi-column>
+          <dxi-column dataField="statusName" [caption]="l('status')">
+          </dxi-column>
+          <dxi-column
+            cellTemplate="actionTemplate"
+            [allowExporting]="false"
+            [allowEditing]="false"
+            [width]="50"
+          >
+            <div *dxTemplate="let cell of 'actionTemplate'">
+              <div class="d-flex align-items-center">
+                <a
+                  *ngIf="cell.data.status >= 150"
+                  href="javascript:void(0);"
+                  container="body"
+                  placement="top"
+                  disabled
+                  (click)="showConfirmImage(cell.data)"
+                  ><i class="mr-1" size="16" disabled data-feather="eye"></i
+                ></a>
+              </div>
+            </div>
+          </dxi-column>
+        </dx-data-grid>
+      </div>
+    </core-card>
   </form>
 </ng-template>
 

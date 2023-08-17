@@ -3,7 +3,9 @@ import { Component, Injector, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { ComboComponentBase } from "@cbms/ng-core-vuexy";
 import { DataServiceProxy } from "@shared/services/data.service";
+import { DialogService } from "primeng/dynamicdialog";
 import { map } from "rxjs/operators";
+import { CustomerDialogComponent } from "../customer-dialog/customer-dialog.component";
 //#endregion
 @Component({
   selector: "app-shop-combo",
@@ -29,9 +31,10 @@ export class ShopComboComponent extends ComboComponentBase {
   @Input() rsmStaffId = undefined;
   @Input() asmStaffId = undefined;
   @Input() ssStaffId = undefined;
+  @Input() detailButton = false;
   //#endregion
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector,  public dialogService: DialogService) {
     super(injector);
   }
   //#endregion
@@ -76,6 +79,17 @@ export class ShopComboComponent extends ComboComponentBase {
           },
         }))
       );
+  }
+
+  showDetail(_) {
+    this.dialogService.open(CustomerDialogComponent, {
+      data: {
+        id: this.value,
+      },
+      baseZIndex: 1001,
+      header: this.l("customer_information"),
+      width: "70%",
+    });
   }
   //#endregion
 }

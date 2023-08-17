@@ -1,0 +1,338 @@
+<div class="row" *blockUI="'posm_investment_history_content_block'">
+  <div class="col-12">
+    <ul class="timeline">
+      <ng-container *ngFor="let item of items">
+        <ng-container
+          *ngIf="isRegister(item)"
+          [ngTemplateOutlet]="requestTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isApproval(item)"
+          [ngTemplateOutlet]="approvalTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isDeny(item)"
+          [ngTemplateOutlet]="denyTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isInvalid(item)"
+          [ngTemplateOutlet]="invalidTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isValid(item)"
+          [ngTemplateOutlet]="validTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isConfirmSuggest(item)"
+          [ngTemplateOutlet]="confirmSuggestTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isOperation(item)"
+          [ngTemplateOutlet]="operationTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isAcceptance(item)"
+          [ngTemplateOutlet]="acceptanceTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <!-- <ng-container
+          *ngIf="isPicking(item)"
+          [ngTemplateOutlet]="pickingTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isAssign(item)"
+          [ngTemplateOutlet]="assignTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isConfirmAssign(item)"
+          [ngTemplateOutlet]="confirmAssignTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isStartDelivery(item)"
+          [ngTemplateOutlet]="startDeliveryTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isCancelReceiveDelivery(item)"
+          [ngTemplateOutlet]="cancelReceiveDeliveryTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isReturnShipping(item)"
+          [ngTemplateOutlet]="returnShippingTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+        *ngIf="isReturnBackOrder(item)"
+        [ngTemplateOutlet]="returnBackOrderTemplate"
+        [ngTemplateOutletContext]="{ item: item }"
+      ></ng-container>
+        <ng-container
+          *ngIf="isReceiveReturnShipping(item)"
+          [ngTemplateOutlet]="receiveReturnShippingTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+        *ngIf="isReceiveReturnBackOrder(item)"
+        [ngTemplateOutlet]="receiveReturnBackOrderTemplate"
+        [ngTemplateOutletContext]="{ item: item }"
+      ></ng-container>
+        <ng-container
+          *ngIf="isCompleteReturnShipping(item)"
+          [ngTemplateOutlet]="completeReturnShippingTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isCanceled(item)"
+          [ngTemplateOutlet]="canceledTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isRescheduleDelivery(item)"
+          [ngTemplateOutlet]="rescheduleDeliveryTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isCompleteDelivery(item)"
+          [ngTemplateOutlet]="completeDeliveryTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isSettle(item)"
+          [ngTemplateOutlet]="settleTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isAggregateSettle(item)"
+          [ngTemplateOutlet]="aggregateSettleTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isAccountantConfirmSettle(item)"
+          [ngTemplateOutlet]="accountantConfirmTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isStartRecall(item)"
+          [ngTemplateOutlet]="startRecallTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isRecall(item)"
+          [ngTemplateOutlet]="recallTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isStartCollectDebt(item)"
+          [ngTemplateOutlet]="startCollectDebtTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isReceiveReceivable(item)"
+          [ngTemplateOutlet]="receiveReceivableTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container>
+        <ng-container
+          *ngIf="isRollbackShipping(item)"
+          [ngTemplateOutlet]="rollbackShippingTemplate"
+          [ngTemplateOutletContext]="{ item: item }"
+        ></ng-container> -->
+      </ng-container>
+    </ul>
+  </div>
+</div>
+<ng-template #requestTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="item && item.id">
+      <span
+        class="timeline-point timeline-point-indicator timeline-point-primary"
+      ></span>
+      <div class="timeline-event" *ngIf="getData(item); let data">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        <p>
+          Người yêu cầu: {{ item.creationRole }} - {{ item.creationUser }}
+          <br />Ngày đề xuất:
+          {{ investment?.registerDate | dateFormat : "shortDateShortTime" }}
+          <br />{{ l("staff_request_for_shop") }}
+          <strong>{{ getCustomer(investment?.customerId) | async }}</strong
+          >. Tổng chi phí đầu tư
+          {{ investment?.investmentAmount | numberFormat }}
+        </p>
+      </div>
+    </div>
+  </li>
+</ng-template>
+
+<ng-template #approvalTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người duyệt: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày duyệt:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }}
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #denyTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người từ chối: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày từ chối:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }}
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #invalidTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người xác nhận: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày xác nhận:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }} <br />Ghi
+        chú: {{ data.PrepareNote }} <br /><strong
+          >Chi phí đăng ký: {{ formatNum(data.TotalCost) }}</strong
+        >
+        <br /><strong
+          >Chi phí thực tế: {{ formatNum(data.ActualTotalCost) }}</strong
+        >
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #validTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người xác nhận: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày xác nhận:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }} <br />Ghi
+        chú: {{ data.PrepareNote }} <br /><strong
+          >Chi phí đăng ký: {{ formatNum(data.TotalCost) }}</strong
+        >
+        <br /><strong
+          >Chi phí thực tế: {{ formatNum(data.ActualTotalCost) }}</strong
+        >
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #confirmSuggestTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người xác nhận: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày xác nhận:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }}
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #operationTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người xác nhận: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày xác nhận:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }}
+      </div>
+    </div>
+  </li>
+</ng-template>
+<ng-template #acceptanceTemplate let-item="item">
+  <li class="timeline-item">
+    <div *ngIf="getData(item); let data">
+      <span
+        class="timeline-point timeline-point-indicator {{
+          getTimePointCss(item)
+        }}"
+      ></span>
+      <div class="timeline-event">
+        <div
+          class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1"
+        >
+          <h6>{{ getTitle(data) }}</h6>
+        </div>
+        Người nghiệm thu: {{ item.creationRole }} - {{ item.creationUser }}
+        <br />Ngày nghiệm thu:
+        {{ item.creationTime | dateFormat : "shortDateShortTime" }}
+      </div>
+    </div>
+  </li>
+</ng-template>

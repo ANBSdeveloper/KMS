@@ -45,6 +45,121 @@ export const contentHeader = {
       ],
     },
   },
+  posm_class: {
+    headerTitle: "posm_class",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "posm_class",
+          isLink: true,
+          link: "/master/posm-class-list",
+        },
+      ],
+    },
+  },
+  vendor: {
+    headerTitle: "vendor",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "vendor",
+          isLink: true,
+          link: "/master/vendor-list",
+        },
+      ],
+    },
+  },
+  posm_item: {
+    headerTitle: "posm_item",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "posm",
+          isLink: true,
+          link: "/master/posm-item-list",
+        },
+      ],
+    },
+  },
+  posm_price: {
+    headerTitle: "posm_price",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "posm_price",
+          isLink: true,
+          link: "/master/posm-price-list",
+        },
+      ],
+    },
+  },
+  posm_investment: {
+    headerTitle: "posm_investment",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "posm_investment",
+          isLink: true,
+          link: "/investment/posm-investment-list",
+        },
+      ],
+    },
+  },
   district: {
     headerTitle: "district",
     actionButton: false,
@@ -548,6 +663,29 @@ export const contentHeader = {
           name: "branch",
           isLink: true,
           link: "/master/branch-list",
+        },
+      ],
+    },
+  },
+  customer_location: {
+    headerTitle: "customer_location",
+    actionButton: false,
+    breadcrumb: {
+      type: "",
+      links: [
+        {
+          name: "home",
+          isLink: true,
+          link: "/",
+        },
+        {
+          name: "master_data",
+          isLink: false,
+        },
+        {
+          name: "customer_location",
+          isLink: true,
+          link: "/master/customer-location-list",
         },
       ],
     },

@@ -1,0 +1,92 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div class="modal-dialog" *blockUI="'posm_price_detail_content_block'">
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <div class="form-group">
+              <app-posm-item-combo
+                #posmItemCombo
+                [required]="true"
+                formControlName="posmItemId"
+                (change)="posmItemComboChange($event)"
+              ></app-posm-item-combo>
+            </div>
+          </div>
+          <div class="form-group">
+            <app-posm-unit-type-combo
+              #posmUnitTypeCombo
+              [required]="true"
+              [readOnly]="true"
+              formControlName="unitType"
+            ></app-posm-unit-type-combo>
+          </div>
+          <div class="form-group">
+            <app-posm-calc-type-combo
+              #posmCalcTypeCombo
+              [required]="true"
+              [readOnly]="true"
+              formControlName="calcType"
+            ></app-posm-calc-type-combo>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("price")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              format="#,##0.##"
+              formControlName="price"
+              [isValid]="!cError('price')"
+            >
+            </dx-number-box>
+            <span class="invalid-form" *ngIf="cErrorV('price', 'min')">
+              <small class="form-text text-danger">{{
+                lminv("price", 0)
+              }}</small>
+            </span>
+          </div>
+
+          <button
+            type="button"
+            (click)="saveAdd()"
+            *ngIf="saveAddVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsaveadd }}
+          </button>
+          <button
+            type="submit"
+            *ngIf="updateVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="reset"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -56,7 +56,6 @@ export class AppInitializer {
       .toPromise()
       .then((response) => {
         this.localizationService.setData(response);
-        console.log(this.localizationService.get("welcome", "trucvt"));
       });
   }
 

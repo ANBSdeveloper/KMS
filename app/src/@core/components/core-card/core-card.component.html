@@ -35,9 +35,10 @@
           </a>
         </li>
       </ul>
-    </div>
+    </div> 
     <!--/ heading elements -->
   </div>
+  <ng-content select=".card-body-mini"></ng-content>
   <div *ngIf="actionsView.collapse; else noCollapse" class="card-content" [ngbCollapse]="onclickEvent.collapseStatus">
     <ng-container *ngTemplateOutlet="cardBodyOutlet"></ng-container>
   </div>
@@ -47,6 +48,7 @@
   </ng-template>
   <ng-template #cardBodyOutlet>
     <!--? content wrapped with .card-body -->
+
     <ng-content select=".card-body"></ng-content>
 
     <!--? content without any wrapper -->

@@ -20,7 +20,7 @@ export class BrandComboComponent extends ComboComponentBase {
   @Input() displayName: string = "name";
   @Input() valueName: string = "id";
   @Input() label: string = "brand";
-  
+  @Input() required: boolean = false;
   entityName = "brand";
   sidebarName = "brand_sidebar";
   permissionName = "Brands";

@@ -1,0 +1,284 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header contentHeaderName="posm_price"></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <!-- <ng-container *ngTemplateOutlet="photo"></ng-container> -->
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+          <ng-container *ngTemplateOutlet="details"></ng-container>
+        </div>
+      </div>
+    </section>
+    <block-ui></block-ui>
+    <core-sidebar
+      class="modal modal-slide-in fade"
+      [name]="detailConfig.sidebarName"
+      overlayClass="modal-backdrop"
+    >
+      <app-posm-price-detail-sidebar
+        [dataSource]="detailDataSource"
+        [posmPrice]="formGroup.value"
+      >
+      </app-posm-price-detail-sidebar>
+    </core-sidebar>
+  </div>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup">
+    <div class="row mt-1">
+      <div class="col-12">
+        <h4 class="mb-1">
+          <i data-feather="info" [size]="16" class="mr-75 font-medium-4"></i>
+          <span class="align-middle">{{ l("posm_price_information") }}</span>
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lcode }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="30"
+            formControlName="code"
+            [isValid]="!cError('code')"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'minlength')">
+            <small class="form-text text-danger">{{ lmin("code", 2) }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('code', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("code", 50) }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("from_date")
+            }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            max="2200/12/31"
+            min="1900/1/1"
+            type="date"
+            formControlName="fromDate"
+            [isValid]="!cError('fromDate')"
+            (onValueChanged)="fromDateChange($event)"
+            #fromDate
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('fromDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ l("to_date") }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-date-box
+            [showClearButton]="true"
+            [useMaskBehavior]="true"
+            max="2200/12/31"
+            min="1900/1/1"
+            type="date"
+            formControlName="toDate"
+            [isValid]="!cError('toDate')"
+            (onValueChanged)="toDateChange($event)"
+            #toDate
+          >
+          </dx-date-box>
+          <span class="invalid-form" *ngIf="cErrorV('toDate', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <div class="custom-control custom-switch">
+            <p class="form-label mb-50">{{ l("active") }}</p>
+            <!-- Must specify input id match to label for id -->
+            <input
+              id="rewarda-pakage-isActive"
+              type="checkbox"
+              class="custom-control-input"
+              formControlName="isActive"
+            />
+            <label for="rewarda-pakage-isActive" class="custom-control-label">
+              <span class="switch-icon-left"><i data-feather="check"></i></span>
+              <span class="switch-icon-right"><i data-feather="x"></i></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group">
+          <label class="form-label"
+            >{{ lname }}<strong class="mark-required">(*)</strong></label
+          >
+          <dx-text-box
+            [maxLength]="100"
+            formControlName="name"
+            [isValid]="!cError('name')"
+          >
+          </dx-text-box>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+          <span class="invalid-form" *ngIf="cErrorV('name', 'maxLength')">
+            <small class="form-text text-danger">{{ lmax("name", 200) }}</small>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #details>
+  <div class="row mt-2">
+    <div class="col-lg-6 col-sm-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center mt-1">
+          <h4>
+            <i data-feather="box" [size]="16" class="mr-75 font-medium-4"></i>
+            <span class="align-middle">{{ l("posm_price_detail_list") }}</span>
+          </h4>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-primary ml-2"
+            rippleEffect
+            *ngIf="createItemVisible"
+            (click)="createDetail()"
+          >
+            <span [data-feather]="'plus'"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dx-data-grid
+    class="ext-grid mt-1"
+    [dataSource]="detailDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+    [wordWrapEnabled]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column dataField="code" [caption]="lcode"></dxi-column>
+    <dxi-column dataField="name" [caption]="lname"></dxi-column>
+    <dxi-column
+      [caption]="l('posm_unit_type')"
+      cellTemplate="unitTypeTemplate"
+      [allowEditing]="false"
+      alignment="left"
+    >
+      <div *dxTemplate="let cell of 'unitTypeTemplate'">
+        <div>
+          {{ posmUnitTypeDataSource.findItem(cell.data.unitType).name }}
+        </div>
+      </div>
+    </dxi-column>
+    <dxi-column
+      dataField="price"
+      [caption]="l('price')"
+      format="#,##0.##"
+      [width]="100"
+    ></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="80"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="deleteDetailVisible(cell.data)"
+            (click)="deleteDetail(cell.data)"
+            ><i class="mr-1" size="16" data-feather="trash"></i
+          ></a>
+
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="editDetailVisible(cell.data)"
+            (click)="editDetail(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="submit()"
+  >
+    {{ lsave }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="deleteVisible"
+    (click)="delete()"
+  >
+    {{ ldelete }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    *ngIf="duplicateVisible"
+    (click)="duplicate()"
+  >
+    <span [data-feather]="'copy'"></span>
+  </button>
+</ng-template>

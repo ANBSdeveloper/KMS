@@ -1,0 +1,128 @@
+<div class="slideout-content">
+  <div class="modalsd modal-slide-in sdfade" id="modals-slide-in">
+    <div
+      class="modal-dialog"
+      *blockUI="'product_unit_conversion_content_block'"
+    >
+      <form
+        [formGroup]="formGroup"
+        class="modal-content pt-0"
+        (ngSubmit)="submit()"
+      >
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          (click)="close()"
+        ></button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">{{ title }}</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label">{{ l("zone") }}</label>
+            <dx-text-box
+              formControlName="zoneName"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+          <div class="form-group" *ngIf="areaVisible">
+            <label class="form-label">{{ l("area") }}</label>
+            <dx-text-box
+              formControlName="areaName"
+              [readOnly]="true"
+            ></dx-text-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label"
+              >{{ l("budget_allocate_amount")
+              }}<strong class="mark-required">(*)</strong></label
+            >
+            <dx-number-box
+              formControlName="allocateAmount"
+              format="#,##0.##"
+              [min]="0"
+              [max]="1000000000000"
+              [isValid]="!cError('allocateAmount')"
+            ></dx-number-box>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('allocateAmount', 'required')"
+            >
+              <small class="form-text text-danger">{{ lreq() }}</small>
+            </span>
+            <span class="invalid-form" *ngIf="cErrorV('allocateAmount', 'min')">
+              <small class="form-text text-danger">{{ lminv(0) }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('allocateAmount', 'ownAmount')"
+            >
+              <small class="form-text text-danger">{{
+                l("budget_over_own_amount", unallocatedAmountFormatted)
+              }}</small>
+            </span>
+            <span
+              class="invalid-form"
+              *ngIf="cErrorV('allocateAmount', 'usedAmount')"
+            >
+              <small class="form-text text-danger">{{
+                l("budget_less_than_used_amount")
+              }}</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("budget_temp_used_amount") }}</label>
+            <dx-number-box
+              formControlName="tempUsedAmount"
+              format="#,##0.##"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{
+              l("budget_temp_remain_amount")
+            }}</label>
+            <dx-number-box
+              formControlName="tempRemainAmount"
+              format="#,##0.##"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("budget_used_amount") }}</label>
+            <dx-number-box
+              formControlName="usedAmount"
+              format="#,##0.##"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+          <div class="form-group">
+            <label class="form-label">{{ l("budget_remain_amount") }}</label>
+            <dx-number-box
+              formControlName="remainAmount"
+              format="#,##0.##"
+              [readOnly]="true"
+            ></dx-number-box>
+          </div>
+          <button
+            type="submit"
+            *ngIf="saveVisible"
+            class="btn btn-primary mr-1 mt-1"
+            rippleEffect
+          >
+            {{ lsave }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-1"
+            (click)="close()"
+            rippleEffect
+          >
+            {{ lclose }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

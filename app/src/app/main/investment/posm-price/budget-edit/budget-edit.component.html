@@ -1,0 +1,558 @@
+<div class="content-wrapper">
+  <div class="content-body cbms-form">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <app-content-header contentHeaderName="budget"></app-content-header>
+      </div>
+      <div class="ml-auto">
+        <ng-container *ngTemplateOutlet="buttons"></ng-container>
+      </div>
+    </div>
+    <section>
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngTemplateOutlet="form"></ng-container>
+        </div>
+      </div>
+    </section>
+  </div>
+  <block-ui></block-ui>
+  <core-sidebar
+    class="modal modal-slide-in fade"
+    name="budget_zone_sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <app-budget-zone-sidebar
+      [dataSource]="zoneDataSource"
+      [budget]="formGroup.value"
+      [ownAmount]="unallocateAmount"
+    ></app-budget-zone-sidebar>
+  </core-sidebar>
+  <core-sidebar
+    class="modal modal-slide-in fade"
+    name="budget_area_sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <app-budget-area-sidebar
+      [dataSource]="areaDataSource"
+      [budget]="formGroup.value"
+      [ownAmount]="unallocateAmount"
+    ></app-budget-area-sidebar>
+  </core-sidebar>
+  <core-sidebar
+    class="modal modal-slide-in fade"
+    name="budget_branch_sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <app-budget-branch-sidebar
+      [dataSource]="branchDataSource"
+      [budget]="formGroup.value"
+      [ownAmount]="unallocateAmount"
+    ></app-budget-branch-sidebar>
+  </core-sidebar>
+</div>
+
+<ng-template #form>
+  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-cycle-combo
+            #cycleCombo
+            required="true"
+            [readOnly]="formReadOnly || this.modelId"
+            formControlName="cycleId"
+            [error]="cError('cycleId')"
+            (change)="cycleChange($event)"
+          >
+          </app-cycle-combo>
+          <span class="invalid-form" *ngIf="cErrorV('cycleId', 'required')">
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("from_date") }}</label>
+          <dx-date-box
+            formControlName="fromDate"
+            [readOnly]="true"
+          ></dx-date-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("to_date") }}</label>
+          <dx-date-box formControlName="toDate" [readOnly]="true"></dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-investment-type-combo
+            required="true"
+            [readOnly]="formReadOnly || this.modelId"
+            formControlName="investmentType"
+            [error]="cError('investmentType')"
+          >
+          </app-investment-type-combo>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('investmentType', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <app-budget-allocate-type-combo
+            required="true"
+            [readOnly]="formReadOnly"
+            formControlName="allocateType"
+            [error]="cError('allocateType')"
+            (change)="allocateTypeChange($event)"
+          >
+          </app-budget-allocate-type-combo>
+          <span
+            class="invalid-form"
+            *ngIf="cErrorV('allocateType', 'required')"
+          >
+            <small class="form-text text-danger">{{ lreq() }}</small>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group" [ngClass]="{ 'd-none': !zoneComboVisible }">
+          <app-budget-zone-combo
+            #zoneCombo
+            [required]="zoneVisible"
+            [readOnly]="formReadOnly"
+            label="filter_by_zone"
+            displayName="displayName"
+            formControlName="zoneId"
+            (change)="zoneChange($event)"
+          ></app-budget-zone-combo>
+        </div>
+        <div class="form-group" [ngClass]="{ 'd-none': !areaComboVisible }">
+          <app-budget-area-combo
+            #areaCombo
+            [required]="areaVisible"
+            [readOnly]="formReadOnly"
+            displayName="displayName"
+            label="filter_by_area"
+            formControlName="areaId"
+            (change)="areaChange($event)"
+          ></app-budget-area-combo>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngIf="!ownAmountVisible">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_allocate_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="allocateAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" *ngIf="ownAmountVisible">
+        <div class="form-group">
+          <label class="form-label">{{ l("budget_own_amount") }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="ownAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_temp_used_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="tempUsedAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{ l("budget_used_amount_header") }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="usedAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngIf="!ownAmountVisible"></div>
+      <div class="col-lg-3 col-md-6" *ngIf="ownAmountVisible">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_allocate_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="allocateAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_temp_remain_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="tempRemainAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_remain_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="remainAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="ownAmountVisible">
+      <div class="col-lg-3 col-md-6">
+        <div class="form-group">
+          <label class="form-label">{{
+            l("budget_unallocate_amount_header")
+          }}</label>
+          <dx-number-box
+            [readOnly]="true"
+            [value]="unallocateAmount"
+            format="#,##0.##"
+          ></dx-number-box>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngIf="zoneGridVisible">
+        <ng-container *ngTemplateOutlet="zone"></ng-container>
+      </div>
+      <div class="col-12" *ngIf="areaGridVisible">
+        <ng-container *ngTemplateOutlet="area"></ng-container>
+      </div>
+      <div class="col-12" *ngIf="branchGridVisible">
+        <ng-container *ngTemplateOutlet="branch"></ng-container>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #zone>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("budget_zone_list") }}</span>
+      </h4>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-end pb-1 pb-md-0">
+      <input
+        type="search"
+        class="form-control"
+        [placeholder]="lsearch"
+        (input)="zoneSearchChange($event)"
+      />
+    </div>
+  </div>
+  <dx-data-grid
+    class="ext-grid"
+    [dataSource]="zoneDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column dataField="zoneCode" [caption]="l('zone_code')"></dxi-column>
+    <dxi-column dataField="zoneName" [caption]="l('zone_name')"></dxi-column>
+    <dxi-column
+      dataField="allocateAmount"
+      [caption]="l('budget_allocate_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempUsedAmount"
+      [caption]="l('budget_temp_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempRemainAmount"
+      [caption]="l('budget_temp_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="usedAmount"
+      [caption]="l('budget_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="remainAmount"
+      [caption]="l('budget_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="50"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="zoneEditVisible(cell.data)"
+            (click)="zoneEdit(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+<ng-template #area>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("budget_area_list") }}</span>
+      </h4>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-end pb-1 pb-md-0">
+      <input
+        type="search"
+        class="form-control"
+        [placeholder]="lsearch"
+        (input)="areaSearchChange($event)"
+      />
+    </div>
+  </div>
+  <dx-data-grid
+    class="ext-grid"
+    [dataSource]="areaDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column dataField="areaCode" [caption]="l('area_code')"></dxi-column>
+    <dxi-column dataField="areaName" [caption]="l('area_name')"></dxi-column>
+    <dxi-column
+      dataField="allocateAmount"
+      [caption]="l('budget_allocate_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempUsedAmount"
+      [caption]="l('budget_temp_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempRemainAmount"
+      [caption]="l('budget_temp_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="usedAmount"
+      [caption]="l('budget_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="remainAmount"
+      [caption]="l('budget_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="50"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="areaEditVisible(cell.data)"
+            (click)="areaEdit(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+<ng-template #branch>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center mt-1 mb-1">
+      <h4>
+        <i data-feather="list" [size]="16" class="mr-75 font-medium-4"></i>
+        <span class="align-middle">{{ l("budget_branch_list") }}</span>
+      </h4>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-end pb-1 pb-md-0">
+      <input
+        type="search"
+        class="form-control"
+        [placeholder]="lsearch"
+        (input)="branchSearchChange($event)"
+      />
+    </div>
+  </div>
+  <dx-data-grid
+    class="ext-grid"
+    [dataSource]="branchDataSource.items"
+    keyExpr="rowId"
+    [showBorders]="false"
+    [showColumnLines]="false"
+    [showRowLines]="true"
+    [columnHidingEnabled]="true"
+    [columnAutoWidth]="true"
+  >
+    <dxo-scrolling rowRenderingMode="virtual"> </dxo-scrolling>
+    <dxo-paging [pageSize]="10"> </dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [showInfo]="false"
+      [showNavigationButtons]="true"
+    >
+    </dxo-pager>
+    <dxi-column
+      dataField="branchCode"
+      [caption]="l('branch_code')"
+    ></dxi-column>
+    <dxi-column
+      dataField="branchName"
+      [caption]="l('branch_name')"
+    ></dxi-column>
+    <dxi-column
+      dataField="allocateAmount"
+      [caption]="l('budget_allocate_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempUsedAmount"
+      [caption]="l('budget_temp_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="tempRemainAmount"
+      [caption]="l('budget_temp_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="usedAmount"
+      [caption]="l('budget_used_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      dataField="remainAmount"
+      [caption]="l('budget_remain_amount_short')"
+      format="#,##0.##"
+    ></dxi-column>
+    <dxi-column
+      cellTemplate="actionTemplate"
+      [allowEditing]="false"
+      [width]="50"
+    >
+      <div *dxTemplate="let cell of 'actionTemplate'">
+        <div class="d-flex align-items-center">
+          <a
+            href="javascript:void(0);"
+            container="body"
+            placement="top"
+            *ngIf="branchEditVisible(cell.data)"
+            (click)="branchEdit(cell.data)"
+            ><i class="mr-1" size="16" data-feather="edit"></i
+          ></a>
+        </div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</ng-template>
+<ng-template #buttons>
+  <button
+    type="button"
+    class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="submit()"
+  >
+    {{ lsave }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    (click)="create()"
+    *ngIf="createVisible"
+  >
+    <span [data-feather]="'plus'"></span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    *ngIf="deleteVisible"
+    (click)="delete()"
+  >
+    <span [data-feather]="'trash'"></span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-icon btn-outline-primary mb-1 mb-sm-0 mr-0 mr-1"
+    rippleEffect
+    (click)="refresh()"
+  >
+    <span [data-feather]="'refresh-ccw'"></span>
+  </button>
+</ng-template>

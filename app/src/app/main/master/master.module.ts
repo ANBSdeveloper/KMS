@@ -93,7 +93,40 @@ import { SubProductClassSidebarComponent } from "./sub-product-class/sub-product
 import { FilterBranchByZoneAreaComponent } from "./filter/filter-branch-by-zone-area/filter-branch-by-zone-area.component";
 import { StatusActiveDataSource } from "./reward-package/data-source/status-active.data-source";
 import { StatusActiveComboComponent } from "./status-active-combo/status-active-combo.component";
-
+import { PosmClassListComponent } from "./posm-class/posm-class-list/posm-class-list.component";
+import { PosmClassComboComponent } from "./posm-class/posm-class-combo/posm-class-combo.component";
+import { PosmClassSidebarComponent } from "./posm-class/posm-class-sidebar/posm-class-sidebar.component";
+import { VendorListComponent } from "./vendor/vendor-list/vendor-list.component";
+import { VendorComboComponent } from "./vendor/vendor-combo/vendor-combo.component";
+import { VendorSidebarComponent } from "./vendor/vendor-sidebar/vendor-sidebar.component";
+import { PosmItemListComponent } from "./posm-item/posm-item-list/posm-item-list.component";
+import { PosmUnitTypeDataSource } from "./posm-item/data-source/posm-unit-type.data-source";
+import { PosmCalcTypeDataSource } from "./posm-item/data-source/posm-calc-type.data-source";
+import { PosmUnitTypeComboComponent } from "./posm-item/posm-unit-type-combo/posm-unit-type-combo.component";
+import { PosmCalcTypeComboComponent } from "./posm-item/posm-calc-type-combo/posm-calc-type-combo.component";
+import { PosmItemEditComponent } from "./posm-item/posm-item-edit/posm-item-edit.component";
+import { PosmCatalogSidebarComponent } from "./posm-item/posm-catalog-sidebar/posm-catalog-sidebar.component";
+import { PosmPriceListComponent } from "./posm-price/posm-price-list/posm-price-list.component";
+import { PosmPriceEditComponent } from "./posm-price/posm-price-edit/posm-price-edit.component";
+import { PosmPriceDetailSidebarComponent } from "./posm-price/posm-price-detail-sidebar/posm-price-detail-sidebar.component";
+import { PosmItemComboComponent } from "./posm-item/posm-item-combo/posm-item-combo.component";
+import { CustomerLocationListComponent } from "./customer-location/customer-location-list/customer-location-list.component";
+import { CustomerLocationComboComponent } from "./customer-location/customer-location-combo/customer-location-combo.component";
+import { CustomerLocationSidebarComponent } from "./customer-location/customer-location-sidebar/customer-location-sidebar.component";
+import { PosmCatalogComboComponent } from "./posm-item/posm-catalog-combo/posm-catalog-combo.component";
+import { PosmRequestTypeComboComponent } from "./posm-item/posm-request-type-combo/posm-request-type-combo.component";
+import { PosmRequestTypeDataSource } from "./posm-item/data-source/posm-request-type.data-source";
+import { PosmInvestmentItemStatusDataSource } from "../investment/data-source/posm-investment-item-status.data-source";
+import { CustomerDialogComponent } from "./customer/customer-dialog/customer-dialog.component";
+import { PosmInvestmentStatusDataSource } from "../investment/data-source/posm-investment-status.data-source";
+import { CoreCardModule } from "@core/components/core-card/core-card.module";
+import { CustomerSalesMonthlyDialogComponent } from "./customer/customer-sales-monthly-dialog/customer-sales-monthly-dialog.component";
+import { DxPivotGridModule } from "devextreme-angular";
+import { ReportService } from "../report/report.service";
+import { CustomerAcceptanceImageDialogComponent } from "./customer/customer-acceptance-image-dialog/customer-acceptance-image-dialog.component";
+import { PosmTypeListComponent } from "./posm-type/posm-type-list/posm-type-list.component";
+import { PosmTypeComboComponent } from "./posm-type/posm-type-combo/posm-type-combo.component";
+import { PosmTypeSidebarComponent } from "./posm-type/posm-type-sidebar/posm-type-sidebar.component";
 // routing
 const routes: Routes = [
   {
@@ -193,6 +226,46 @@ const routes: Routes = [
     component: WardListComponent,
   },
   {
+    path: "posm-class-list",
+    component: PosmClassListComponent,
+  },
+  {
+    path: "posm-type-list",
+    component: PosmTypeListComponent,
+  },
+  {
+    path: "vendor-list",
+    component: VendorListComponent,
+  },
+  {
+    path: "customer-location-list",
+    component: CustomerLocationListComponent,
+  },
+  {
+    path: "posm-item-list",
+    component: PosmItemListComponent,
+  },
+  {
+    path: "posm-item/:id",
+    component: PosmItemEditComponent,
+  },
+  {
+    path: "new-posm-item",
+    component: PosmItemEditComponent,
+  },
+  {
+    path: "posm-price-list",
+    component: PosmPriceListComponent,
+  },
+  {
+    path: "posm-price/:id",
+    component: PosmPriceEditComponent,
+  },
+  {
+    path: "new-posm-price",
+    component: PosmPriceEditComponent,
+  },
+  {
     path: "",
     redirectTo: "/brand-list",
     pathMatch: "full",
@@ -249,14 +322,41 @@ const routes: Routes = [
     ProductPointListComponent,
     ProductPointSidebarComponent,
     ObjectTypeNotificationComboComponent,
+    PosmItemComboComponent,
     ZoneListComponent,
     AreaListComponent,
     WardListComponent,
+    PosmClassListComponent,
+    PosmClassComboComponent,
+    PosmClassSidebarComponent,
+    PosmTypeListComponent,
+    PosmTypeComboComponent,
+    PosmTypeSidebarComponent,
+    PosmItemListComponent,
+    PosmItemEditComponent,
+    PosmItemComboComponent,
+    PosmCatalogSidebarComponent,
+    PosmPriceListComponent,
+    PosmPriceEditComponent,
+    PosmPriceDetailSidebarComponent,
+    VendorListComponent,
+    VendorComboComponent,
+    VendorSidebarComponent,
     ProductEditComponent,
     SubProductClassListComponent,
     SubProductClassSidebarComponent,
     FilterBranchByZoneAreaComponent,
-    StatusActiveComboComponent
+    StatusActiveComboComponent,
+    PosmUnitTypeComboComponent,
+    PosmCalcTypeComboComponent,
+    CustomerLocationListComponent,
+    CustomerLocationComboComponent,
+    CustomerLocationSidebarComponent,
+    CustomerSalesMonthlyDialogComponent,
+    PosmCatalogComboComponent,
+    PosmRequestTypeComboComponent,
+    CustomerDialogComponent,
+    CustomerAcceptanceImageDialogComponent
   ],
   imports: [
     CommonModule,
@@ -284,6 +384,9 @@ const routes: Routes = [
     DxDateBoxModule,
     DxTextAreaModule,
     DynamicDialogModule,
+    DxPivotGridModule,
+    CoreCardModule,
+    SharedModule
   ],
   exports: [
     CycleComboComponent,
@@ -293,7 +396,17 @@ const routes: Routes = [
     FilterBranchByZoneAreaComponent,
     ZoneComboComponent,
     AreaComboComponent,
-    StatusActiveComboComponent
+    StatusActiveComboComponent,
+    PosmClassComboComponent,
+    VendorComboComponent,
+    CustomerLocationComboComponent,
+    BrandComboComponent,
+    PosmCatalogComboComponent,
+    PosmItemComboComponent,
+    PosmUnitTypeComboComponent,
+    PosmRequestTypeComboComponent,
+    CustomerDialogComponent,
+    PosmTypeComboComponent,
   ],
   providers: [
     DataServiceProxy,
@@ -305,6 +418,12 @@ const routes: Routes = [
     StatusTypeNotificationDataSource,
     ObjectTypeNotificationDataSource,
     StatusActiveDataSource,
+    PosmUnitTypeDataSource,
+    PosmCalcTypeDataSource,
+    PosmRequestTypeDataSource,
+    PosmInvestmentItemStatusDataSource,
+    PosmInvestmentStatusDataSource,
+    ReportService
   ],
 })
 export class MasterModule {}

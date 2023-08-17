@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center mt-1 mb-1">
+              <h4>
+                <i
+                  data-feather="image"
+                  [size]="16"
+                  class="mr-75 font-medium-4"
+                ></i>
+                <span class="align-middle"
+                  >{{ l("acceptance_photo")
+                  }}<strong class="mark-required" style="color: red">
+                    (*)</strong
+                  ></span
+                >
+              </h4>
+            </div>
+          </div>
+          <app-image-viewer
+            #imageViewer
+            [size]="4"
+            [dataImages]="photos"
+            [header]="l('acceptance_photo')"
+            [readOnly]="true"
+          ></app-image-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center mt-1 mb-1">
+              <h4>
+                <i
+                  data-feather="image"
+                  [size]="16"
+                  class="mr-75 font-medium-4"
+                ></i>
+                <span class="align-middle"
+                  >{{ l("design_photo")
+                  }}<strong class="mark-required" style="color: red">
+                    (*)</strong
+                  ></span
+                >
+              </h4>
+            </div>
+          </div>
+          <app-image-viewer
+            #imageViewer
+            [size]="4"
+            [dataImages]="designPhotos"
+            [header]="l('design_photo')"
+            [readOnly]="true"
+          ></app-image-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
