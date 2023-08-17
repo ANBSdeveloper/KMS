@@ -9,9 +9,9 @@ export const environment = {
   // apiUrl: "http://kms.vitadairy.vn/service",
   // authUrl: "http://kms.vitadairy.vn/service",
   // fakeApiUrl: "http://kms.vitadairy.vn",
-  apiUrl: "https://localhost:5001",
-  authUrl: "https://localhost:5001",
-  fakeApiUrl: "http://localhost:4200",
+  apiUrl: "https://localhost:5003",
+  authUrl: "https://localhost:5003",
+  fakeApiUrl: "http://localhost:4202",
   authHttps: false,
   appConfig: "app-config.json",
 };
