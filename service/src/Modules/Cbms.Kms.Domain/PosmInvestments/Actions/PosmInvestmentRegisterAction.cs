@@ -99,7 +99,9 @@ namespace Cbms.Kms.Domain.PosmInvestments.Actions
         public int CustomerId { get; private set; }
         public int CustomerLocationId { get; private set; }
         public decimal CurrentSalesAmount { get; private set; }
-        public string ShopPanelPhoto1 { get; private set; }
+		public decimal VTDCommitmentAmount { get; private set; }
+		public decimal MilkIndustryAmount { get; private set; }
+		public string ShopPanelPhoto1 { get; private set; }
         public string ShopPanelPhoto2 { get; private set; }
         public string ShopPanelPhoto3 { get; private set; }
         public string ShopPanelPhoto4 { get; private set; }
@@ -143,8 +145,10 @@ namespace Cbms.Kms.Domain.PosmInvestments.Actions
             string setupContact2,
             string note,
             List<SalesCommitment> salesCommitments,
-            List<PosmItem> items
-        )
+            List<PosmItem> items,
+			decimal vtdCommitmentAmount,
+			decimal milkIndustryAmount
+		)
         {
             IocResolver = iocResolver;
             LocalizationSource = localizationSource;
@@ -169,6 +173,8 @@ namespace Cbms.Kms.Domain.PosmInvestments.Actions
             UserId = userId;
             SalesCommitments = salesCommitments;
             Items = items;
+            VTDCommitmentAmount = vtdCommitmentAmount;
+            MilkIndustryAmount = milkIndustryAmount;
         }
     }
 }

@@ -82,8 +82,10 @@ namespace Cbms.Kms.Application.PosmInvestments.CommandHandlers
                             p.Photo1,
                             p.Photo2,
                             p.Photo3,
-                            p.Photo4)).ToList()
-                        ));
+                            p.Photo4)).ToList(),
+						requestData.VTDCommitmentAmount,
+						requestData.MilkIndustryAmount
+						));
 
                     await _posmInvestmentRepository.InsertAsync(posmInvestment);
 

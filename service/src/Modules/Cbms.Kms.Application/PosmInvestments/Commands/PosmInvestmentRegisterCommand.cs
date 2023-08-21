@@ -43,7 +43,9 @@ namespace Cbms.Kms.Application.PosmInvestments.Commands
             public int CustomerId { get; set; }
             public int CustomerLocationId { get; set; }
             public decimal CurrentSalesAmount { get; set; }
-            public string ShopPanelPhoto1 { get; set; }
+			public decimal VTDCommitmentAmount { get; set; }
+			public decimal MilkIndustryAmount { get; set; }
+			public string ShopPanelPhoto1 { get; set; }
             public string ShopPanelPhoto2 { get; set; }
             public string ShopPanelPhoto3 { get; set; }
             public string ShopPanelPhoto4 { get; set; }

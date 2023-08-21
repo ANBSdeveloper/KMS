@@ -3,3 +3,6 @@
 /app/.vscode
 /app/package-lock.json
 /app/dist
+/service/src/API/Cbms.Wms.Web/appsettings.json
+/service/src/API/Cbms.Wms.Web/appsettings.json
+/.vs
