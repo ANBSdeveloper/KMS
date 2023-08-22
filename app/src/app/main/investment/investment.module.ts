@@ -6,6 +6,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { NgbModule, NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import {DialogModule} from 'primeng/dialog';
 
 import { CoreCommonModule } from "@core/common.module";
 import { CoreDirectivesModule } from "@core/directives/directives";
@@ -91,6 +92,7 @@ import { PosmInvestmentPrepareComponent } from "./posm-investment/posm-investmen
 import { PosmInvestmentOperationComponent } from "./posm-investment/posm-investment-operation/posm-investment-operation.component";
 import { PosmInvestmentAcceptanceComponent } from "./posm-investment/posm-investment-acceptance/posm-investment-acceptance.component";
 import { PosmInvestmentHistoryComponent } from "./posm-investment/posm-investment-history/posm-investment-history.component";
+import { PosmInvestmentImageDetailComponent } from "./posm-investment/posm-investment-image-detail/posm-investment-image-detail.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -207,7 +209,8 @@ const routes: Routes = [
     PosmInvestmentPrepareComponent,
     PosmInvestmentOperationComponent,
     PosmInvestmentAcceptanceComponent,
-    PosmInvestmentHistoryComponent
+    PosmInvestmentHistoryComponent,
+    PosmInvestmentImageDetailComponent
   ],
   imports: [
     CommonModule,
@@ -240,6 +243,7 @@ const routes: Routes = [
     DynamicDialogModule,
     SystemModule,
     FullCalendarModule,
+    DialogModule,
   ],
   providers: [
     DataServiceProxy,

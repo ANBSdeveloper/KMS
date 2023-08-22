@@ -49,10 +49,10 @@ namespace Cbms.Kms.Domain.PosmInvestments
         public string PrepareNote { get; private set; }
         public DateTime? PrepareDate { get; private set; }
         public string UpdateCostReason { get; private set; }
-        public string OperationPhoto1 { get; private set; }
-        public string OperationPhoto2 { get; private set; }
-        public string OperationPhoto3 { get; private set; }
-        public string OperationPhoto4 { get; private set; }
+        public string OperationPhoto1 { get; set; }
+        public string OperationPhoto2 { get; set; }
+        public string OperationPhoto3 { get; set; }
+        public string OperationPhoto4 { get; set; }
         public string OperationLink { get; private set; }
         public string OperationNote { get; private set; }
 

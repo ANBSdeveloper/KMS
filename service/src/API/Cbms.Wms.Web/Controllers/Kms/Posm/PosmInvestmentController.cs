@@ -1,18 +1,27 @@
 ﻿using Cbms.Application.Authorization;
+using Cbms.Application.Dependency;
 using Cbms.Application.Runtime;
 using Cbms.AspNetCore.Web.Models;
 using Cbms.Authorization;
+using Cbms.Dependency;
 using Cbms.Kms.Application.PosmInvestments.Commands;
 using Cbms.Kms.Application.PosmInvestments.Dto;
 using Cbms.Kms.Application.PosmInvestments.Query;
 using Cbms.Kms.Application.PosmPrices.Commands;
 using Cbms.Kms.Application.TicketInvestments.Commands;
+using Cbms.Kms.Domain.AppSettings;
+using Cbms.Kms.Infrastructure;
+using Cbms.Kms.Web.Models;
+using Cbms.Kms.Web.Service;
+using Cbms.Localization;
 using Cbms.Mediator.Query.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Buffers.Text;
@@ -27,9 +36,17 @@ namespace Cbms.Kms.Web.Controllers.Kms
     [Route("api/v1/posm-investments")]
     public class PosmInvestmentController : AppController
     {
-        public PosmInvestmentController(ILogger logger, IMediator mediator) : base(logger, mediator)
+		public IIocResolver IocResolver { get; private set; }		
+		private readonly AppDbContext _dbContext;
+		private readonly ILocalizationManager _localizationManager;
+
+		public PosmInvestmentController(ILogger logger, IMediator mediator, IIocResolver iocResolver, 
+            ILocalizationManager localizationManager, AppDbContext dbContext) : base(logger, mediator)
         {
-        }
+			IocResolver = iocResolver;		
+			_dbContext = dbContext;
+			_localizationManager = localizationManager;
+		}
 
         [HttpGet("{id}", Name = "GetPosmInvestment")]
         [Produces(typeof(ApiResultObject<PosmInvestmentDto>))]
@@ -510,50 +527,57 @@ namespace Cbms.Kms.Web.Controllers.Kms
             return Ok();
         }
 
-        //[HttpGet("getOperationPlanInvestmentList", Name = "GetOperationPlanInvestmentList")]
-        //[Produces(typeof(ApiResultObject<PagingResult<PosmInvestmentListItemDto>>))]
-        //public async Task<PagingResult<PosmInvestmentListItemDto>> GetOperationPlanInvestmentList([FromQuery] PosmInvestmnetGetListByTime query)
-        //{
+		//[HttpGet("getOperationPlanInvestmentList", Name = "GetOperationPlanInvestmentList")]
+		//[Produces(typeof(ApiResultObject<PagingResult<PosmInvestmentListItemDto>>))]
+		//public async Task<PagingResult<PosmInvestmentListItemDto>> GetOperationPlanInvestmentList([FromQuery] PosmInvestmnetGetListByTime query)
+		//{
 
-        //    var entityDto = await Mediator.Send(new PosmInvestmnetGetListByTime()
-        //    {
-        //        Status = { (int)PosmInvestmentStatus.Approved, 
-        //            (int)PosmInvestmentStatus.Denied, 
-        //            (int)PosmInvestmentStatus.Doing, 
-        //            (int)PosmInvestmentStatus.Operated, 
-        //            (int)PosmInvestmentStatus.Accepted, 
-        //            (int)PosmInvestmentStatus.FinalSettlement },
-        //        RsmStaffId = query.RsmStaffId,
-        //        AsmStaffId = query.AsmStaffId,
-        //        SalesSupervisorStaffId = query.SalesSupervisorStaffId,
-        //        FromDate = query.FromDate,
-        //        ToDate = query.ToDate,
-        //        ByOperationDate = true,
-        //        Keyword = query.Keyword,
-        //        MaxResult = query.MaxResult,
-        //        Skip = query.Skip,
-        //        Sort = query.Sort
-        //    });
-        //    return entityDto;
-        //}
+		//    var entityDto = await Mediator.Send(new PosmInvestmnetGetListByTime()
+		//    {
+		//        Status = { (int)PosmInvestmentStatus.Approved, 
+		//            (int)PosmInvestmentStatus.Denied, 
+		//            (int)PosmInvestmentStatus.Doing, 
+		//            (int)PosmInvestmentStatus.Operated, 
+		//            (int)PosmInvestmentStatus.Accepted, 
+		//            (int)PosmInvestmentStatus.FinalSettlement },
+		//        RsmStaffId = query.RsmStaffId,
+		//        AsmStaffId = query.AsmStaffId,
+		//        SalesSupervisorStaffId = query.SalesSupervisorStaffId,
+		//        FromDate = query.FromDate,
+		//        ToDate = query.ToDate,
+		//        ByOperationDate = true,
+		//        Keyword = query.Keyword,
+		//        MaxResult = query.MaxResult,
+		//        Skip = query.Skip,
+		//        Sort = query.Sort
+		//    });
+		//    return entityDto;
+		//}
 
-        //[HttpGet("getPosmByPosmInvestmentId", Name = "GetPosmByPosmInvestmentId")]
-        //[Produces(typeof(ApiResultObject<PagingResult<PosmListDto>>))]
-        //public async Task<PagingResult<PosmListDto>> GetPosmByPosmInvestmentId([FromQuery] PosmGetListByPosmInvestmentId query)
-        //{
-        //    var entityDto = await Mediator.Send(query); ;
-        //    return entityDto;
-        //}
+		//[HttpGet("getPosmByPosmInvestmentId", Name = "GetPosmByPosmInvestmentId")]
+		//[Produces(typeof(ApiResultObject<PagingResult<PosmListDto>>))]
+		//public async Task<PagingResult<PosmListDto>> GetPosmByPosmInvestmentId([FromQuery] PosmGetListByPosmInvestmentId query)
+		//{
+		//    var entityDto = await Mediator.Send(query); ;
+		//    return entityDto;
+		//}
 
 
 
-        //[HttpPost("print", Name = "PrintPosm")]
-        //[ClaimRequirementAny(CbmsClaimTypes.Permission, "Posms")]
-        //[Produces(typeof(ApiResultObject<object>))]
-        //public async Task PrintPosm([FromBody] PosmInvestmentUpdatePrintPosmQuantityCommand command)
-        //{
-        //    await Mediator.Send(command);
-        //}
+		//[HttpPost("print", Name = "PrintPosm")]
+		//[ClaimRequirementAny(CbmsClaimTypes.Permission, "Posms")]
+		//[Produces(typeof(ApiResultObject<object>))]
+		//public async Task PrintPosm([FromBody] PosmInvestmentUpdatePrintPosmQuantityCommand command)
+		//{
+		//    await Mediator.Send(command);
+		//}
 
-    }
+		[HttpPost("posm-investment-items-update", Name = "PosmInvestmentItemsUpdate")]		
+		public async Task<ResponseData> PosmInvestmentItemsUpdate([FromBody] PosmInvestmentItemsUpdateRequest request)
+		{
+			PosmService posmService = new PosmService(IocResolver, _dbContext);
+			return await posmService.PosmInvestmentItemsUpdate(request);
+		}
+
+	}
     }

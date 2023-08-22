@@ -93,7 +93,7 @@
                         ></i>
                         <span class="align-middle"
                           >{{ l("design_photo")
-                          }}<strong class="mark-required" style="color: red">
+                          }} bbb<strong class="mark-required" style="color: red">
                             (*)</strong
                           ></span
                         >
@@ -211,5 +211,16 @@
       format="#,##0"
     ></dxi-column>
     <dxi-column dataField="note" [caption]="l('note')"></dxi-column>
+    <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+    <div *dxTemplate="let itemPosm of 'detail'">
+      <div class="master-detail-caption"> 
+        <app-posm-investment-image-detail
+        #posmInvestmentImageDetail       
+        [placeholder]="l('all')"   
+        [posmInvestmentItemId]="itemPosm.data.id"    
+      ></app-posm-investment-image-detail>
+      </div>
+      <detail-grid [key]="itemPosm.key"></detail-grid>
+    </div>
   </dx-data-grid>
 </ng-template>

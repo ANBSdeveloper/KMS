@@ -27,6 +27,7 @@ import { ImageViewerComponent } from "@shared/components/image-viewer/image-view
 import { PosmInvestmentItemStatusDataSource } from "../../data-source/posm-investment-item-status.data-source";
 import { PosmCalcType } from "@app/main/master/posm-item/data-source/posm-calc-type.data-source";
 import { formatNumber } from "devextreme/localization";
+import { PosmInvestmentImageDetailComponent } from "../posm-investment-image-detail/posm-investment-image-detail.component";
 
 //#endregion
 
@@ -47,6 +48,8 @@ export class PosmInvestmentOperationComponent extends FormComponentBase {
   @BlockUI() pageBlockUI: NgBlockUI;
   @ViewChild("posmItemDataGrid") posmItemGrid: DxDataGridComponent;
   @ViewChild("imageViewer") imageViewer: ImageViewerComponent;
+  @ViewChild("posmInvestmentImageDetail")
+  posmInvestmentImageDetail: PosmInvestmentImageDetailComponent;
   @Input() set investment(value: PosmInvestmentDto) {
     this._investment = value;
     this.mapToForm();
