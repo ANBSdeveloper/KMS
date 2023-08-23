@@ -8678,7 +8678,74 @@ export class DataServiceProxy {
         }));
     }
 
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    marketingConfirmProduceNew(id: number, body: PosmInvestmentMarketingConfirmProduceNewCommand | undefined): Observable<ObjectApiResultObject> {
+        let url_ = this.baseUrl + "/api/v1/posm-investments/{id}/marketing-confirm-produce-new";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMarketingConfirmProduceNew(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMarketingConfirmProduceNew(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ObjectApiResultObject>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ObjectApiResultObject>;
+        }));
+    }
+
     protected processMarketingConfirmProduce(response: HttpResponseBase): Observable<ObjectApiResultObject> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ObjectApiResultObject.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 401) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Unauthorized", status, _responseText, _headers);
+            }));
+        } else if (status === 403) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("Forbidden", status, _responseText, _headers);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ObjectApiResultObject>(null as any);
+    }
+
+    protected processMarketingConfirmProduceNew(response: HttpResponseBase): Observable<ObjectApiResultObject> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -29278,6 +29345,10 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
     status?: number;
     items?: PosmInvestmentItemDto[] | undefined;
     salesCommitments?: PosmSalesCommitmentDto[] | undefined;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
 
     constructor(data?: IPosmInvestmentDto) {
         if (data) {
@@ -29339,6 +29410,10 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
                 for (let item of _data["salesCommitments"])
                     this.salesCommitments!.push(PosmSalesCommitmentDto.fromJS(item));
             }
+            this.designPhoto1 = _data["designPhoto1"];
+            this.designPhoto2 = _data["designPhoto2"];
+            this.designPhoto3 = _data["designPhoto3"];
+            this.designPhoto4 = _data["designPhoto4"];
         }
     }
 
@@ -29400,6 +29475,10 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
             for (let item of this.salesCommitments)
                 data["salesCommitments"].push(item.toJSON());
         }
+        data["designPhoto1"] = this.designPhoto1;
+        data["designPhoto2"] = this.designPhoto2;
+        data["designPhoto3"] = this.designPhoto3;
+        data["designPhoto4"] = this.designPhoto4;
         return data;
     }
 
@@ -29453,6 +29532,10 @@ export interface IPosmInvestmentDto {
     status?: number;
     items?: PosmInvestmentItemDto[] | undefined;
     salesCommitments?: PosmSalesCommitmentDto[] | undefined;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
 }
 
 export class PosmInvestmentDtoApiResultObject implements IPosmInvestmentDtoApiResultObject {
@@ -30687,6 +30770,128 @@ export interface IPosmInvestmentMarketingConfirmProduceDto {
     photo2?: string | undefined;
     photo3?: string | undefined;
     photo4?: string | undefined;
+    link?: string | undefined;
+    note?: string | undefined;
+    id?: number;
+}
+
+export class PosmInvestmentMarketingConfirmProduceNewCommand implements IPosmInvestmentMarketingConfirmProduceNewCommand {
+    readonly commandId?: string;
+    readonly occuredDate?: Date;
+    data?: PosmInvestmentMarketingConfirmProduceNewDto;
+
+    constructor(data?: IPosmInvestmentMarketingConfirmProduceNewCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            (<any>this).commandId = _data["commandId"];
+            (<any>this).occuredDate = _data["occuredDate"] ? new Date(_data["occuredDate"].toString()) : <any>undefined;
+            this.data = _data["data"] ? PosmInvestmentMarketingConfirmProduceNewDto.fromJS(_data["data"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): PosmInvestmentMarketingConfirmProduceNewCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new PosmInvestmentMarketingConfirmProduceNewCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["commandId"] = this.commandId;
+        data["occuredDate"] = this.occuredDate ? this.occuredDate.toISOString() : <any>undefined;
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        return data;
+    }
+
+    clone(): PosmInvestmentMarketingConfirmProduceNewCommand {
+        const json = this.toJSON();
+        let result = new PosmInvestmentMarketingConfirmProduceNewCommand();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPosmInvestmentMarketingConfirmProduceNewCommand {
+    commandId?: string;
+    occuredDate?: Date;
+    data?: PosmInvestmentMarketingConfirmProduceNewDto;
+}
+
+export class PosmInvestmentMarketingConfirmProduceNewDto implements IPosmInvestmentMarketingConfirmProduceNewDto {
+    posmInvestmentId?: number;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
+    link?: string | undefined;
+    note?: string | undefined;
+    id?: number;
+
+    constructor(data?: IPosmInvestmentMarketingConfirmProduceNewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.posmInvestmentId = _data["posmInvestmentId"];
+            this.designPhoto1 = _data["designPhoto1"];
+            this.designPhoto2 = _data["designPhoto2"];
+            this.designPhoto3 = _data["designPhoto3"];
+            this.designPhoto4 = _data["designPhoto4"];
+            this.link = _data["link"];
+            this.note = _data["note"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): PosmInvestmentMarketingConfirmProduceNewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PosmInvestmentMarketingConfirmProduceNewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["posmInvestmentId"] = this.posmInvestmentId;
+        data["designPhoto1"] = this.designPhoto1;
+        data["designPhoto2"] = this.designPhoto2;
+        data["designPhoto3"] = this.designPhoto3;
+        data["designPhoto4"] = this.designPhoto4;
+        data["link"] = this.link;
+        data["note"] = this.note;
+        data["id"] = this.id;
+        return data;
+    }
+
+    clone(): PosmInvestmentMarketingConfirmProduceNewDto {
+        const json = this.toJSON();
+        let result = new PosmInvestmentMarketingConfirmProduceNewDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPosmInvestmentMarketingConfirmProduceNewDto {
+    posmInvestmentId?: number;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
     link?: string | undefined;
     note?: string | undefined;
     id?: number;

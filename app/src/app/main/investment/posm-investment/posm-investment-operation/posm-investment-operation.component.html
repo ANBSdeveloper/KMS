@@ -22,7 +22,8 @@
           <ng-container *ngTemplateOutlet="posmItemGrid"></ng-container>
         </div>
       </div>
-      <div *ngIf="detailVisible" class="mt-2">
+      <!-- <div *ngIf="detailVisible" class="mt-2"> -->
+        <div class="mt-2"> 
         <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="row">
@@ -54,8 +55,8 @@
                     }}<strong class="mark-required">(*)</strong></label
                   >
                   <dx-text-box
-                    formControlName="operationLink"
-                    [readOnly]="!editable"
+                    formControlName="operationLink"      
+                    [readOnly]="!editableNew"             
                   ></dx-text-box>
                   <span
                     class="invalid-form"
@@ -71,9 +72,9 @@
                 <div class="form-group">
                   <label class="form-label">{{ l("note") }}</label>
                   <dx-text-area
-                    [height]="60"
-                    [readOnly]="!editable"
+                    [height]="60"                   
                     formControlName="operationNote"
+                    [readOnly]="!editableNew"
                   ></dx-text-area>
                 </div>
               </div>
@@ -93,7 +94,7 @@
                         ></i>
                         <span class="align-middle"
                           >{{ l("design_photo")
-                          }} bbb<strong class="mark-required" style="color: red">
+                          }} bbbxyzz<strong class="mark-required" style="color: red">
                             (*)</strong
                           ></span
                         >
@@ -104,8 +105,8 @@
                     #imageViewer
                     [size]="4"
                     [dataImages]="photos"
-                    [header]="l('design_photo')"
-                    [readOnly]="!editable"
+                    [header]="l('design_photo')"    
+                    [readOnly]="!editableNew"               
                   ></app-image-viewer>
                 </div>
               </div>
@@ -214,10 +215,24 @@
     <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
     <div *dxTemplate="let itemPosm of 'detail'">
       <div class="master-detail-caption"> 
+        <h6>
+          <i
+            data-feather="image"
+            [size]="16"
+            class="mr-75 font-medium-4"
+          ></i>
+          <span class="align-middle"
+            >{{ l("attachment_photo")
+            }} <strong class="mark-required" style="color: red">
+              (*)</strong
+            ></span
+          >
+        </h6>
         <app-posm-investment-image-detail
         #posmInvestmentImageDetail       
         [placeholder]="l('all')"   
-        [posmInvestmentItemId]="itemPosm.data.id"    
+        [posmInvestmentItemId]="itemPosm.data.id"  
+        [readOnly]="!editableNew"  
       ></app-posm-investment-image-detail>
       </div>
       <detail-grid [key]="itemPosm.key"></detail-grid>

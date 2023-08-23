@@ -262,7 +262,15 @@ namespace Cbms.Kms.Web.Controllers.Kms
             await Mediator.Send(command.WithId(id));
         }
 
-        [HttpPut("{id}/sup-confirm-produce", Name = "SupConfirmProduce")]
+		[HttpPut("{id}/marketing-confirm-produce-new", Name = "MarketingConfirmProduceNew")]
+		[ClaimRequirementAny(CbmsClaimTypes.Permission, "PosmInvestments", "PosmInvestments.MarketingConfirmProduce")]
+		[Produces(typeof(ApiResultObject<object>))]
+		public async Task ConfirmProduceNew([FromRoute] int id, [FromBody] PosmInvestmentMarketingConfirmProduceNewCommand command)
+		{
+			await Mediator.Send(command.WithId(id));
+		}
+
+		[HttpPut("{id}/sup-confirm-produce", Name = "SupConfirmProduce")]
         [ClaimRequirementAny(CbmsClaimTypes.Permission, "PosmInvestments", "PosmInvestments.SupConfirmProduce")]
         [Produces(typeof(ApiResultObject<object>))]
         public async Task ConfirmProduce([FromRoute] int id, [FromBody] PosmInvestmentSupConfirmProduceCommand command)

@@ -2,10 +2,12 @@
 using Cbms.Domain.Entities.Auditing;
 using Cbms.Domain.Repositories;
 using Cbms.Kms.Domain.Budgets;
+using Cbms.Kms.Domain.Connection;
 using Cbms.Kms.Domain.Customers;
 using Cbms.Kms.Domain.Cycles;
 using Cbms.Kms.Domain.Helpers;
 using Cbms.Kms.Domain.InvestmentSettings;
+using Cbms.Kms.Domain.Orders;
 using Cbms.Kms.Domain.PosmClasses;
 using Cbms.Kms.Domain.PosmInvestments.Actions;
 using Cbms.Kms.Domain.PosmItems;
@@ -13,6 +15,7 @@ using Cbms.Kms.Domain.Staffs;
 using Cbms.Kms.Domain.TicketInvestments;
 using Cbms.Kms.Domain.TicketInvestments.Actions;
 using Cbms.Timing;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,14 +52,21 @@ namespace Cbms.Kms.Domain.PosmInvestments
         public decimal CommitmentAmount { get; private set; }
         public int CycleId { get; private set; }
         public string CancelReason { get; private set; }
-      
-        public PosmInvestmentStatus Status { get; private set; }
+		public string DesignPhoto1 { get; set; }
+		public string DesignPhoto2 { get; set; }
+		public string DesignPhoto3 { get; set; }
+		public string DesignPhoto4 { get; set; }		
+
+		public PosmInvestmentStatus Status { get; private set; }
         public IReadOnlyCollection<PosmSalesCommitment> SalesCommitments => _salesCommitments;
         public List<PosmSalesCommitment> _salesCommitments = new List<PosmSalesCommitment>();
         public IReadOnlyCollection<PosmInvestmentItem> Items => _items;
         public List<PosmInvestmentItem> _items = new List<PosmInvestmentItem>();
 
-        public override async Task ApplyActionAsync(IEntityAction action)
+		public IReadOnlyCollection<PosmItem> PosmItems => _posmItem;
+		public List<PosmItem> _posmItem = new List<PosmItem>();
+
+		public override async Task ApplyActionAsync(IEntityAction action)
         {
             switch (action)
             {
@@ -123,7 +133,10 @@ namespace Cbms.Kms.Domain.PosmInvestments
                 case PosmInvestmentMarketingConfirmProduceAction marketingnConfirmProduceAction:
                     await MarketingConfirmProduceAsync(marketingnConfirmProduceAction);
                     break;
-                case PosmInvestmentSupConfirmProduceAction supConfirmProduceAction:
+				case PosmInvestmentMarketingConfirmProduceNewAction marketingnConfirmProduceNewAction:
+					await MarketingConfirmProduceNewAsync(marketingnConfirmProduceNewAction);
+					break;
+				case PosmInvestmentSupConfirmProduceAction supConfirmProduceAction:
                     await SupConfirmProduceAsync(supConfirmProduceAction);
                     break;
                 case PosmInvestmentSupplyConfirmProduceAction procConfirmProduceAction:
@@ -572,10 +585,72 @@ namespace Cbms.Kms.Domain.PosmInvestments
             {
                 Status = PosmInvestmentStatus.ConfirmedProduce1;
             }
-
         }
 
-        public async Task SupConfirmProduceAsync(PosmInvestmentSupConfirmProduceAction action)
+		public async Task MarketingConfirmProduceNewAsync(PosmInvestmentMarketingConfirmProduceNewAction action)
+		{
+			//var posmItemRepository = action.IocResolver.Resolve<IRepository<PosmItem, int>>();		
+			var item = _items.Where(p => p.PosmInvestmentId == action.PosmInvestmentId);
+			if (item == null)
+			{
+				throw new EntityNotFoundException(typeof(PosmInvestmentItem), action.PosmInvestmentId);
+			}
+
+            foreach (var _item in item)
+            {
+                var posmInvestmentItem = _items.FirstOrDefault(p => p.Id == _item.Id);
+                if (posmInvestmentItem == null)
+                {
+                    throw new EntityNotFoundException(typeof(PosmInvestmentItem), action.PosmInvestmentId);
+                }
+
+                if (string.IsNullOrEmpty(posmInvestmentItem.OperationPhoto1) && string.IsNullOrEmpty(posmInvestmentItem.OperationPhoto2)
+                    && string.IsNullOrEmpty(posmInvestmentItem.OperationPhoto3) && string.IsNullOrEmpty(posmInvestmentItem.OperationPhoto4))
+                {
+                    //var posmItem = await posmItemRepository.FirstOrDefaultAsync(p => p.Id == _item.PosmItemId);
+                    throw BusinessExceptionBuilder.Create(action.LocalizationSource).MessageCode("PosmItem.OperationPhotoNotNull").Build();
+                }
+
+                await posmInvestmentItem.ApplyActionAsync(action);
+            }			
+
+			if (_items.Count(p => p.Status == PosmInvestmentItemStatus.ConfirmedProduce1) == _items.Count)
+			{
+				Status = PosmInvestmentStatus.ConfirmedProduce1;
+
+				var imageResizer = action.IocResolver.Resolve<IImageResizer>();
+				string imgObject = "PosmInvestmentDesign";
+                if (!string.IsNullOrEmpty(action.DesignPhoto1)) {
+					string imgPathPhoto1 = await imageResizer.SaveImgFromBase64(imgObject, action.PosmInvestmentId.ToString(), 
+                        action.DesignPhoto1, DesignPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath);
+					DesignPhoto1 = imgPathPhoto1;
+				}
+
+				if (!string.IsNullOrEmpty(action.DesignPhoto2))
+				{
+					string imgPathPhoto2 = await imageResizer.SaveImgFromBase64(imgObject, action.PosmInvestmentId.ToString(),
+						action.DesignPhoto2, DesignPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath);
+					DesignPhoto2 = imgPathPhoto2;
+				}
+
+				if (!string.IsNullOrEmpty(action.DesignPhoto3))
+				{
+					string imgPathPhoto3 = await imageResizer.SaveImgFromBase64(imgObject, action.PosmInvestmentId.ToString(),
+						action.DesignPhoto3, DesignPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath);
+					DesignPhoto3 = imgPathPhoto3;
+				}
+
+				if (!string.IsNullOrEmpty(action.DesignPhoto4))
+				{
+					string imgPathPhoto4 = await imageResizer.SaveImgFromBase64(imgObject, action.PosmInvestmentId.ToString(),
+						action.DesignPhoto4, DesignPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath);
+					DesignPhoto4 = imgPathPhoto4;
+				}
+			}
+
+		}
+
+		public async Task SupConfirmProduceAsync(PosmInvestmentSupConfirmProduceAction action)
         {
             var item = _items.FirstOrDefault(p => p.Id == action.PosmInvestmentItemId);
             if (item == null)

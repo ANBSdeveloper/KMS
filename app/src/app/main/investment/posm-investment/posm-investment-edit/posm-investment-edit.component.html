@@ -662,12 +662,21 @@
   >
     {{ l("approve") }}
   </button>
-  <button
+  <!-- <button
     type="button"
     class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
     rippleEffect
     (click)="confirmProduce1()"
     *ngIf="confirmProduce1ButtonVisible"
+  >
+    {{ l("confirm_produce_1") }}
+  </button> -->
+  <button
+    type="button"
+    class="btn btn-success mb-1 mb-sm-0 mr-0 mr-sm-1"
+    rippleEffect
+    (click)="confirmProduce1New()"
+    *ngIf="confirmProduce1ButtonVisibleNew"
   >
     {{ l("confirm_produce_1") }}
   </button>

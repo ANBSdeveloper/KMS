@@ -43,7 +43,12 @@ namespace Cbms.Kms.Application.PosmInvestments.Dto
         public string MobilePhone { get; set; }
         public string Address { get; set; }
         public int Status { get; set; }
-        [IgnoreMap]
+		public string DesignPhoto1 { get; set; }
+		public string DesignPhoto2 { get; set; }
+		public string DesignPhoto3 { get; set; }
+		public string DesignPhoto4 { get; set; }
+
+		[IgnoreMap]
         public List<PosmInvestmentItemDto> Items { get; set; }
         [IgnoreMap]
         public List<PosmSalesCommitmentDto> SalesCommitments { get; set; }

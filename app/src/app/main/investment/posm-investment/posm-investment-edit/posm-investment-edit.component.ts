@@ -68,6 +68,8 @@ import {
   PosmInvestmentAsmConfirmAcceptDto,
   PosmInvestmentTradeConfirmAcceptCommand,
   PosmInvestmentTradeConfirmAcceptDto,
+  PosmInvestmentMarketingConfirmProduceNewCommand,
+  PosmInvestmentMarketingConfirmProduceNewDto,
 } from "@shared/services/data.service";
 import Stepper from "bs-stepper";
 import { DxDataGridComponent } from "devextreme-angular/ui/data-grid";
@@ -571,6 +573,43 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
         }
       );
   }
+
+  confirmProduce1New() {
+    if (!this.posmInvestmentOperation.formGroup.valid) {
+      formHelper.validateAllFormFields(this.posmInvestmentOperation.formGroup);
+      return false;
+    }
+    if (this.posmInvestmentOperation.imageViewer.getData().every((p) => !p)) {
+      this.messageService.toastError(this.l("design_photo_required"));
+      return false;
+    }
+    this.pageBlockUI.start();
+    this.getDataService<DataServiceProxy>()
+      .marketingConfirmProduceNew(
+        this.modelId,
+        new PosmInvestmentMarketingConfirmProduceNewCommand({
+          data: new PosmInvestmentMarketingConfirmProduceNewDto({
+            link: this.posmInvestmentOperation.c("operationLink").value,
+            note: this.posmInvestmentOperation.c("operationNote").value,
+            designPhoto1: this.posmInvestmentOperation.imageViewer.getData()[0],
+            designPhoto2: this.posmInvestmentOperation.imageViewer.getData()[1],
+            designPhoto3: this.posmInvestmentOperation.imageViewer.getData()[2],
+            designPhoto4: this.posmInvestmentOperation.imageViewer.getData()[3],
+            posmInvestmentId: this.posmInvestmentPrepare._investment.id,
+          }),
+        })
+      )
+      .pipe(finalize(() => this.pageBlockUI.stop()))
+      .subscribe(
+        (_) => {
+          this.refresh();
+        },
+        (error) => {
+          this.messageService.toastError(error);
+        }
+      );
+  }
+
   confirmProduce2() {
     this.pageBlockUI.start();
     this.getDataService<DataServiceProxy>()
@@ -998,6 +1037,17 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
       this.posmInvestmentOperation?.item &&
       <any>this.posmInvestmentOperation?.item.status ==
         PosmInvestmentItemStatus.ValidOrder &&
+      (this.isGranted("PosmInvestments.MarketingConfirmProduce") ||
+        this.isGranted("PosmInvestments"))
+    );
+  }
+
+  get confirmProduce1ButtonVisibleNew(): boolean {
+    return (
+      !this.operationStepDisabled &&
+      this.currentStep == 4 &&   
+      this.posmInvestmentOperation._investment.status ==
+        PosmInvestmentStatus.ValidOrder && 
       (this.isGranted("PosmInvestments.MarketingConfirmProduce") ||
         this.isGranted("PosmInvestments"))
     );

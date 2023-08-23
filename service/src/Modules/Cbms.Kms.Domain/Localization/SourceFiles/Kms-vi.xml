@@ -274,6 +274,7 @@
 	<text name="PosmInvestment.SetupPlanDate">Ngày dự kiến lắp đặt</text>
 	<text name="PosmInvestment.ImportInvalid">Dòng {0} {1} dữ liệu không hợp lệ</text>
 	<text name="PosmInvestment.RequestType">Lý do yêu cầu</text>
+  <text name="PosmItem.OperationPhotoNotNull">Các POSM yêu cầu ít nhất 1 ảnh đính kèm</text>
 	 
 	<text name="PosmPrice.PosmItemCode">Mã POSM</text>
 	<text name="PosmPrice.PosmItemName">Tên POSM</text>

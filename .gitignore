@@ -3,3 +3,5 @@
 /app/.vscode
 /app/package-lock.json
 /app/dist
+/app/src/assets/img_save
+/service/publish

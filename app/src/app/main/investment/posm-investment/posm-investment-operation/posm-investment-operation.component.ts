@@ -22,12 +22,13 @@ import { PosmUnitTypeDataSource } from "@app/main/master/posm-item/data-source/p
 import moment from "moment";
 import { Validators } from "@angular/forms";
 import { DxDataGridComponent } from "devextreme-angular/ui/data-grid";
-import { PosmInvestmentItemStatus } from "../../data-source/posm-investment-status.enum";
+import { PosmInvestmentItemStatus, PosmInvestmentStatus } from "../../data-source/posm-investment-status.enum";
 import { ImageViewerComponent } from "@shared/components/image-viewer/image-viewer.component";
 import { PosmInvestmentItemStatusDataSource } from "../../data-source/posm-investment-item-status.data-source";
 import { PosmCalcType } from "@app/main/master/posm-item/data-source/posm-calc-type.data-source";
 import { formatNumber } from "devextreme/localization";
 import { PosmInvestmentImageDetailComponent } from "../posm-investment-image-detail/posm-investment-image-detail.component";
+import { environment } from "environments/environment";
 
 //#endregion
 
@@ -50,9 +51,9 @@ export class PosmInvestmentOperationComponent extends FormComponentBase {
   @ViewChild("imageViewer") imageViewer: ImageViewerComponent;
   @ViewChild("posmInvestmentImageDetail")
   posmInvestmentImageDetail: PosmInvestmentImageDetailComponent;
-  @Input() set investment(value: PosmInvestmentDto) {
-    this._investment = value;
-    this.mapToForm();
+  @Input() set investment(value: PosmInvestmentDto) {   
+    this._investment = value;    
+    this.mapToForm();   
   }
 
   get investment() {
@@ -75,12 +76,45 @@ export class PosmInvestmentOperationComponent extends FormComponentBase {
       operationNote: [undefined],
       operationDate: [moment().toDate(), [Validators.required]],
       operationLink: [undefined, [Validators.required]],
-    });
+    });   
   }
 
-  mapToForm() {
+  async ngOnInit() {   
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
+  }
+
+  async mapToForm() {
     this.model = cloneDeep(this.investment);
+
+    this.photos = [
+      this.model.designPhoto1 != null && this.model.designPhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto1) : this.model.designPhoto1,       
+      this.model.designPhoto2 != null && this.model.designPhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto2) : this.model.designPhoto2, 
+      this.model.designPhoto3 != null && this.model.designPhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto3) : this.model.designPhoto3, 
+      this.model.designPhoto4 != null && this.model.designPhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto4) : this.model.designPhoto4, 
+    ];
+
     if (this.model?.items) {
+      this.c("operationNote").setValue(this.model.items[0].operationNote);
+      this.c("operationLink").setValue(this.model.items[0].operationLink);
       this.posmItemDataSource.setData(this.model.items);
       this.posmItemGrid?.instance.refresh();
     }
@@ -97,6 +131,14 @@ export class PosmInvestmentOperationComponent extends FormComponentBase {
     );
   }
 
+  get editableNew() {
+    return (
+      this.model.status == PosmInvestmentStatus.ValidOrder &&
+      (this.isGranted("PosmInvestments.MarketingConfirmProduce") ||
+        this.isGranted("PosmInvestments"))
+    );
+  }
+
   selectionChanged(e) {
     if (e.selectedRowsData?.length > 0) {
       this.item = e.selectedRowsData[0];
@@ -105,12 +147,12 @@ export class PosmInvestmentOperationComponent extends FormComponentBase {
           this.formGroup.controls[key].setValue(e.selectedRowsData[0][key]);
         }
       });
-      this.photos = [
-        this.item.operationPhoto1,
-        this.item.operationPhoto2,
-        this.item.operationPhoto3,
-        this.item.operationPhoto4,
-      ];
+      // this.photos = [
+      //   this.item.operationPhoto1,
+      //   this.item.operationPhoto2,
+      //   this.item.operationPhoto3,
+      //   this.item.operationPhoto4,
+      // ];
 
       if (!this.c("operationDate").value) {
         this.c("operationDate").setValue(moment().toDate());

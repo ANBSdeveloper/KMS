@@ -109,7 +109,10 @@ namespace Cbms.Kms.Domain.PosmInvestments
                 case PosmInvestmentMarketingConfirmProduceAction designerConfirmProduceAction:
                     await MarketingConfirmProduceAsync(designerConfirmProduceAction);
                     break;
-                case PosmInvestmentSupConfirmProduceAction supConfirmProduceAction:
+				case PosmInvestmentMarketingConfirmProduceNewAction designerConfirmProduceNewAction:
+					await MarketingConfirmProduceNewAsync(designerConfirmProduceNewAction);
+					break;
+				case PosmInvestmentSupConfirmProduceAction supConfirmProduceAction:
                     await SupConfirmProduceAsync(supConfirmProduceAction);
                     break;
                 case PosmInvestmentSupplyConfirmProduceAction procConfirmProduceAction:
@@ -296,7 +299,22 @@ namespace Cbms.Kms.Domain.PosmInvestments
             await LogHistoryAsync(action.IocResolver, action.LocalizationSource);
         }
 
-        private async Task SupConfirmProduceAsync(PosmInvestmentSupConfirmProduceAction action)
+		private async Task MarketingConfirmProduceNewAsync(PosmInvestmentMarketingConfirmProduceNewAction action)
+		{
+			if (Status != PosmInvestmentItemStatus.ValidOrder)
+			{
+				throw BusinessExceptionBuilder.Create(action.LocalizationSource).MessageCode("PosmInvestment.ItemActionInvalid").Build();
+			}
+			Status = PosmInvestmentItemStatus.ConfirmedProduce1;			
+
+			OperationDate = DateTime.Now;
+			OperationLink = action.Link ?? string.Empty;
+			OperationNote = action.Note ?? string.Empty;
+			UpdateSysFields(action.IocResolver);
+			await LogHistoryAsync(action.IocResolver, action.LocalizationSource);
+		}
+
+		private async Task SupConfirmProduceAsync(PosmInvestmentSupConfirmProduceAction action)
         {
             if (Status != PosmInvestmentItemStatus.ConfirmedProduce1)
             {
