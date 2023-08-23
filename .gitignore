@@ -3,5 +3,15 @@
 /app/.vscode
 /app/package-lock.json
 /app/dist
+<<<<<<< .mine
 /app/src/assets/img_save
+=======
+/service/src/API/Cbms.Wms.Web/appsettings.json
+>>>>>>> .theirs
+/service/src/API/Cbms.Wms.Web/appsettings.json
 /service/publish
+<<<<<<< .mine
+
+=======
+/.vs
+>>>>>>> .theirs

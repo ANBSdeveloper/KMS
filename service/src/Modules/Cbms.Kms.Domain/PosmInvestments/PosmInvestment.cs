@@ -50,7 +50,9 @@ namespace Cbms.Kms.Domain.PosmInvestments
         public string SetupContact2 { get; private set; }
         public decimal InvestmentAmount { get; private set; }
         public decimal CommitmentAmount { get; private set; }
-        public int CycleId { get; private set; }
+		public decimal VTDCommitmentAmount { get; private set; }
+		public decimal MilkIndustryAmount { get; private set; }
+		public int CycleId { get; private set; }
         public string CancelReason { get; private set; }
 		public string DesignPhoto1 { get; set; }
 		public string DesignPhoto2 { get; set; }
@@ -200,6 +202,8 @@ namespace Cbms.Kms.Domain.PosmInvestments
             RegisterDate = DateTime.Now;
             CustomerLocationId = action.CustomerLocationId;
             CurrentSalesAmount = action.CurrentSalesAmount;
+            VTDCommitmentAmount = action.VTDCommitmentAmount;
+            MilkIndustryAmount = action.MilkIndustryAmount;
             ShopPanelPhoto1 = action.ShopPanelPhoto1 != ShopPanelPhoto1 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto1) : ShopPanelPhoto1;
             ShopPanelPhoto2 = action.ShopPanelPhoto2 != ShopPanelPhoto2 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto2) : ShopPanelPhoto2;
             ShopPanelPhoto3 = action.ShopPanelPhoto3 != ShopPanelPhoto3 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto3) : ShopPanelPhoto3;
