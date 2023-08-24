@@ -36,7 +36,9 @@ namespace Cbms.Kms.Application.PosmInvestments.Dto
         public string VisibilityCompetitorPhoto4 { get; set; }
         public string ApproveNote { get; set; }
         public decimal CommitmentAmount { get; set; }
-        public string CancelReason { get; private set; }
+		public decimal VTDCommitmentAmount { get; private set; }
+		public decimal MilkIndustryAmount { get; private set; }
+		public string CancelReason { get; private set; }
         public string CustomerName { get; set; }
         public string CustomerCode { get; set; }
         public decimal? Efficient { get; set; }
