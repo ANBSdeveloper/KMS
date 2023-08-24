@@ -183,6 +183,8 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
       currentSalesAmount: [undefined, [Validators.required]],
       note: [undefined],
       registerDate: [undefined, [Validators.required]],
+      vtdCommitmentAmount: [undefined, [Validators.required]],
+      milkIndustryAmount: [undefined, [Validators.required]],
     });
 
     // this.formGroup.valueChanges.subscribe((_) => {
@@ -309,6 +311,8 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
       currentSalesAmount: 0,
       salesCommitments: [],
       items: [],
+      vtdCommitmentAmount: 0,
+      milkIndustryAmount: 0,
     });
   }
   //#endregion

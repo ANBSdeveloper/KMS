@@ -62,5 +62,9 @@ namespace Cbms.Kms.Application.PosmInvestments.Dto
         public int? VendorId { get; set; }
         public decimal? RemarkOfSales { get; set; }
         public decimal? RemarkOfCompany { get; set; }
-    }
+		public string DesignPhoto1 { get; set; }
+		public string DesignPhoto2 { get; set; }
+		public string DesignPhoto3 { get; set; }
+		public string DesignPhoto4 { get; set; }
+	}
 }

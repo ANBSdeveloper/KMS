@@ -47,6 +47,8 @@ namespace Cbms.Kms.Application.PosmInvestments.Dto
 		public string DesignPhoto2 { get; set; }
 		public string DesignPhoto3 { get; set; }
 		public string DesignPhoto4 { get; set; }
+		public decimal VTDCommitmentAmount { get; set; }
+		public decimal MilkIndustryAmount { get; set; }
 
 		[IgnoreMap]
         public List<PosmInvestmentItemDto> Items { get; set; }

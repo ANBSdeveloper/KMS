@@ -30,6 +30,7 @@ namespace Cbms.Kms.Application.PosmInvestments.QueryHandlers
                                 join i in _dbContext.PosmCatalogs on p.PosmCatalogId equals i.Id
                                 join o in _dbContext.PosmItems on i.PosmItemId equals o.Id
                                 join c in _dbContext.PosmClasses on o.PosmClassId equals c.Id
+                                join d in _dbContext.PosmInvestments on p.PosmInvestmentId equals d.Id
                                 where p.Id == request.Id
                                 select new PosmInvestmentItemDto()
                                 {
@@ -91,7 +92,11 @@ namespace Cbms.Kms.Application.PosmInvestments.QueryHandlers
                                     InclueInfo = c.IncludeInfo,
                                     RemarkOfCompany = p.RemarkOfCompany,
                                     RemarkOfSales = p.RemarkOfSales,
-                                }).FirstOrDefaultAsync();
+									DesignPhoto1 = d.DesignPhoto1,
+									DesignPhoto2 = d.DesignPhoto2,
+									DesignPhoto3 = d.DesignPhoto3,
+									DesignPhoto4 = d.DesignPhoto4,
+								}).FirstOrDefaultAsync();
 
             if (entityDto == null)
             {

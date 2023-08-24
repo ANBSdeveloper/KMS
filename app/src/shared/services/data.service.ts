@@ -29349,6 +29349,8 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
     designPhoto2?: string | undefined;
     designPhoto3?: string | undefined;
     designPhoto4?: string | undefined;
+    vtdCommitmentAmount?: number;
+    milkIndustryAmount?: number;
 
     constructor(data?: IPosmInvestmentDto) {
         if (data) {
@@ -29414,6 +29416,8 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
             this.designPhoto2 = _data["designPhoto2"];
             this.designPhoto3 = _data["designPhoto3"];
             this.designPhoto4 = _data["designPhoto4"];
+            this.vtdCommitmentAmount = _data["vtdCommitmentAmount"];
+            this.milkIndustryAmount = _data["milkIndustryAmount"];
         }
     }
 
@@ -29479,6 +29483,8 @@ export class PosmInvestmentDto implements IPosmInvestmentDto {
         data["designPhoto2"] = this.designPhoto2;
         data["designPhoto3"] = this.designPhoto3;
         data["designPhoto4"] = this.designPhoto4;
+        data["vtdCommitmentAmount"] = this.vtdCommitmentAmount;
+        data["milkIndustryAmount"] = this.milkIndustryAmount;     
         return data;
     }
 
@@ -29536,6 +29542,8 @@ export interface IPosmInvestmentDto {
     designPhoto2?: string | undefined;
     designPhoto3?: string | undefined;
     designPhoto4?: string | undefined;
+    vtdCommitmentAmount?: number;
+    milkIndustryAmount?: number;
 }
 
 export class PosmInvestmentDtoApiResultObject implements IPosmInvestmentDtoApiResultObject {
@@ -29644,6 +29652,10 @@ export class PosmInvestmentItemDto implements IPosmInvestmentItemDto {
     vendorId?: number | undefined;
     remarkOfSales?: number | undefined;
     remarkOfCompany?: number | undefined;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
 
     constructor(data?: IPosmInvestmentItemDto) {
         if (data) {
@@ -29714,6 +29726,10 @@ export class PosmInvestmentItemDto implements IPosmInvestmentItemDto {
             this.vendorId = _data["vendorId"];
             this.remarkOfSales = _data["remarkOfSales"];
             this.remarkOfCompany = _data["remarkOfCompany"];
+            this.designPhoto1 = _data["designPhoto1"];
+            this.designPhoto2 = _data["designPhoto2"];
+            this.designPhoto3 = _data["designPhoto3"];
+            this.designPhoto4 = _data["designPhoto4"];
         }
     }
 
@@ -29784,6 +29800,10 @@ export class PosmInvestmentItemDto implements IPosmInvestmentItemDto {
         data["vendorId"] = this.vendorId;
         data["remarkOfSales"] = this.remarkOfSales;
         data["remarkOfCompany"] = this.remarkOfCompany;
+        data["designPhoto1"] = this.designPhoto1;
+        data["designPhoto2"] = this.designPhoto2;
+        data["designPhoto3"] = this.designPhoto3;
+        data["designPhoto4"] = this.designPhoto4;
         return data;
     }
 
@@ -29854,6 +29874,10 @@ export interface IPosmInvestmentItemDto {
     vendorId?: number | undefined;
     remarkOfSales?: number | undefined;
     remarkOfCompany?: number | undefined;
+    designPhoto1?: string | undefined;
+    designPhoto2?: string | undefined;
+    designPhoto3?: string | undefined;
+    designPhoto4?: string | undefined;
 }
 
 export class PosmInvestmentItemDtoApiResultObject implements IPosmInvestmentItemDtoApiResultObject {

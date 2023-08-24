@@ -31,6 +31,7 @@ import { PosmInvestmentItemStatusDataSource } from "../../data-source/posm-inves
 import { PosmCalcType } from "@app/main/master/posm-item/data-source/posm-calc-type.data-source";
 import { formatNumber } from "devextreme/localization";
 import { finalize } from "rxjs/operators";
+import { environment } from "environments/environment";
 
 //#endregion
 
@@ -81,9 +82,37 @@ export class PosmInvestmentAcceptanceComponent extends FormComponentBase {
     });
   }
 
-  mapToForm() {
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
+  }
+
+  async mapToForm() {
     this.model = cloneDeep(this.investment);
     if (this.model?.items) {
+
+      this.designPhotos = [
+        this.model.designPhoto1 != null && this.model.designPhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto1) : this.model.designPhoto1,       
+        this.model.designPhoto2 != null && this.model.designPhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto2) : this.model.designPhoto2, 
+        this.model.designPhoto3 != null && this.model.designPhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto3) : this.model.designPhoto3, 
+        this.model.designPhoto4 != null && this.model.designPhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.designPhoto4) : this.model.designPhoto4, 
+      ];
+
       this.posmItemDataSource.setData(this.model.items);
       this.posmItemGrid?.instance.refresh();
     }
@@ -164,12 +193,12 @@ export class PosmInvestmentAcceptanceComponent extends FormComponentBase {
         this.item.acceptancePhoto4,
       ];
 
-      this.designPhotos = [
-        this.item.operationPhoto1,
-        this.item.operationPhoto2,
-        this.item.operationPhoto3,
-        this.item.operationPhoto4,
-      ]
+      // this.designPhotos = [
+      //   this.item.operationPhoto1,
+      //   this.item.operationPhoto2,
+      //   this.item.operationPhoto3,
+      //   this.item.operationPhoto4,
+      // ]
 
       if (!this.c("acceptanceDate").value) {
         this.c("acceptanceDate").setValue(moment().toDate());
