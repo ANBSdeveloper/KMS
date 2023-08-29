@@ -25,6 +25,7 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { Validators } from "@angular/forms";
 import { ImageViewerComponent } from "@shared/components/image-viewer/image-viewer.component";
 import { finalize } from "rxjs/operators";
+import { environment } from "environments/environment";
 //#endregion
 @Component({
   selector: "app-ticket-consumer-reward-detail-dialog",
@@ -60,7 +61,7 @@ export class TicketConsumerRewardDetailDialogComponent extends FormComponentBase
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.consumerReward = this.config.data.consumerReward;
     this.ticketInvestmentId = this.config.data.ticketInvestmentId;
     this.allocateTickets = this.config.data.allocateTickets;
@@ -70,16 +71,36 @@ export class TicketConsumerRewardDetailDialogComponent extends FormComponentBase
     this.rewardDetailDataSource.setData(this.consumerReward.details);
     this.readOnly = this.config.data.readOnly;
     this.photos = [
-      this.consumerReward.photo1,
-      this.consumerReward.photo2,
-      this.consumerReward.photo3,
-      this.consumerReward.photo4,
-      this.consumerReward.photo5,
+      this.consumerReward.photo1 != null && this.consumerReward.photo1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.consumerReward.photo1) : this.consumerReward.photo1,       
+        this.consumerReward.photo2 != null && this.consumerReward.photo2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.consumerReward.photo2) : this.consumerReward.photo2, 
+        this.consumerReward.photo3 != null && this.consumerReward.photo3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.consumerReward.photo3) : this.consumerReward.photo3, 
+        this.consumerReward.photo4 != null && this.consumerReward.photo4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.consumerReward.photo4) : this.consumerReward.photo4,
+        this.consumerReward.photo5 != null && this.consumerReward.photo5 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.consumerReward.photo5) : this.consumerReward.photo5,
     ];
 
     this.rewardDetailDataSource.onUpdate.subscribe(() => {
       this.calcQuantity();
     });
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   calcQuantity() {

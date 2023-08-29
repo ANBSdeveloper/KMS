@@ -1,6 +1,7 @@
 ﻿using Cbms.Domain.Entities;
 using Cbms.Domain.Entities.Auditing;
 using Cbms.Domain.Repositories;
+using Cbms.Kms.Domain.Connection;
 using Cbms.Kms.Domain.Helpers;
 using Cbms.Kms.Domain.TicketInvestments.Actions;
 using System;
@@ -40,13 +41,19 @@ namespace Cbms.Kms.Domain.TicketInvestments
             var imageResizer = action.IocResolver.Resolve<IImageResizer>();
             Quantity = action.Quantity;
             RewardItemId = action.RewardItemId;
-            Photo1 = action.Photo1 != Photo1 ? await imageResizer.ResizeBase64Image(action.Photo1) : Photo1;
-            Photo2 = action.Photo2 != Photo2 ? await imageResizer.ResizeBase64Image(action.Photo2) : Photo2;
-            Photo3 = action.Photo3 != Photo3 ? await imageResizer.ResizeBase64Image(action.Photo3) : Photo3;
-            Photo4 = action.Photo4 != Photo4 ? await imageResizer.ResizeBase64Image(action.Photo4) : Photo4;
-            Photo5 = action.Photo5 != Photo5 ? await imageResizer.ResizeBase64Image(action.Photo5) : Photo5;
+			//Photo1 = action.Photo1 != Photo1 ? await imageResizer.ResizeBase64Image(action.Photo1) : Photo1;
+			//Photo2 = action.Photo2 != Photo2 ? await imageResizer.ResizeBase64Image(action.Photo2) : Photo2;
+			//Photo3 = action.Photo3 != Photo3 ? await imageResizer.ResizeBase64Image(action.Photo3) : Photo3;
+			//Photo4 = action.Photo4 != Photo4 ? await imageResizer.ResizeBase64Image(action.Photo4) : Photo4;
+			//Photo5 = action.Photo5 != Photo5 ? await imageResizer.ResizeBase64Image(action.Photo5) : Photo5;
 
-            foreach (var id in action.DeleteRewardDetails)
+			Photo1 = !string.IsNullOrEmpty(action.Photo1) ? await imageResizer.SaveImgFromBase64("TicketConsumerReward", "", action.Photo1, Photo1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			Photo2 = !string.IsNullOrEmpty(action.Photo2) ? await imageResizer.SaveImgFromBase64("TicketConsumerReward", "", action.Photo2, Photo2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			Photo3 = !string.IsNullOrEmpty(action.Photo3) ? await imageResizer.SaveImgFromBase64("TicketConsumerReward", "", action.Photo3, Photo3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			Photo4 = !string.IsNullOrEmpty(action.Photo4) ? await imageResizer.SaveImgFromBase64("TicketConsumerReward", "", action.Photo4, Photo4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			Photo5 = !string.IsNullOrEmpty(action.Photo5) ? await imageResizer.SaveImgFromBase64("TicketConsumerReward", "", action.Photo5, Photo5, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+			foreach (var id in action.DeleteRewardDetails)
             {
                 var rewardDetail = _details.FirstOrDefault(p => p.Id == id);
                 if (rewardDetail != null)

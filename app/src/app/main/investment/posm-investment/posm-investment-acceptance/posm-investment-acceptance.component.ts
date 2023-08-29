@@ -178,7 +178,7 @@ export class PosmInvestmentAcceptanceComponent extends FormComponentBase {
     );
   }
 
-  selectionChanged(e) {
+  async selectionChanged(e) {
     if (e.selectedRowsData?.length > 0) {
       this.item = e.selectedRowsData[0];
       Object.keys(this.formGroup.controls).forEach((key) => {
@@ -186,11 +186,11 @@ export class PosmInvestmentAcceptanceComponent extends FormComponentBase {
           this.formGroup.controls[key].setValue(e.selectedRowsData[0][key]);
         }
       });
-      this.photos = [
-        this.item.acceptancePhoto1,
-        this.item.acceptancePhoto2,
-        this.item.acceptancePhoto3,
-        this.item.acceptancePhoto4,
+      this.photos = [        
+        this.item.acceptancePhoto1 != null && this.item.acceptancePhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.item.acceptancePhoto1) : this.item.acceptancePhoto1,       
+        this.item.acceptancePhoto2 != null && this.item.acceptancePhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.item.acceptancePhoto2) : this.item.acceptancePhoto2, 
+        this.item.acceptancePhoto3 != null && this.item.acceptancePhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.item.acceptancePhoto3) : this.item.acceptancePhoto3, 
+        this.item.acceptancePhoto4 != null && this.item.acceptancePhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.item.acceptancePhoto4) : this.item.acceptancePhoto4,
       ];
 
       // this.designPhotos = [

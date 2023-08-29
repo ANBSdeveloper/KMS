@@ -35,6 +35,7 @@ import moment from "moment";
 import { TicketConsumerRewardDetailDialogComponent } from "../ticket-consumer-reward-detal-dialog/ticket-consumer-reward-detail-dialog.component";
 import { DialogService } from "primeng/dynamicdialog";
 import { isBuffer } from "node:util";
+import { environment } from "environments/environment";
 //#endregion
 
 @Component({
@@ -106,7 +107,7 @@ export class TicketAcceptanceComponent extends FormComponentBase {
     }
   }
 
-  mapToForm() {
+  async mapToForm() {
     if (this.investment.acceptance) {
       this.model = cloneDeep(this.investment.acceptance);
     } else {
@@ -143,12 +144,12 @@ export class TicketAcceptanceComponent extends FormComponentBase {
       this.rewardItemDataSource.transferToNewState();
     }
 
-    this.photos = [
-      this.model.photo1,
-      this.model.photo2,
-      this.model.photo3,
-      this.model.photo4,
-      this.model.photo5,
+    this.photos = [ 
+        this.model.photo1 != null && this.model.photo1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.photo1) : this.model.photo1,       
+        this.model.photo2 != null && this.model.photo2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.photo2) : this.model.photo2, 
+        this.model.photo3 != null && this.model.photo3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.photo3) : this.model.photo3, 
+        this.model.photo4 != null && this.model.photo4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.photo4) : this.model.photo4,
+        this.model.photo5 != null && this.model.photo5 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.photo5) : this.model.photo5,
     ];
 
     this.c("note").setValue(this.model.note);
@@ -185,6 +186,26 @@ export class TicketAcceptanceComponent extends FormComponentBase {
           this.remarkOfCompany = response.result.remarkOfCompany;
         });
     }
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   save(complete: boolean) {

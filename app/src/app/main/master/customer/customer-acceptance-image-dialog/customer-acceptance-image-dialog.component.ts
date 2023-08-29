@@ -45,10 +45,10 @@ export class CustomerAcceptanceImageDialogComponent extends PermissionComponentB
     this.dataService.getPosmInvestmentItem(this.config.data.posmInvestmentItemId).subscribe(async (res) => {
       res.result.acceptancePhoto1
       this.photos = [
-        res.result.acceptancePhoto1,
-        res.result.acceptancePhoto2,
-        res.result.acceptancePhoto3,
-        res.result.acceptancePhoto4,
+        res.result.acceptancePhoto1 != null && res.result.acceptancePhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + res.result.acceptancePhoto1) : res.result.acceptancePhoto1,       
+        res.result.acceptancePhoto2 != null && res.result.acceptancePhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + res.result.acceptancePhoto2) : res.result.acceptancePhoto2, 
+        res.result.acceptancePhoto3 != null && res.result.acceptancePhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + res.result.acceptancePhoto3) : res.result.acceptancePhoto3, 
+        res.result.acceptancePhoto4 != null && res.result.acceptancePhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + res.result.acceptancePhoto4) : res.result.acceptancePhoto4,
       ];
 
       // this.designPhotos = [

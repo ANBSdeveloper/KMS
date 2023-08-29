@@ -2,6 +2,7 @@
 using Cbms.Domain.Entities;
 using Cbms.Domain.Entities.Auditing;
 using Cbms.Domain.Repositories;
+using Cbms.Kms.Domain.Connection;
 using Cbms.Kms.Domain.Helpers;
 using Cbms.Kms.Domain.PosmClasses;
 using Cbms.Kms.Domain.PosmInvestments.Actions;
@@ -286,13 +287,17 @@ namespace Cbms.Kms.Domain.PosmInvestments
             Status = PosmInvestmentItemStatus.ConfirmedProduce1;
             var imageResizer = action.IocResolver.Resolve<IImageResizer>();
 
+            //OperationPhoto1 = action.Photo1 != OperationPhoto1 ? await imageResizer.ResizeBase64Image(action.Photo1) : OperationPhoto1;
+            //OperationPhoto2 = action.Photo2 != OperationPhoto2 ? await imageResizer.ResizeBase64Image(action.Photo2) : OperationPhoto2;
+            //OperationPhoto3 = action.Photo3 != OperationPhoto3 ? await imageResizer.ResizeBase64Image(action.Photo3) : OperationPhoto3;
+            //OperationPhoto4 = action.Photo4 != OperationPhoto4 ? await imageResizer.ResizeBase64Image(action.Photo4) : OperationPhoto4;
 
-            OperationPhoto1 = action.Photo1 != OperationPhoto1 ? await imageResizer.ResizeBase64Image(action.Photo1) : OperationPhoto1;
-            OperationPhoto2 = action.Photo2 != OperationPhoto2 ? await imageResizer.ResizeBase64Image(action.Photo2) : OperationPhoto2;
-            OperationPhoto3 = action.Photo3 != OperationPhoto3 ? await imageResizer.ResizeBase64Image(action.Photo3) : OperationPhoto3;
-            OperationPhoto4 = action.Photo4 != OperationPhoto4 ? await imageResizer.ResizeBase64Image(action.Photo4) : OperationPhoto4;
+			OperationPhoto1 = !string.IsNullOrEmpty(action.Photo1) ? await imageResizer.SaveImgFromBase64("OperationPhoto", "", action.Photo1, OperationPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			OperationPhoto2 = !string.IsNullOrEmpty(action.Photo2) ? await imageResizer.SaveImgFromBase64("OperationPhoto", "", action.Photo2, OperationPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			OperationPhoto3 = !string.IsNullOrEmpty(action.Photo3) ? await imageResizer.SaveImgFromBase64("OperationPhoto", "", action.Photo3, OperationPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			OperationPhoto4 = !string.IsNullOrEmpty(action.Photo4) ? await imageResizer.SaveImgFromBase64("OperationPhoto", "", action.Photo4, OperationPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
 
-            OperationDate = DateTime.Now;
+			OperationDate = DateTime.Now;
             OperationLink = action.Link ?? string.Empty;
             OperationNote = action.Note ?? string.Empty;
             UpdateSysFields(action.IocResolver);
@@ -343,11 +348,17 @@ namespace Cbms.Kms.Domain.PosmInvestments
             var imageResizer = action.IocResolver.Resolve<IImageResizer>();
 
             Status = PosmInvestmentItemStatus.Accepted;
-            AcceptancePhoto1 = action.Photo1 != Photo1 ? await imageResizer.ResizeBase64Image(action.Photo1) : AcceptancePhoto1;
-            AcceptancePhoto2 = action.Photo2 != Photo2 ? await imageResizer.ResizeBase64Image(action.Photo2) : AcceptancePhoto2;
-            AcceptancePhoto3 = action.Photo3 != Photo3 ? await imageResizer.ResizeBase64Image(action.Photo3) : AcceptancePhoto3;
-            AcceptancePhoto4 = action.Photo4 != Photo4 ? await imageResizer.ResizeBase64Image(action.Photo4) : AcceptancePhoto4;
-            UpdateSysFields(action.IocResolver);
+            //AcceptancePhoto1 = action.Photo1 != Photo1 ? await imageResizer.ResizeBase64Image(action.Photo1) : AcceptancePhoto1;
+            //AcceptancePhoto2 = action.Photo2 != Photo2 ? await imageResizer.ResizeBase64Image(action.Photo2) : AcceptancePhoto2;
+            //AcceptancePhoto3 = action.Photo3 != Photo3 ? await imageResizer.ResizeBase64Image(action.Photo3) : AcceptancePhoto3;
+            //AcceptancePhoto4 = action.Photo4 != Photo4 ? await imageResizer.ResizeBase64Image(action.Photo4) : AcceptancePhoto4;
+
+			AcceptancePhoto1 = !string.IsNullOrEmpty(action.Photo1) ? await imageResizer.SaveImgFromBase64("AcceptancePhoto", "", action.Photo1, AcceptancePhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			AcceptancePhoto2 = !string.IsNullOrEmpty(action.Photo2) ? await imageResizer.SaveImgFromBase64("AcceptancePhoto", "", action.Photo2, AcceptancePhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			AcceptancePhoto3 = !string.IsNullOrEmpty(action.Photo3) ? await imageResizer.SaveImgFromBase64("AcceptancePhoto", "", action.Photo3, AcceptancePhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			AcceptancePhoto4 = !string.IsNullOrEmpty(action.Photo4) ? await imageResizer.SaveImgFromBase64("AcceptancePhoto", "", action.Photo4, AcceptancePhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+			UpdateSysFields(action.IocResolver);
             await LogHistoryAsync(action.IocResolver, action.LocalizationSource);
         }
         private async Task SupplyDenyAsync(PosmInvestmentSupplyDenyRequestAction action)
@@ -425,10 +436,10 @@ namespace Cbms.Kms.Domain.PosmInvestments
         {
             var imageResizer = action.IocResolver.Resolve<IImageResizer>();
 
-            Photo1 = action.Photo1 != Photo1 ? await imageResizer.ResizeBase64Image(action.Photo1) : Photo1;
-            Photo2 = action.Photo2 != Photo2 ? await imageResizer.ResizeBase64Image(action.Photo2) : Photo2;
-            Photo3 = action.Photo3 != Photo3 ? await imageResizer.ResizeBase64Image(action.Photo3) : Photo3;
-            Photo4 = action.Photo4 != Photo4 ? await imageResizer.ResizeBase64Image(action.Photo4) : Photo4;
+            Photo1 = !string.IsNullOrEmpty(action.Photo1) ? await imageResizer.SaveImgFromBase64("PosmInvestmentItems", action.PosmItemId.ToString(), action.Photo1, Photo1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            Photo2 = !string.IsNullOrEmpty(action.Photo2) ? await imageResizer.SaveImgFromBase64("PosmInvestmentItems", action.PosmItemId.ToString(), action.Photo2, Photo2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            Photo3 = !string.IsNullOrEmpty(action.Photo3) ? await imageResizer.SaveImgFromBase64("PosmInvestmentItems", action.PosmItemId.ToString(), action.Photo3, Photo3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            Photo4 = !string.IsNullOrEmpty(action.Photo4) ? await imageResizer.SaveImgFromBase64("PosmInvestmentItems", action.PosmItemId.ToString(), action.Photo4, Photo4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
 
             PosmClassId = action.PosmClassId;
             PosmItemId = action.PosmItemId;

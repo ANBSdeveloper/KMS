@@ -25,6 +25,7 @@ import {
   TicketProgressMaterialDto,
   TicketProgressRewardItemDto,
 } from "@shared/services/data.service";
+import { environment } from "environments/environment";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { finalize } from "rxjs/operators";
 //#endregion
@@ -80,13 +81,13 @@ export class TicketProgressItemComponent extends FormComponentBase {
 
   ngOnInit() {}
 
-  mapToForm() {
+  async mapToForm() {
     this.documentPhotos = [
-      this._data.documentPhoto1,
-      this._data.documentPhoto2,
-      this._data.documentPhoto3,
-      this._data.documentPhoto4,
-      this._data.documentPhoto5,
+      this._data.documentPhoto1 != null && this._data.documentPhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this._data.documentPhoto1) : this._data.documentPhoto1,       
+        this._data.documentPhoto2 != null && this._data.documentPhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this._data.documentPhoto2) : this._data.documentPhoto2, 
+        this._data.documentPhoto3 != null && this._data.documentPhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this._data.documentPhoto3) : this._data.documentPhoto3, 
+        this._data.documentPhoto4 != null && this._data.documentPhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this._data.documentPhoto4) : this._data.documentPhoto4,
+        this._data.documentPhoto5 != null && this._data.documentPhoto5 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this._data.documentPhoto5) : this._data.documentPhoto5,
     ];
 
     this.c("note").setValue(this._data.note);
@@ -101,6 +102,26 @@ export class TicketProgressItemComponent extends FormComponentBase {
     this.designMaterials = this._data.materials
       ? this._data.materials.filter((p) => p.isDesign)
       : [];
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   save() {

@@ -86,6 +86,7 @@ import { PosmInvesetmentItemDialogComponent } from "../posm-investment-item-dial
 import { PosmInvestmentOperationComponent } from "../posm-investment-operation/posm-investment-operation.component";
 import { PosmInvestmentPrepareComponent } from "../posm-investment-prepare/posm-investment-prepare.component";
 import { CustomerDialogComponent } from "@app/main/master/customer/customer-dialog/customer-dialog.component";
+import { environment } from "environments/environment";
 //#endregion
 
 @Component({
@@ -224,7 +225,7 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
     this.c("investmentAmount").setValue(investmentAmount);
   }
 
-  mapPropertyModelToFormGroup() {
+  async mapPropertyModelToFormGroup() {
     super.mapPropertyModelToFormGroup();
 
     this.horizontalWizardStepper?.to(this.businessStep);
@@ -255,25 +256,45 @@ export class PosmInvestmentEditComponent extends PageEditFormComponentBase<
     }
 
     this.shopPanelPhotos = [
-      this.model.shopPanelPhoto1,
-      this.model.shopPanelPhoto2,
-      this.model.shopPanelPhoto3,
-      this.model.shopPanelPhoto4,
+      this.model.shopPanelPhoto1.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.shopPanelPhoto1) : this.model.shopPanelPhoto1,
+      this.model.shopPanelPhoto2.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.shopPanelPhoto2) : this.model.shopPanelPhoto2,
+      this.model.shopPanelPhoto3.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.shopPanelPhoto3) : this.model.shopPanelPhoto3,
+      this.model.shopPanelPhoto4.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.shopPanelPhoto4) : this.model.shopPanelPhoto4,
     ];
 
-    this.visibilityPhotos = [
-      this.model.visibilityPhoto1,
-      this.model.visibilityPhoto2,
-      this.model.visibilityPhoto3,
-      this.model.visibilityPhoto4,
+    this.visibilityPhotos = [     
+      this.model.visibilityPhoto1.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityPhoto1) : this.model.visibilityPhoto1,
+      this.model.visibilityPhoto2.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityPhoto2) : this.model.visibilityPhoto2,
+      this.model.visibilityPhoto3.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityPhoto3) : this.model.visibilityPhoto3,
+      this.model.visibilityPhoto4.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityPhoto4) : this.model.visibilityPhoto4,
     ];
 
-    this.visibilityCompetitorPhotos = [
-      this.model.visibilityCompetitorPhoto1,
-      this.model.visibilityCompetitorPhoto2,
-      this.model.visibilityCompetitorPhoto3,
-      this.model.visibilityCompetitorPhoto4,
+    this.visibilityCompetitorPhotos = [      
+      this.model.visibilityCompetitorPhoto1.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityCompetitorPhoto1) : this.model.visibilityCompetitorPhoto1,
+      this.model.visibilityCompetitorPhoto2.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityCompetitorPhoto2) : this.model.visibilityCompetitorPhoto2,
+      this.model.visibilityCompetitorPhoto3.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityCompetitorPhoto3) : this.model.visibilityCompetitorPhoto3,
+      this.model.visibilityCompetitorPhoto4.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.visibilityCompetitorPhoto4) : this.model.visibilityCompetitorPhoto4,
     ];
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   mapPropertyFormGroupToSaveModel() {

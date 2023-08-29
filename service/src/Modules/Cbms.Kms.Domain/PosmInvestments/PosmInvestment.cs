@@ -204,18 +204,21 @@ namespace Cbms.Kms.Domain.PosmInvestments
             CurrentSalesAmount = action.CurrentSalesAmount;
             VTDCommitmentAmount = action.VTDCommitmentAmount;
             MilkIndustryAmount = action.MilkIndustryAmount;
-            ShopPanelPhoto1 = action.ShopPanelPhoto1 != ShopPanelPhoto1 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto1) : ShopPanelPhoto1;
-            ShopPanelPhoto2 = action.ShopPanelPhoto2 != ShopPanelPhoto2 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto2) : ShopPanelPhoto2;
-            ShopPanelPhoto3 = action.ShopPanelPhoto3 != ShopPanelPhoto3 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto3) : ShopPanelPhoto3;
-            ShopPanelPhoto4 = action.ShopPanelPhoto4 != ShopPanelPhoto4 ? await imageResizer.ResizeBase64Image(action.ShopPanelPhoto4) : ShopPanelPhoto4;
-            VisibilityPhoto1 = action.VisibilityPhoto1 != VisibilityPhoto1 ? await imageResizer.ResizeBase64Image(action.VisibilityPhoto1) : VisibilityPhoto1;
-            VisibilityPhoto2 = action.VisibilityPhoto2 != VisibilityPhoto2 ? await imageResizer.ResizeBase64Image(action.VisibilityPhoto2) : VisibilityPhoto2;
-            VisibilityPhoto3 = action.VisibilityPhoto3 != VisibilityPhoto3 ? await imageResizer.ResizeBase64Image(action.VisibilityPhoto3) : VisibilityPhoto3;
-            VisibilityPhoto4 = action.VisibilityPhoto4 != VisibilityPhoto4 ? await imageResizer.ResizeBase64Image(action.VisibilityPhoto4) : VisibilityPhoto4;
-            VisibilityCompetitorPhoto1 = action.VisibilityCompetitorPhoto1 != VisibilityCompetitorPhoto1 ? await imageResizer.ResizeBase64Image(action.VisibilityCompetitorPhoto1) : VisibilityCompetitorPhoto1;
-            VisibilityCompetitorPhoto2 = action.VisibilityCompetitorPhoto2 != VisibilityCompetitorPhoto2 ? await imageResizer.ResizeBase64Image(action.VisibilityCompetitorPhoto2) : VisibilityCompetitorPhoto2;
-            VisibilityCompetitorPhoto3 = action.VisibilityCompetitorPhoto3 != VisibilityCompetitorPhoto3 ? await imageResizer.ResizeBase64Image(action.VisibilityCompetitorPhoto3) : VisibilityCompetitorPhoto3;
-            VisibilityCompetitorPhoto4 = action.VisibilityCompetitorPhoto4 != VisibilityCompetitorPhoto4 ? await imageResizer.ResizeBase64Image(action.VisibilityCompetitorPhoto4) : VisibilityCompetitorPhoto4;
+
+			ShopPanelPhoto1 = !string.IsNullOrEmpty(action.ShopPanelPhoto1) ? await imageResizer.SaveImgFromBase64("ShopPanelPhoto", Code, action.ShopPanelPhoto1, ShopPanelPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			ShopPanelPhoto2 = !string.IsNullOrEmpty(action.ShopPanelPhoto2) ? await imageResizer.SaveImgFromBase64("ShopPanelPhoto", Code, action.ShopPanelPhoto2, ShopPanelPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			ShopPanelPhoto3 = !string.IsNullOrEmpty(action.ShopPanelPhoto3) ? await imageResizer.SaveImgFromBase64("ShopPanelPhoto", Code, action.ShopPanelPhoto3, ShopPanelPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			ShopPanelPhoto4 = !string.IsNullOrEmpty(action.ShopPanelPhoto4) ? await imageResizer.SaveImgFromBase64("ShopPanelPhoto", Code, action.ShopPanelPhoto4, ShopPanelPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+			VisibilityPhoto1 = !string.IsNullOrEmpty(action.VisibilityPhoto1) ? await imageResizer.SaveImgFromBase64("VisibilityPhoto", Code, action.VisibilityPhoto1, VisibilityPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityPhoto2 = !string.IsNullOrEmpty(action.VisibilityPhoto2) ? await imageResizer.SaveImgFromBase64("VisibilityPhoto", Code, action.VisibilityPhoto2, VisibilityPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityPhoto3 = !string.IsNullOrEmpty(action.VisibilityPhoto3) ? await imageResizer.SaveImgFromBase64("VisibilityPhoto", Code, action.VisibilityPhoto3, VisibilityPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityPhoto4 = !string.IsNullOrEmpty(action.VisibilityPhoto4) ? await imageResizer.SaveImgFromBase64("VisibilityPhoto", Code, action.VisibilityPhoto4, VisibilityPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+            VisibilityCompetitorPhoto1 = !string.IsNullOrEmpty(action.VisibilityCompetitorPhoto1) ? await imageResizer.SaveImgFromBase64("VisibilityCompetitor", Code, action.VisibilityCompetitorPhoto1, VisibilityCompetitorPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityCompetitorPhoto2 = !string.IsNullOrEmpty(action.VisibilityCompetitorPhoto2) ? await imageResizer.SaveImgFromBase64("VisibilityCompetitor", Code, action.VisibilityCompetitorPhoto2, VisibilityCompetitorPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityCompetitorPhoto3 = !string.IsNullOrEmpty(action.VisibilityCompetitorPhoto3) ? await imageResizer.SaveImgFromBase64("VisibilityCompetitor", Code, action.VisibilityCompetitorPhoto3, VisibilityCompetitorPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+            VisibilityCompetitorPhoto4 = !string.IsNullOrEmpty(action.VisibilityCompetitorPhoto4) ? await imageResizer.SaveImgFromBase64("VisibilityCompetitor", Code, action.VisibilityCompetitorPhoto4, VisibilityCompetitorPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
 
             SetupContact1 = action.SetupContact1 ?? "";
             SetupContact2 = action.SetupContact2 ?? ""; ;

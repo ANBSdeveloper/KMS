@@ -6,6 +6,7 @@ using Cbms.Domain.Repositories;
 using Cbms.Extensions;
 using Cbms.Kms.Domain.AppSettings;
 using Cbms.Kms.Domain.Budgets;
+using Cbms.Kms.Domain.Connection;
 using Cbms.Kms.Domain.Customers;
 using Cbms.Kms.Domain.Helpers;
 using Cbms.Kms.Domain.InvestmentSettings;
@@ -392,14 +393,20 @@ namespace Cbms.Kms.Domain.TicketInvestments
             OperationDate = action.OperationDate.ToLocalTime().Date;
 
             RegisterNote = action.RegisterNote ?? "";
-            SurveyPhoto1 = action.SurveyPhoto1 != SurveyPhoto1 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto1) : SurveyPhoto1;
-            SurveyPhoto2 = action.SurveyPhoto2 != SurveyPhoto2 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto2) : SurveyPhoto2;
-            SurveyPhoto3 = action.SurveyPhoto3 != SurveyPhoto3 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto3) : SurveyPhoto3;
-            SurveyPhoto4 = action.SurveyPhoto4 != SurveyPhoto4 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto4) : SurveyPhoto4;
-            SurveyPhoto5 = action.SurveyPhoto5 != SurveyPhoto5 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto5) : SurveyPhoto5;
+            //SurveyPhoto1 = action.SurveyPhoto1 != SurveyPhoto1 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto1) : SurveyPhoto1;
+            //SurveyPhoto2 = action.SurveyPhoto2 != SurveyPhoto2 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto2) : SurveyPhoto2;
+            //SurveyPhoto3 = action.SurveyPhoto3 != SurveyPhoto3 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto3) : SurveyPhoto3;
+            //SurveyPhoto4 = action.SurveyPhoto4 != SurveyPhoto4 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto4) : SurveyPhoto4;
+            //SurveyPhoto5 = action.SurveyPhoto5 != SurveyPhoto5 ? await imageResizer.ResizeBase64Image(action.SurveyPhoto5) : SurveyPhoto5;
 
-            //Check Sales Commitment
-            if (BuyEndDate < BuyBeginDate)
+			SurveyPhoto1 = !string.IsNullOrEmpty(action.SurveyPhoto1) ? await imageResizer.SaveImgFromBase64("TicketInvestment_SurveyPhoto", "", action.SurveyPhoto1, SurveyPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			SurveyPhoto2 = !string.IsNullOrEmpty(action.SurveyPhoto2) ? await imageResizer.SaveImgFromBase64("TicketInvestment_SurveyPhoto", "", action.SurveyPhoto2, SurveyPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			SurveyPhoto3 = !string.IsNullOrEmpty(action.SurveyPhoto3) ? await imageResizer.SaveImgFromBase64("TicketInvestment_SurveyPhoto", "", action.SurveyPhoto3, SurveyPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			SurveyPhoto4 = !string.IsNullOrEmpty(action.SurveyPhoto4) ? await imageResizer.SaveImgFromBase64("TicketInvestment_SurveyPhoto", "", action.SurveyPhoto4, SurveyPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			SurveyPhoto5 = !string.IsNullOrEmpty(action.SurveyPhoto5) ? await imageResizer.SaveImgFromBase64("TicketInvestment_SurveyPhoto", "", action.SurveyPhoto5, SurveyPhoto5, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+			//Check Sales Commitment
+			if (BuyEndDate < BuyBeginDate)
             {
                 throw BusinessExceptionBuilder.Create(action.LocalizationSource).MessageCode("TicketInvestment.BuyDateInvalid").Build();
             }

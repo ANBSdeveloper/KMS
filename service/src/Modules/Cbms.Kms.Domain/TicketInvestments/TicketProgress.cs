@@ -1,6 +1,7 @@
 ﻿using Cbms.Domain.Entities;
 using Cbms.Domain.Entities.Auditing;
 using Cbms.Domain.Repositories;
+using Cbms.Kms.Domain.Connection;
 using Cbms.Kms.Domain.Helpers;
 using Cbms.Kms.Domain.RewardPackages;
 using Cbms.Kms.Domain.TicketInvestments.Actions;
@@ -45,13 +46,19 @@ namespace Cbms.Kms.Domain.TicketInvestments
             UpdateUserId = action.UserId;
             UpdateTime = Clock.Now;
             Note = action.Note ?? "";
-            DocumentPhoto1 = action.DocumentPhoto1 != DocumentPhoto1 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto1) : DocumentPhoto1;
-            DocumentPhoto2 = action.DocumentPhoto2 != DocumentPhoto2 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto2) : DocumentPhoto2;
-            DocumentPhoto3 = action.DocumentPhoto3 != DocumentPhoto3 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto3) : DocumentPhoto3;
-            DocumentPhoto4 = action.DocumentPhoto4 != DocumentPhoto4 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto4) : DocumentPhoto4;
-            DocumentPhoto5 = action.DocumentPhoto5 != DocumentPhoto5 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto5) : DocumentPhoto5;
+			//DocumentPhoto1 = action.DocumentPhoto1 != DocumentPhoto1 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto1) : DocumentPhoto1;
+			//DocumentPhoto2 = action.DocumentPhoto2 != DocumentPhoto2 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto2) : DocumentPhoto2;
+			//DocumentPhoto3 = action.DocumentPhoto3 != DocumentPhoto3 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto3) : DocumentPhoto3;
+			//DocumentPhoto4 = action.DocumentPhoto4 != DocumentPhoto4 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto4) : DocumentPhoto4;
+			//DocumentPhoto5 = action.DocumentPhoto5 != DocumentPhoto5 ? await imageResizer.ResizeBase64Image(action.DocumentPhoto5) : DocumentPhoto5;
 
-            foreach (var item in action.UpsertRewardItems)
+			DocumentPhoto1 = !string.IsNullOrEmpty(action.DocumentPhoto1) ? await imageResizer.SaveImgFromBase64("TicketProgress_DocumentPhoto", "", action.DocumentPhoto1, DocumentPhoto1, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			DocumentPhoto2 = !string.IsNullOrEmpty(action.DocumentPhoto2) ? await imageResizer.SaveImgFromBase64("TicketProgress_DocumentPhoto", "", action.DocumentPhoto2, DocumentPhoto2, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			DocumentPhoto3 = !string.IsNullOrEmpty(action.DocumentPhoto3) ? await imageResizer.SaveImgFromBase64("TicketProgress_DocumentPhoto", "", action.DocumentPhoto3, DocumentPhoto3, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			DocumentPhoto4 = !string.IsNullOrEmpty(action.DocumentPhoto4) ? await imageResizer.SaveImgFromBase64("TicketProgress_DocumentPhoto", "", action.DocumentPhoto4, DocumentPhoto4, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+			DocumentPhoto5 = !string.IsNullOrEmpty(action.DocumentPhoto5) ? await imageResizer.SaveImgFromBase64("TicketProgress_DocumentPhoto", "", action.DocumentPhoto5, DocumentPhoto5, AppSettingsConnect.ImgSavePath, AppSettingsConnect.ImgLivePath) : "";
+
+			foreach (var item in action.UpsertRewardItems)
             {
                 TicketProgressRewardItem rewardItemUpdate;
                 if (!item.Id.IsNew())

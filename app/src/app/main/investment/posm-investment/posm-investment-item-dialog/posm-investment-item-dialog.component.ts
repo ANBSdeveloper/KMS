@@ -12,6 +12,7 @@ import { PosmInvestmentItemDto } from "@shared/services/data.service";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ImageViewerComponent } from "@shared/components/image-viewer/image-viewer.component";
 import { PosmCalcType } from "@app/main/master/posm-item/data-source/posm-calc-type.data-source";
+import { environment } from "environments/environment";
 //#endregion
 @Component({
   selector: "app-posm-investment-item-dialog",
@@ -61,16 +62,16 @@ export class PosmInvesetmentItemDialogComponent extends FormComponentBase {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.posmInvestmentItem = this.config.data.posmInvestmentItem;
     this.posmInvestmentItemId = this.config.data.posmInvestmentItem?.id;
     this.readOnly = this.config.data.readOnly;
 
     this.photos = [
-      this.posmInvestmentItem.photo1,
-      this.posmInvestmentItem.photo2,
-      this.posmInvestmentItem.photo3,
-      this.posmInvestmentItem.photo4,
+      this.posmInvestmentItem.photo1.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.posmInvestmentItem.photo1) : this.posmInvestmentItem.photo1,
+      this.posmInvestmentItem.photo2.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.posmInvestmentItem.photo2) : this.posmInvestmentItem.photo2,
+      this.posmInvestmentItem.photo3.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.posmInvestmentItem.photo3) : this.posmInvestmentItem.photo3,
+      this.posmInvestmentItem.photo4.includes("/assets/img_save/") ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.posmInvestmentItem.photo4) : this.posmInvestmentItem.photo4,
     ];
 
     Object.keys(this.formGroup.controls).forEach((key) => {
@@ -78,6 +79,26 @@ export class PosmInvesetmentItemDialogComponent extends FormComponentBase {
         this.formGroup.controls[key].setValue(this.posmInvestmentItem[key]);
       }
     });
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   close() {

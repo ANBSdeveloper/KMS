@@ -29,6 +29,7 @@ import {
 import Stepper from "bs-stepper";
 import { DxDataGridComponent } from "devextreme-angular/ui/data-grid";
 import { formatDate } from "devextreme/localization";
+import { environment } from "environments/environment";
 import moment from "moment";
 import { finalize, takeUntil } from "rxjs/operators";
 import { TicketInvestmentStatus } from "../../data-source/ticket-investmen-status.enum";
@@ -251,7 +252,7 @@ export class TicketInvestmentEditComponent extends PageEditFormComponentBase<
     }
   }
 
-  mapPropertyModelToFormGroup() {
+  async mapPropertyModelToFormGroup() {
     super.mapPropertyModelToFormGroup();
 
     this.horizontalWizardStepper?.to(this.businessStep);
@@ -264,12 +265,32 @@ export class TicketInvestmentEditComponent extends PageEditFormComponentBase<
     this.c("mobilePhone").setValue(this.model?.mobilePhone);
 
     this.surveyPhotos = [
-      this.model.surveyPhoto1,
-      this.model.surveyPhoto2,
-      this.model.surveyPhoto3,
-      this.model.surveyPhoto4,
-      this.model.surveyPhoto5,
+      this.model.surveyPhoto1 != null && this.model.surveyPhoto1 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.surveyPhoto1) : this.model.surveyPhoto1,       
+        this.model.surveyPhoto2 != null && this.model.surveyPhoto2 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.surveyPhoto2) : this.model.surveyPhoto2, 
+        this.model.surveyPhoto3 != null && this.model.surveyPhoto3 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.surveyPhoto3) : this.model.surveyPhoto3, 
+        this.model.surveyPhoto4 != null && this.model.surveyPhoto4 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.surveyPhoto4) : this.model.surveyPhoto4,
+        this.model.surveyPhoto5 != null && this.model.surveyPhoto5 != "" ? await this.convertImgUrl(`${environment.fakeApiUrl}` + this.model.surveyPhoto5) : this.model.surveyPhoto5,
     ];
+  }
+
+  async convertImgUrl(url): Promise<string> {
+    console.log("Downloading image...");
+    var res = await fetch(url);
+    var blob = await res.blob();
+
+    const result = await new Promise((resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(blob);
+    })
+
+    return result.toString()
   }
 
   mapPropertyFormGroupToSaveModel() {
